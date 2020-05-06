@@ -35,7 +35,8 @@ from userbot import (
     BOTLOG,
     BOTLOG_CHATID,
     TEMP_DOWNLOAD_DIRECTORY,
-    IMG_LIMIT)
+    IMG_LIMIT,
+    WOLFRAM_ID)
 from userbot.events import register
 from telethon.tl.types import DocumentAttributeAudio
 from userbot.utils import progress, chrome, googleimagesdownload
@@ -579,6 +580,23 @@ def deEmojify(inputString):
     return get_emoji_regexp().sub(u'', inputString)
 
 
+@register(outgoing=True, pattern=r'^.wolfram (.*)')
+async def wolfram(wvent):
+    if WOLFRAM_ID is None:
+        await wvent.edit(
+            'Please set your WOLFRAM_ID first !\n'
+            'Get your API KEY from [here](https://'
+            'products.wolframalpha.com/api/)',
+            parse_mode='Markdown')
+        return
+    i = wvent.pattern_match.group(1)
+    appid = WOLFRAM_ID
+    server = f'https://api.wolframalpha.com/v1/spoken?appid={appid}&i={i}'
+    res = get(server)
+    await wvent.edit(f'**{i}**\n\n' + res.text, parse_mode='Markdown')
+    if BOTLOG:
+        await wvent.client.send_message(BOTLOG_CHATID, f'.wolfram {i} was executed successfully')
+
 CMD_HELP.update({
     "img":
     ">`.img <search_query>`"
@@ -616,5 +634,8 @@ CMD_HELP.update({
     "rip":
     ">`.aud <url> or vid <url>`"
     "\nUsage: Download videos and songs from YouTube "
-    "(and [many other sites](https://ytdl-org.github.io/youtube-dl/supportedsites.html))."
+    "(and [many other sites](https://ytdl-org.github.io/youtube-dl/supportedsites.html)).",
+    "wolfram":
+    ".wolfram <query>"
+    "\nUsage: Get answers to questions using WolframAlpha Spoken Results API."
 })
