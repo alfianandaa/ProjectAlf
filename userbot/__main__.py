@@ -27,7 +27,7 @@ for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
 
-LOGS.info("You are running UserBot [v???]")
+LOGS.info("You are running UserBot [v1]")
 
 LOGS.info(
     "UserBot is now running !!!" 
