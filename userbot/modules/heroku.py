@@ -7,6 +7,8 @@
 import heroku3
 import aiohttp
 import math
+import asyncio
+import os
 
 from userbot import (
     CMD_HELP,
@@ -190,6 +192,28 @@ async def dyno_usage(dyno):
             return True
 
 
+@register(outgoing=True, pattern=r"^\.logs")
+async def _(dyno):
+        try:
+             Heroku = heroku3.from_key(HEROKU_API_KEY)
+             app = Heroku.app(HEROKU_APP_NAME)
+        except:
+  	       return await dyno.reply("`Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var.`")
+        await dyno.edit("`Getting Logs....`")
+        with open('logs.txt', 'w') as log:
+            log.write(app.get_log())
+        await dyno.client.send_file(
+            dyno.chat_id,
+            "logs.txt",
+            reply_to=dyno.id,
+            caption="`Heroku dyno logs`"
+        )
+        await dyno.edit("`Sending dyno logs ..`")
+        await asyncio.sleep(5)
+        await dyno.delete()
+        return os.remove('logs.txt')
+
+
 CMD_HELP.update({
     "heroku":
     ">.`usage`"
@@ -203,4 +227,6 @@ CMD_HELP.update({
     "\n\n>`.del var <VAR>`"
     "\nUsage: delete existing variable"
     "\n!!! WARNING !!!, after deleting variable the bot will restarted"
+    "\n\n>`.logs`"
+    "\nUsage: Get heroku dyno logs"
 })
