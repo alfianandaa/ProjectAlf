@@ -1,0 +1,187 @@
+{
+  "name": "Telegram ProjectBish",
+  "description": "[ProjectBish] A modular Telegram userbot running on Python 3.7+ with an sqlalchemy database.",
+  "keywords": [
+    "telegram",
+    "userbot",
+    "plugin",
+    "modular",
+    "productivity"
+  ],
+  "repository": "https://github.com/alfiananda84/ProjectBish",
+  "website": "https://telegra.ph/How-to-host-a-Telegram-Userbot-11-02",
+  "success_url": "https://t.me/userbotindo",
+  "stack": "container",
+  "env": {
+    "API_KEY": {
+      "description": "Get this value from my.telegram.org.",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "Get this value from my.telegram.org.",
+      "required": true
+    },
+    "STRING_SESSION": {
+      "description": "Get this value by running [python3 string_session.py] in Termux or local system.",
+      "required": true
+    },
+    "HEROKU_MEMEZ": {
+      "description": "This should be True if the userbot is running on a Heroku Dyno.",
+      "value": "True",
+      "required": true
+    },
+    "HEROKU_API_KEY": {
+      "description": "Your Heroku API key, get it from 'https://dashboard.heroku.com/account'",
+      "value": ""
+    },
+    "HEROKU_APP_NAME": {
+      "description": "Add the Heroku app name here. It helps with userbot updates.",
+      "required": false
+    },
+    "UPSTREAM_REPO_URL": {
+      "description": "In case you maintain a fork, add your repo URL here.",
+      "required": false
+    },
+    "COUNTRY": {
+      "description": "Set your Country to be used in the .time and .date commands.",
+      "required": false
+    },
+    "TZ_NUMBER": {
+      "description": "Change this value in case your country has multiple Time Zones.",
+      "value": "1",
+      "required": false
+    },
+    "CHROME_DRIVER": {
+      "description": "ChromeDriver location for selenium based modules.",
+      "value": "/usr/bin/chromedriver",
+      "required": false
+    },
+    "GOOGLE_CHROME_BIN": {
+      "description": "Google Chrome (or) Chromium binary location for selenium based modules.",
+      "value": "/usr/bin/chromium-browser",
+      "required": false
+    },
+    "OPEN_WEATHER_MAP_APPID": {
+      "description": "Get your own APPID (API key)from https://api.openweathermap.org/data/2.5/weather",
+      "required": false
+    },
+    "BOTLOG": {
+      "description": "Incase you want to turn off logging, put this to false",
+      "value": "False"
+    },
+    "BOTLOG_CHATID": {
+      "description": "ChatID of the Log group. Set it to '0' if BOTLOG = False and/or if LOGSPAMMER = False.",
+      "value": "0"
+    },
+    "CONSOLE_LOGGER_VERBOSE": {
+      "description": "If you need verbosity on the console logging",
+      "value": "False"
+    },
+    "PM_AUTO_BAN": {
+      "description": "PM Auto-Ban Feature Switch. Also known as the 'bleep blop, this is a bot...' module.",
+      "value": "False"
+    },
+    "YOUTUBE_API_KEY": {
+      "description": "YouTube Data API Key for .yt command. Get from https://console.cloud.google.com",
+      "required": false
+    },
+    "OCR_SPACE_API_KEY": {
+      "description": "OCR API Key for .ocr command. Get from https://ocr.space/ocrapi",
+      "required": false
+    },
+    "REM_BG_API_KEY": {
+      "description": "API Key for .rbg command. Get from https://www.remove.bg/api",
+      "required": false
+    },
+    "ANTI_SPAMBOT": {
+      "description": "Kicks spambots from groups after they join. [Requires admin powers in groups to kick.]",
+      "value": "False"
+    },
+    "ANTI_SPAMBOT_SHOUT": {
+      "description": "Report spambots to @admins in groups after they join, just in case when you don't have admin powers to kick that shit yourself.",
+      "value": "False"
+    },
+    "TMP_DOWNLOAD_DIRECTORY": {
+      "description": "Download location for many modules (GDrive, .download etc..)",
+      "value": "./downloads/"
+    },
+    "QUOTES_API_TOKEN": {
+      "description": "Enhance ur text to sticker. Get your own API token from http://antiddos.systems.",
+      "required": false
+    },
+    "CLEAN_WELCOME": {
+      "description": "When a new person joins, the old welcome message is deleted.",
+      "value": "True"
+    },
+    "LASTFM_API": {
+      "description": "API Key for Last.FM module. [Get one from - https://www.last.fm/api/account/create]",
+      "required": false
+    },
+    "LASTFM_SECRET": {
+      "description": "SECRET Key for Last.FM module. [Get one from - https://www.last.fm/api/account/create]",
+      "required": false
+    },
+    "LASTFM_USERNAME": {
+      "description": "Last.FM Username",
+      "required": false
+    },
+    "LASTFM_PASSWORD": {
+      "description": "Last.FM Password",
+      "required": false
+    },
+    "BIO_PREFIX": {
+      "description": "Prefix for Last.FM Module Bio.",
+      "required": false
+    },
+    "DEFAULT_BIO": {
+      "description": "Default profile bio.",
+      "value": "ProjectDils",
+      "required": false
+    },
+    "ALIVE_NAME": {
+      "description": "Name to show in .alive message",
+      "required": false
+    },
+    "G_DRIVE_DATA": {
+      "description": "Your client_secret.json.",
+      "required": false
+    },
+    "GENIUS_ACCESS_TOKEN": {
+      "description": "Client Access Token from https://genius.com/api-clients.",
+      "required": false
+    },
+    "WEATHER_DEFCITY": {
+      "description": "Set the default city for the userbot's weather module.",
+      "required": false
+    },
+    "GIT_REPO_NAME": {
+      "description": "Set the repo for the gitupload module.",
+      "required": false
+    },
+    "GITHUB_ACCESS_TOKEN": {
+      "description": "Set this in order to make the gitupload work. you can look https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line to assist you.",
+      "required": false
+    },
+    "GENIUS_API_TOKEN": {
+      "description": "Get this value from https://genius.com/developers.",
+      "required": false 
+    },
+    "IMG_LIMIT": {
+      "description": "Set limit for .img module",
+      "value": "6",
+      "required": true
+    },
+    "LOGSPAMMER": {
+      "description": "Set this to True in case you want the error logs to be stored in the userbot log group, instead of spitting out the file in the current chat, requires a valid BOTLOG_CHATID to be set.",
+      "value": "True"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "12"
+      }
+    }
+  ]
+}
