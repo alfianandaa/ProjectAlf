@@ -26,7 +26,7 @@ from userbot.utils import progress, humanbytes
 from userbot.events import register
 
 
-@register(pattern=r".download(?: |$)(.*)", outgoing=True)
+@register(pattern=r".dl(?: |$)(.*)", outgoing=True)
 async def download(target_file):
     """ For .download command, download files to the userbot's server. """
     await target_file.edit("Processing ...")
@@ -103,7 +103,7 @@ async def download(target_file):
             "Reply to a message to download to my local server.")
 
 
-@register(pattern=r".uploadir (.*)", outgoing=True)
+@register(pattern=r".upldir (.*)", outgoing=True)
 async def uploadir(udir_event):
     """ For .uploadir command, allows you to upload everything from a folder in the server"""
     input_str = udir_event.pattern_match.group(1)
@@ -179,7 +179,7 @@ async def uploadir(udir_event):
         await udir_event.edit("404: Directory Not Found")
 
 
-@register(pattern=r".upload (.*)", outgoing=True)
+@register(pattern=r".upl (.*)", outgoing=True)
 async def upload(u_event):
     """ For .upload command, allows you to upload a file from the userbot's server """
     await u_event.edit("Processing ...")
@@ -349,8 +349,8 @@ async def uploadas(uas_event):
 
 CMD_HELP.update({
     "download":
-    ">`.download <link|filename> or reply to media`"
+    ">`.dl <link|filename> or reply to media`"
     "\nUsage: Downloads file to the server."
-    "\n\n>`.upload <path in server>`"
+    "\n\n>`.upl <path in server>`"
     "\nUsage: Uploads a locally stored file to the chat."
 })
