@@ -503,7 +503,7 @@ async def youtube_search(query,
         return (nexttok, videos)
 
 
-@register(outgoing=True, pattern=r".rip(audio|video) (.*)")
+@register(outgoing=True, pattern=r".(aud|vid) (.*)")
 async def download_video(v_url):
     """ For .rip command, download media from YouTube and many other sites. """
     url = v_url.pattern_match.group(2)
@@ -511,7 +511,7 @@ async def download_video(v_url):
 
     await v_url.edit("`Preparing to download...`")
 
-    if type == "audio":
+    if type == "aud":
         opts = {
             'format':
             'bestaudio',
@@ -542,7 +542,7 @@ async def download_video(v_url):
         video = False
         song = True
 
-    elif type == "video":
+    elif type == "vid":
         opts = {
             'format':
             'best',
@@ -672,7 +672,7 @@ CMD_HELP.update({
     ">`.imdb <movie-name>`"
     "\nUsage: Shows movie info and other stuff.",
     "rip":
-    ">`.ripaudio <url> or ripvideo <url>`"
+    ">`.aud <url> or vid <url>`"
     "\nUsage: Download videos and songs from YouTube "
     "(and [many other sites](https://ytdl-org.github.io/youtube-dl/supportedsites.html))."
 })
