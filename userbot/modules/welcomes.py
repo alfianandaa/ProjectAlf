@@ -35,7 +35,7 @@ async def welcome_to_chat(event):
             # Convert to Jakarta time zone
             jakarta_timezone = now_utc.astimezone(timezone('Asia/Jakarta'))
             if jakarta_timezone.hour < 4:
-                time = "Selamat pagi 🌄"
+                time = "Selamat malam 🌒"
             elif 4 <= jakarta_timezone.hour < 6:
                 time = "Selamat pagi 🌄"
             elif 6 <= jakarta_timezone.hour < 11:
@@ -49,7 +49,7 @@ async def welcome_to_chat(event):
             elif 17 <= jakarta_timezone.hour < 19:
                 time = "Selamat malam 🌙"
             else:
-                time = "Selamat malam 🌙"
+                time = "Selamat malam 🌕"
 
             title = chat.title if chat.title else "this chat"
             participants = await event.client.get_participants(chat)
