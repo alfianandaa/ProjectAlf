@@ -47,9 +47,9 @@ async def welcome_to_chat(event):
             elif 15 <= jakarta_timezone.hour < 17:
                 time = "Selamat sore 🌅"
             elif 17 <= jakarta_timezone.hour < 19:
-                time = "Good night 🌙"
+                time = "Selamat malam 🌙"
             else:
-                time = "Good night 🌙"
+                time = "Selamat malam 🌙"
 
             title = chat.title if chat.title else "this chat"
             participants = await event.client.get_participants(chat)
