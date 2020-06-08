@@ -35,19 +35,19 @@ async def welcome_to_chat(event):
             # Convert to Jakarta time zone
             jakarta_timezone = now_utc.astimezone(timezone('Asia/Jakarta'))
             if jakarta_timezone.hour < 4:
-                time = "Good dawn 🌚"
+                time = "Selamat pagi 🌄"
             elif 4 <= jakarta_timezone.hour < 6:
-                time = "Happy early morning 😁"
+                time = "Selamat pagi 🌄"
             elif 6 <= jakarta_timezone.hour < 11:
-                time = "Good morning 🌤"
+                time = "Selamat pagi 🌄"
             elif 11 <= jakarta_timezone.hour < 13:
-                time = "Happy early afternoon ☀"
+                time = "Selamat siang 🌤️"
             elif 13 <= jakarta_timezone.hour <15:
-                time = "Good day 😎"
+                time = "Selamat siang 🌤️"
             elif 15 <= jakarta_timezone.hour < 17:
-                time = "Good afternoon ⛅"
+                time = "Selamat sore 🌅"
             elif 17 <= jakarta_timezone.hour < 19:
-                time = "Good dusk 🌥"
+                time = "Good night 🌙"
             else:
                 time = "Good night 🌙"
 
