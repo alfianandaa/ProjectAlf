@@ -524,7 +524,7 @@ CRI = [
     "༼ ༎ຶ ෴ ༎ຶ༽",
 ]
 
-SLAP_TEMPLATES = [
+SLAP_TEMPLATES_EN = [
     "{hits} {victim} with a {item}.",
     "{hits} {victim} in the face with a {item}.",
     "{hits} {victim} around a bit with a {item}.",
@@ -557,7 +557,7 @@ SLAP_TEMPLATES = [
     "slaps {victim} with a DMCA takedown request!"
 ]
 
-ITEMS = [
+ITEMS_EN = [
     "cast iron skillet",
     "large trout",
     "baseball bat",
@@ -596,14 +596,15 @@ ITEMS = [
     "ton of bricks",
 ]
 
-THROW = [
+THROW_EN = [
     "throws",
     "flings",
     "chucks",
     "hurls",
 ]
 
-HIT = [
+HIT_EN = [
+    "yeets"
     "hits",
     "whacks",
     "slaps",
@@ -611,7 +612,124 @@ HIT = [
     "bashes",
 ]
 
-WHERE = ["in the chest", "on the head", "on the butt", "on the crotch"]
+WHERE_EN = ["in the chest", "on the head", "on the butt", "on the crotch"]
+
+# ID translation by @yincen
+SLAP_TEMPLATES_ID = [
+    "{hits} {victim} dengan {item}.",
+    "{throws} sebuah  {item} kepada {victim}.",
+    "mengambil  {item} dan {hits} {victim} .",
+    "Mengambil Sebuah {item} dan {hits} {victim} Dengan itu.",
+    "Menjatuhkan {victim} Ke Lava.",
+    "Mengirimkan {victim} ke Kawah.",
+    "Membuang {victim} Ke Laut.",
+    "Mengeluarkan {victim} Dari Bumi.",
+    "Melempar {victim} Ke luar angkasa.",
+    "Menaruh {victim} di Pluto.",
+    "Melemparkan sebuah {item} ke {victim}.",
+    "Melemparkan {item} kepada {victim}.",
+    "Menampar {victim} menggunakan {item}.",
+    "Membuang {victim} Ke udara.",
+    "Menghapus {victim} Dari Daftar Teman.",
+    "Melemparkan {item} {where} {victim}.",
+    "Meletakan {item} {where} {victim}.",
+    "Menyerang {victim} menggunakan {anime}.",
+    "Mengehack Seluruh akun {victim}"
+]
+
+ITEMS_ID = [
+    "Tabung Gas",
+    "Televisi 42 In",
+    "Raket",
+    "Raket Nyamuk",
+    "Kaca",
+    "Buku",
+    "Linggis",
+    "Telur",
+    "Jarum",
+    "Monitor Tabung",
+    "Obeng",
+    "Almunium",
+    "Emas",
+    "Printer",
+    "Speaker",
+    "Gas Lpg",
+    "Tangki Bensin",
+    "Tandon Air",
+    "Bola Boling",
+    "Laptop",
+    "Hardisk Rusak",
+    "Wajan Panas",
+    "Virus Corona",
+    "Meja Kantor",
+    "Meja Arsip",
+    "Lemari",
+    "Ember Besi",
+    "Besi Beton",
+    "Timah Panas",
+    "Harimau",
+    "Batu Krikil",
+    "Makanan Basi",
+    "Pesawat AirBus",
+    "Roket Nasa",
+    "Satelit Nasa",
+    "Matahari",
+    "Meteor",
+    "Berkas Kantor",
+    "Beton panas",
+    "Cermin",
+    "Batu Giok",
+    "Botol",
+    "Nezuko",
+    "Kaset Pita",
+    "Tiang Jemuran",
+    "Pisau Lipat",
+    "Bongkahan Es ",
+    "Asteroid",
+]
+
+THROW_ID = [
+    "Melempar",
+    "Melemparkan",
+    "Mematak",
+]
+
+HIT_ID = [
+    "Memukul",
+    "melemparkan",
+    "Memukuli",
+    "Membogem",
+]
+
+WHERE_ID = ["di pipi", "di kepala", "di bokong", "di badan"]
+
+
+SLAP_TEMPLATES_Jutsu = [
+    "Menyerang {victim} Menggunakan {hits}.",
+    "Menyerang {victim} Menggunakan {item}.",
+    "Melemparkan {throws} kepada {victim} .",
+    "Melemparkan {throws} {where} {victim}."
+]
+
+ITEMS_Jutsu = [
+     "KAA MEE HAA MEE HAA",
+     "Chibaku Tensei",
+     "Amaterasu",
+]
+
+THROW_Jutsu = [
+    "Futon Rasen Shuriken",
+    "Shuriken",
+]
+
+HIT_Jutsu = [
+    "Rasengan",
+    "Chidori",
+]
+
+
+WHERE_Jutsu = ["Di Pipi", "Di Kepala", "Di Bokong", "Di Badan ,Di Pantat"]
+
 
 HILIH = [
     "┐(´д｀)┌",
@@ -655,6 +773,9 @@ GAMBAR_TITIT = """
  🍆🍆🍆  🍆🍆🍆
     🍆🍆       🍆🍆
 """
+normiefont = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'] 
+
+weebyfont = ['卂', '乃', '匚', '刀', '乇', '下', '厶', '卄', '工', '丁', '长', '乚', '从', '𠘨', '口', '尸', '㔿', '尺', '丂', '丅', '凵', 'リ', '山', '乂', '丫', '乙']
 
 # ===========================================
 
@@ -712,7 +833,7 @@ async def coin(event):
             await event.edit("The coin landed on: **Tails**.")
 
 
-@register(pattern="^.slap(?: |$)(.*)", outgoing=True)
+@register(pattern="^\.slap(?: |$)(.*)", outgoing=True)
 async def who(event):
     """ slaps a user, or get slapped if not a reply. """
     replied_user = await get_user_from_event(event)
@@ -741,18 +862,36 @@ async def slap(replied_user, event):
         slapped = "@{}".format(username)
     else:
         slapped = f"[{first_name}](tg://user?id={user_id})"
-
-    temp = choice(SLAP_TEMPLATES)
-    item = choice(ITEMS)
-    hit = choice(HIT)
-    throw = choice(THROW)
-    where = choice(WHERE)
+    slap_str = event.pattern_match.group(1)
+    if slap_str == "en":
+       temp = choice(SLAP_TEMPLATES_EN)
+       item = choice(ITEMS_EN)
+       hit = choice(HIT_EN)
+       throw = choice(THROW_EN)
+       where = choice(WHERE_EN)
+    elif slap_str == "id":
+       temp = choice(SLAP_TEMPLATES_ID)
+       item = choice(ITEMS_ID)
+       hit = choice(HIT_ID)
+       throw = choice(THROW_ID)
+       where = choice(WHERE_ID)
+    elif slap_str == "jutsu":
+       temp = choice(SLAP_TEMPLATES_Jutsu)
+       item = choice(ITEMS_Jutsu)
+       hit = choice(HIT_Jutsu)
+       throw = choice(THROW_Jutsu)
+       where = choice(WHERE_Jutsu)
+    else:
+       temp = choice(SLAP_TEMPLATES_EN)
+       item = choice(ITEMS_EN)
+       hit = choice(HIT_EN)
+       throw = choice(THROW_EN)
+       where = choice(WHERE_EN)
 
     caption = "..." + temp.format(
         victim=slapped, item=item, hits=hit, throws=throw, where=where)
 
     return caption
-
 
 @register(outgoing=True, pattern="^-_-$", ignore_unsafe=True)
 async def lol(lel):
@@ -1407,7 +1546,22 @@ async def emoji_penis(e):
         titid = titid.replace('🍆', emoji)
     await e.edit(titid)  
               
- 
+@register(outgoing=True, pattern="^\.weeb(?: |$)(.*)")
+async def weebify(e): 
+    args = e.pattern_match.group(1) 
+    if not args: 
+        get = await e.get_reply_message() 
+        args = get.text 
+    if not args: 
+        await e.edit("`What I am Supposed to Weebify U Dumb`") 
+        return
+    string = ' '.join(args).lower() 
+    for normiecharacter in string: 
+        if normiecharacter in normiefont:
+            weebycharacter = weebyfont[normiefont.index(normiecharacter)]                                                                      
+            string = string.replace(normiecharacter, weebycharacter)
+    await e.edit(string)
+
 CMD_HELP.update({
     "memes":
     ">`.cowsay`"
@@ -1478,6 +1632,6 @@ CMD_HELP.update({
     "\nAnd Many More..."
     "\n.nou ; .bot ; .gey ; .gay ; .tf ; .paw ; .taco ; .nih ; .ii ;"
     "\n.fag ; .gtfo ; .stfu ; .lol ; .lool ; .fail ; .leave"
-    "\n.love ; .rain ; .earth ; .fuck ; .penis ; .koc"
+    "\n.love ; .rain ; .earth ; .fuck ; .penis ; .koc ; .weeb"
     "\n\n\nThanks to 🅱️ottom🅱️ext🅱️ot (@NotAMemeBot) for some of these."
 })
