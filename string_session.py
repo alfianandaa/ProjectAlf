@@ -10,9 +10,8 @@ API_KEY = input("API_KEY: ")
 API_HASH = input("API_HASH: ")
 
 with TelegramClient(StringSession(), API_KEY, API_HASH) as client:
-    print("Here is your userbot srting, copy it to a safe place !!")
-    print("")
-    print(client.session.save())
-    print("")
-    print("")
-    print("Enjoy your userbot !!")
+    session_string = client.session.save()
+    saved_messages_template = """<code>STRING_SESSION</code>: <code>{}</code>
+️<i>It is forbidden to pass this value to third parties</i>""".format(session_string)
+    client.send_message("me", saved_messages_template, parse_mode="html")
+    print("Check Saved Messages on your telegram account !!")
