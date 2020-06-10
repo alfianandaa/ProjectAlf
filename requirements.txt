@@ -6,6 +6,7 @@ cowpy
 cffi
 covid
 cryptg
+deezloader
 dnspython
 emoji
 gitpython
