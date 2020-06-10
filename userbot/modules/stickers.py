@@ -19,20 +19,16 @@ from telethon.tl.types import InputStickerSetID
 from telethon.tl.types import DocumentAttributeSticker
 
 KANGING_STR = [
-    "Eh... Koq bagus... aku kang ahhh :3",
-    "Aku kang y kakak :)",
-    "Using Witchery to kang this sticker...",
-    "Plagiarising hehe...",
-    "Inviting this sticker over to my pack...",
-    "Great\nKanging this sticker hahahahaha...",
-    "Hey that's a nice sticker!\nMind if I kang?!..",
-    "hehe me stel ur stikér\nhehe.",
-    "Ay look over there (☉｡☉)!→\nWhile I kang this...",
-    "Roses are red\nviolets are blue\nkanging this sticker\nso my pack looks cool",
-    "Imprisoning this sticker...\nit'll look good in my pack",
-    "I'm is stealing this sticker...\nhehehehehe... ",
-	"May i kang this?\nI'll do it anyway even you says no!",
-	"Seems gud if i kang this...",
+    "Bentar nyeduh Kopi Dulu...",
+    "Ngeliatin ini sticker...",
+    "Masukin ni Sticker ke pack stickerku...",
+    "Ngekang Ni Sticker...",
+    "Hey Ini Sticker Bagus!\nGimana Jika Aku kang?!..",
+    "Tak kang yo stickermu.",
+    "Ay Coba liat stickermu (☉｡☉)!→\nApa Luu...",
+    "Bapac Toing ke Mekkah, Di mekkah eh masuk angin, Bisa ini gw kangin?!",
+    "Compile This Sticker \nHehe...",
+    "Mr.Cabul Sticker mu bagus ni, minta yakk... ",
 ]
 
 
@@ -194,7 +190,7 @@ async def kang(args):
                 # Ensure user doesn't get spamming notifications
                 await bot.send_read_acknowledge(conv.chat_id)
         else:
-            await args.edit("`Brewing a new Pack...`")
+            await args.edit("`Buat Pack sticker baru`")
             async with bot.conversation('Stickers') as conv:
                 await conv.send_message(cmd)
                 await conv.get_response()
@@ -238,8 +234,8 @@ async def kang(args):
                 await bot.send_read_acknowledge(conv.chat_id)
 
         await args.edit(
-            "`Sticker kanged successfully!`"
-            f"\nPack can be found [here](t.me/addstickers/{packname})",
+            "`Sticker Sukses Tercolong!`"
+            f"\nKlik [disini](t.me/addstickers/{packname}) kalo mau liat stickerku",
             parse_mode='md')
 
 
@@ -317,13 +313,13 @@ async def sticker_to_png(sticker):
 
     img = await sticker.get_reply_message()
     if not img.document:
-        await sticker.edit("`Reply to a sticker...`")
+        await sticker.edit("`Reply ke suatu stiker...`")
         return False
 
     try:
         img.document.attributes[1]
     except Exception:
-        await sticker.edit("`This is not a sticker...`")
+        await sticker.edit("`Ini bukan sticker sticker...`")
         return
 
     with io.BytesIO() as image:
@@ -333,7 +329,7 @@ async def sticker_to_png(sticker):
         try:
             await img.reply(file=image, force_document=True)
         except Exception:
-            await sticker.edit("`Err, can't send file...`")
+            await sticker.edit("`Err, gak bisa ngirim file...`")
         else:
             await sticker.delete()
     return
