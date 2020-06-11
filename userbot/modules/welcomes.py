@@ -44,7 +44,7 @@ async def welcome_to_chat(event):
                 time = "Selamat siang 🌤️"
             elif 13 <= jakarta_timezone.hour <15:
                 time = "Selamat siang 🌤️"
-            elif 15 <= jakarta_timezone.hour < 17:
+            elif 15 <= jakarta_timezone.hour < 18:
                 time = "Selamat sore 🌅"
             elif 17 <= jakarta_timezone.hour < 19:
                 time = "Selamat malam 🌙"
