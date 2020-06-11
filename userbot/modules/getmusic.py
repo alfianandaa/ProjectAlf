@@ -240,6 +240,6 @@ CMD_HELP.update({
     "\nUsage: Download music from Spotify or Deezer"
     "\n\n>`.smd <Artist - Song Title>`"
     "\nUsage: Download music from Spotify"
-    "\n\n`.deez <spotify/deezer link> FORMAT`"
+    "\n\n>`.deez <spotify/deezer link> FORMAT`"
     "\nUsage: Download music from deezer."
 })
