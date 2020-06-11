@@ -99,7 +99,7 @@ async def _(event):
                                        [msg.id, r.id, respond.id])
     await event.delete()
 
-@register(outgoing=True, pattern="^\.deezload (.+?|) --(FLAC|MP3\_320|MP3\_256|MP3\_128)")
+@register(outgoing=True, pattern="^\.deez (.+?|) (FLAC|MP3\_320|MP3\_256|MP3\_128)")
 async def _(event):
     """DeezLoader by @An0nimia
     Ported for UniBorg by @SpEcHlDe"""
@@ -234,12 +234,12 @@ async def upload_track(track_location, message):
 
 CMD_HELP.update({
     "getmusic":
-    ">`.deezload` <spotify/deezer link> --FORMAT"
-    "\nUsage: Download music from deezer."
     ">`.netease <Artist - Song Title>`"
     "\nUsage: Download music with @WooMaiBot"
     "\n\n>`.sdd <Spotify/Deezer Link>`"
     "\nUsage: Download music from Spotify or Deezer"
     "\n\n>`.smd <Artist - Song Title>`"
     "\nUsage: Download music from Spotify"
+    "\n\n`.deez <spotify/deezer link> FORMAT`"
+    "\nUsage: Download music from deezer."
 })
