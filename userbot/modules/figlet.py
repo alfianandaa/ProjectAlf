@@ -36,7 +36,7 @@ async def figlet(e):
  
 CMD_HELP.update({
         "figlet":
-        ">`.figlet`"
+        ">`.fg`"
           "\nUsage: Enhance ur text to strip line with anvil."
           "\n\nExample: `.figlet TEXT.STYLE`"
           "\nSTYLE LIST: `slant`, `3D`, `5line`, `alpha`, `banner`, `doh`, `iso`, `letter`, `allig`, `dotm`, `bubble`, `bulb`, `digi`"
