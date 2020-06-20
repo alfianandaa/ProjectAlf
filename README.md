@@ -42,8 +42,8 @@ Join [Userbotindo Support Group](https://t.me/userbotindo) for discussion, bug r
 * [Mr.Miss](https://github.com/keselekpermen69) - UserButt
 * [adekmaulana](https://github.com/adekmaulana) - ProjectBish
 * [MoveAngel](https://github.com/MoveAngel) - One4uBot
-
-And [others](https://github.com/aidilaryanto/ProjectDils/graphs/contributors) that help to make this userbot awesome.
+* [AidilAryanto](https://github.com/aidilaryanto) - ProjectDils 
+* [others](https://github.com/aidilaryanto/ProjectDils/graphs/contributors) that help to make this userbot awesome.
 
 ## License
 Licensed under [Raphielscape Public License](https://github.com/aidilaryanto/ProjectDils/blob/master/LICENSE) - Version 1.d, February 2020

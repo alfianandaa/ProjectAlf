@@ -135,7 +135,6 @@
     },
     "DEFAULT_BIO": {
       "description": "Default profile bio.",
-      "value": "ProjectDils",
       "required": false
     },
     "ALIVE_NAME": {
