@@ -12,7 +12,7 @@ from shutil import which
 from os import remove
 from telethon import version
 
-from userbot import CMD_HELP, ALIVE_NAME
+from userbot import bot, CMD_HELP, ALIVE_NAME, ALIVE_LOGO
 from userbot.events import register
 
 # ================= CONSTANT =================
@@ -131,7 +131,8 @@ async def pipcheck(pip):
 @register(outgoing=True, pattern="^\.(?:alive|on)\s?(.)?")
 async def amireallyalive(alive):
     """ For .on command, check if the bot is running.  """
-    await alive.edit("`"
+    logo = ALIVE_LOGO
+    output = ("`"
                      "UserBot is running...\n"
              f"====================================\n"
              f"👤 User     : {DEFAULTUSER}\n"
@@ -139,6 +140,8 @@ async def amireallyalive(alive):
              f"⚙️ Telethon : v{version.__version__}\n"
              f"====================================\n"
                      "`")
+    await bot.send_file(alive.chat_id, logo, caption=output)
+    await alive.delete()
 
 
 @register(outgoing=True, pattern="^.aliveu")
