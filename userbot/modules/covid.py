@@ -24,8 +24,8 @@ async def corona(event):
         output_text += f"`New Cases   : {country_data['new_cases']}`\n"
         output_text += f"`New Deaths  : {country_data['new_deaths']}`\n"
         output_text += f"`Critical    : {country_data['critical']}`\n"
-        output_text += f"`Total Tests : {country_data['total_tests']}`\n"
-        output_text += "Data provided by [Worldometer](https://www.worldometers.info)"
+        output_text += f"`Total Tests : {country_data['total_tests']}`\n\n"
+        output_text += f"Data provided by [Worldometer](https://www.worldometers.info/coronavirus/country/{country})"
     else:
         output_text = "No information yet about this country!"
     await event.edit(f"Corona Virus Info in {country}:\n\n{output_text}")
