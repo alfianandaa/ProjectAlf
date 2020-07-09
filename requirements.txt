@@ -53,4 +53,7 @@ python-dateutil
 git+https://github.com/johnwmillr/LyricsGenius.git
 PyGithub
 justwatch
+jikanpy
+html_telegraph_poster
+pendulum==2.0.5
 
