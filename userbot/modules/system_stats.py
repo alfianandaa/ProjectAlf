@@ -12,7 +12,7 @@ from shutil import which
 from os import remove
 from telethon import version
 
-from userbot import bot, CMD_HELP, ALIVE_NAME, ALIVE_LOGO
+from userbot import bot, CMD_HELP, ALIVE_NAME, ALIVE_LOGO, ALIVE_USERNAME, UPSTREAM_REPO_BRANCH
 from userbot.events import register
 
 # ================= CONSTANT =================
@@ -132,14 +132,15 @@ async def pipcheck(pip):
 async def amireallyalive(alive):
     """ For .on command, check if the bot is running.  """
     logo = ALIVE_LOGO
-    output = ("`"
-                     "UserBot is running...\n"
-             f"====================================\n"
-             f"👤 User     : {DEFAULTUSER}\n"
-             f"🐍 Python   : v{python_version()}\n"
-             f"⚙️ Telethon : v{version.__version__}\n"
-             f"====================================\n"
-                     "`")
+    output = (f"`My Detail Ubot `\n"
+             f"┏━━━━━━━━━━━━━━━━━━━━━━━━\n"
+             f"┣[ 👤 `User       :` {DEFAULTUSER}\n"
+             f"┣[ 🐍 `Python     :` v{python_version()}\n"
+             f"┣[ ⚙️ `Telethon   :` v{version.__version__}\n"
+             f"┣[ 👁‍🗨 `Username   :` {ALIVE_USERNAME}\n"
+             f"┣[ 🎮 `Running on :` {UPSTREAM_REPO_BRANCH}\n"
+             f"┗━━━━━━━━━━━━━━━━━━━━━━━━\n"
+             f"`All modules loaded with ({MODULESTR}) errors`")
     await bot.send_file(alive.chat_id, logo, caption=output)
     await alive.delete()
 

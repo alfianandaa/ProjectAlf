@@ -25,6 +25,10 @@
       "description": "Get this value by running [python3 string_session.py] in Termux or local system.",
       "required": true
     },
+    "ALIVE_USERNAME": {
+      "description": "Username to show in .alive message.",
+      "required": false
+    },
     "HEROKU_MEMEZ": {
       "description": "This should be True if the userbot is running on a Heroku Dyno.",
       "value": "True",
