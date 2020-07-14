@@ -657,7 +657,7 @@ def is_gif(file):
 
 CMD_HELP.update(
     {
-        "anime": ">`.animewiki <anime>` Returns with Anime information.\n"
+        "animewiki": ">`.animewiki <anime>` Returns with Anime information.\n"
         ">`.manga <manga name>` Returns with the Manga information.\n"
         ">`.akaizoku` or `.akayo` <anime name> Returns with the Anime Downlaod link.\n"
         ">`.char` <character name> Return with character information.\n"
