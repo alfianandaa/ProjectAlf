@@ -7,11 +7,11 @@
 # 
 # Based code + improve from AdekMaulana and aidilaryanto
 
-from io import BytesIO
 from PIL import Image
 import asyncio
 import re
 import random
+import io
 from random import randint, uniform
 import time
 from datetime import datetime
