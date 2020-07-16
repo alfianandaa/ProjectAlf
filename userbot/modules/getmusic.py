@@ -12,8 +12,9 @@ import shutil
 import time
 
 from telethon import events
+from pylast import User
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from userbot import bot, CMD_HELP, DEEZER_ARL_TOKEN, TEMP_DOWNLOAD_DIRECTORY
+from userbot import bot, CMD_HELP, DEEZER_ARL_TOKEN, TEMP_DOWNLOAD_DIRECTORY, LASTFM_USERNAME, lastfm
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from telethon.tl.types import DocumentAttributeAudio
@@ -46,31 +47,46 @@ def getmusicvideo(cat):
     os.system(command)
 
 
-@register(outgoing=True, pattern="^.netease(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.netease (?:(now)|(.*) - (.*))")
 async def _(event):
     if event.fwd_from:
         return
-    song = event.pattern_match.group(1)
+    if event.pattern_match.group(1) == "now":
+        playing = User(LASTFM_USERNAME, lastfm).get_now_playing()
+        if playing is None:
+            return await event.edit("`Error: No current scrobble found.`")
+        artist = playing.get_artist()
+        song = playing.get_title()
+    else:
+        artist = event.pattern_match.group(2)
+        song = event.pattern_match.group(3)
+    track = str(artist) + " - " + str(song)
     chat = "@WooMaiBot"
-    link = f"/netease {song}"
-    await event.edit("```Getting Your Music```")
-    async with bot.conversation(chat) as conv:
-        await asyncio.sleep(2)
-        await event.edit("`Downloading...Please wait`")
-        try:
-            msg = await conv.send_message(link)
-            response = await conv.get_response()
-            respond = await conv.get_response()
-            await bot.send_read_acknowledge(conv.chat_id)
-        except YouBlockedUserError:
-            await event.reply("```Please unblock @WooMaiBot and try again```")
-            return
-        await event.edit("`Sending Your Music...`")
-        await asyncio.sleep(3)
-        await bot.send_file(event.chat_id, respond)
-    await event.client.delete_messages(conv.chat_id,
-                                       [msg.id, response.id, respond.id])
-    await event.delete()
+    link = f"/netease {track}"
+    await event.edit("`Searching...`")
+    try:
+        async with bot.conversation(chat) as conv:
+            await asyncio.sleep(2)
+            await event.edit("`Processing... Please wait`")
+            try:
+                msg = await conv.send_message(link)
+                response = await conv.get_response()
+                respond = await conv.get_response()
+                await bot.send_read_acknowledge(conv.chat_id)
+            except YouBlockedUserError:
+                await event.reply("`Please unblock @WooMaiBot and try again`")
+                return
+            await event.edit("`Sending Your Music...`")
+            await asyncio.sleep(3)
+            await bot.send_file(event.chat_id, respond)
+        await event.client.delete_messages(
+            conv.chat_id, [msg.id, response.id, respond.id]
+        )
+        await event.delete()
+    except TimeoutError:
+        return await event.edit(
+            "`Error: `@WooMaiBot` is not responding or Song not found!.`"
+        )
 
 
 @register(outgoing=True, pattern=r"^\.vsong(?: |$)(.*)")
@@ -311,6 +327,8 @@ CMD_HELP.update({
     "getmusic":
     ">`.netease <Artist - Song Title>`"
     "\nUsage: Download music with @WooMaiBot"
+    "\n\n>`.netease now`"
+    "\nUsage: Download current LastFM scrobble use `@WooMaiBot`."
     "\n\n>`.vsong` **Artist - Song Title**"
     "\nUsage: Finding and uploading videoclip."
     "\n\n>`.smd <Artist - Song Title>`"
