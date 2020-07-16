@@ -1,6 +1,7 @@
 import asyncio
 import html
 import json
+import re
 import textwrap
 from io import BytesIO, StringIO
 from urllib.parse import quote as urlencode
@@ -14,8 +15,11 @@ from html_telegraph_poster import TelegraphPoster
 from jikanpy import Jikan
 from jikanpy.exceptions import APIException
 from telethon.errors.rpcerrorlist import FilePartsInvalidError
-from telethon.tl.types import (DocumentAttributeAnimated,
-                               DocumentAttributeFilename, MessageMediaDocument)
+from telethon.tl.types import (
+    DocumentAttributeAnimated,
+    DocumentAttributeFilename,
+    MessageMediaDocument,
+)
 from telethon.utils import is_image, is_video
 
 from userbot import CMD_HELP
@@ -38,8 +42,7 @@ def getKitsu(mal):
     link = f"https://kitsu.io/api/edge/mappings?filter[external_site]=myanimelist/anime&filter[external_id]={mal}"
     result = requests.get(link).json()["data"][0]["id"]
     link = f"https://kitsu.io/api/edge/mappings/{result}/item?fields[anime]=slug"
-    kitsu = requests.get(link).json()["data"]["id"]
-    return kitsu
+    return requests.get(link).json()["data"]["id"]
 
 
 def getBannerLink(mal, kitsu_search=True):
@@ -188,7 +191,84 @@ def replace_text(text):
         "")
 
 
-@register(outgoing=True, pattern=r"^\.animewiki ?(.*)")
+async def callAPI(search_str):
+    query = """
+    query ($id: Int,$search: String) {
+      Media (id: $id, type: ANIME,search: $search) {
+        id
+        title {
+          romaji
+          english
+        }
+        description (asHtml: false)
+        startDate{
+            year
+          }
+          episodes
+          chapters
+          volumes
+          season
+          type
+          format
+          status
+          duration
+          averageScore
+          genres
+          bannerImage
+      }
+    }
+    """
+    variables = {"search": search_str}
+    url = "https://graphql.anilist.co"
+    response = requests.post(
+        url,
+        json={
+            "query": query,
+            "variables": variables})
+    return response.text
+
+
+async def formatJSON(outData):
+    msg = ""
+    jsonData = json.loads(outData)
+    res = list(jsonData.keys())
+    if "errors" in res:
+        msg += f"**Error** : `{jsonData['errors'][0]['message']}`"
+    else:
+        jsonData = jsonData["data"]["Media"]
+        if "bannerImage" in jsonData.keys():
+            msg += f"[〽️]({jsonData['bannerImage']})"
+        else:
+            msg += "〽️"
+        title = jsonData["title"]["romaji"]
+        link = f"https://anilist.co/anime/{jsonData['id']}"
+        msg += f"[{title}]({link})"
+        msg += f"\n\n**Type** : {jsonData['format']}"
+        msg += "\n**Genres** : "
+        for g in jsonData["genres"]:
+            msg += g + " "
+        msg += f"\n**Status** : {jsonData['status']}"
+        msg += f"\n**Episode** : {jsonData['episodes']}"
+        msg += f"\n**Year** : {jsonData['startDate']['year']}"
+        msg += f"\n**Score** : {jsonData['averageScore']}"
+        msg += f"\n**Duration** : {jsonData['duration']} min\n\n"
+        cat = f"{jsonData['description']}"
+        msg += " __" + re.sub("<br>", "\n", cat) + "__"
+
+    return msg
+
+
+@register(outgoing=True, pattern=r"^\.anilist ?(.*)")
+async def anilist(event):
+    if event.fwd_from:
+        return
+    input_str = event.pattern_match.group(1)
+    result = await callAPI(input_str)
+    msg = await formatJSON(result)
+    await event.edit(msg, link_preview=True)
+
+
+@register(outgoing=True, pattern=r"^\.anime ?(.*)")
 async def anime(event):
     query = event.pattern_match.group(1)
     reply = await event.get_reply_message()
@@ -241,8 +321,6 @@ async def anime(event):
         trailer = anime.get("trailer_url")
         if trailer:
             bru = f"<a href='{trailer}'>Trailer</a>"
-        else:
-            pass
         url = anime.get("url")
     else:
         await event.edit("`No results Found!`")
@@ -649,20 +727,29 @@ def is_gif(file):
     # lazy to go to github and make an issue kek
     if not is_video(file):
         return False
-    if DocumentAttributeAnimated() not in getattr(
-            file, "document", file).attributes:
-        return False
-    return True
+    return DocumentAttributeAnimated() in getattr(
+        file, "document", file).attributes
 
 
 CMD_HELP.update(
     {
-        "animewiki": ">`.animewiki <anime>` Returns with Anime information.\n"
-        ">`.manga <manga name>` Returns with the Manga information.\n"
-        ">`.akaizoku` or `.akayo` <anime name> Returns with the Anime Downlaod link.\n"
-        ">`.char` <character name> Return with character information.\n"
-        ">`.upcoming` Returns with Upcoming Anime information.\n"
-        ">`.scanime` <anime> or `.sanime` <anime> Search anime.\n"
-        ">`.smanga` <manga> Search manga.\n"
-        ">`.whatanime` Reply to media.\n"
-        "Usage: Find anime from media file."})
+        "anime": ">`.anilist` <anime>"
+        "\nUsage: Get anime information from anilist.\n\n"
+        ">`.anime <anime>`"
+        "\nUsage: Returns with Anime information.\n\n"
+        ">`.manga <manga name>`"
+        "\nUsage: Returns with the Manga information.\n\n"
+        ">`.akaizoku` or `.akayo` <anime name>"
+        "\nUsage: Returns with the Anime Downlaod link.\n\n"
+        ">`.char` <character name>"
+        "\nUsage: Return with character information.\n\n"
+        ">`.upcoming`"
+        "\nUsage: Returns with Upcoming Anime information.\n\n"
+        ">`.scanime` <anime> or `.sanime` <anime>"
+        "\nUsage: Search anime.\n\n"
+        ">`.smanga` <manga>"
+        "\nUsage: Search manga.\n\n"
+        ">`.whatanime` Reply to media: foto, gif or video."
+        "\nUsage: Find anime from replied media."
+    }
+)
