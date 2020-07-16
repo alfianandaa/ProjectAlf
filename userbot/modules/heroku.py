@@ -7,8 +7,9 @@
 import heroku3
 import aiohttp
 import math
-import asyncio
+import codecs
 import os
+import requests
 
 from userbot import (
     CMD_HELP,
@@ -194,24 +195,24 @@ async def dyno_usage(dyno):
 
 @register(outgoing=True, pattern=r"^\.logs")
 async def _(dyno):
-        try:
-             Heroku = heroku3.from_key(HEROKU_API_KEY)
-             app = Heroku.app(HEROKU_APP_NAME)
-        except:
-  	       return await dyno.reply("`Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var.`")
-        await dyno.edit("`Getting Logs....`")
-        with open('logs.txt', 'w') as log:
-            log.write(app.get_log())
-        await dyno.client.send_file(
-            dyno.chat_id,
-            "logs.txt",
-            reply_to=dyno.id,
-            caption="`Heroku dyno logs`"
+    try:
+        Heroku = heroku3.from_key(HEROKU_API_KEY)
+        app = Heroku.app(HEROKU_APP_NAME)
+    except BaseException:
+        return await dyno.reply(
+            "`Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var.`"
         )
-        await dyno.edit("`Sending dyno logs ..`")
-        await asyncio.sleep(5)
-        await dyno.delete()
-        return os.remove('logs.txt')
+    await dyno.edit("`Getting Logs....`")
+    with open("logs.txt", "w") as log:
+        log.write(app.get_log())
+    fd = codecs.open("logs.txt", "r", encoding="utf-8")
+    data = fd.read()
+    key = (requests.post("https://nekobin.com/api/documents",
+                         json={"content": data}) .json() .get("result") .get("key"))
+    url = f"https://nekobin.com/raw/{key}"
+    await dyno.edit(f"`Here the heroku logs:`\n\nPasted to: [Nekobin]({url})")
+    return os.remove("logs.txt")
+
 
 
 CMD_HELP.update({
