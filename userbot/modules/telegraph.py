@@ -30,9 +30,14 @@ async def telegraphs(graph):
                 )
                 end = datetime.now()
                 ms = (end - start).seconds
-                await graph.edit("Downloaded to {} in {} seconds.".format(downloaded_file_name, ms))
-                if downloaded_file_name.endswith((".webp")):
-                    resize_image(downloaded_file_name)
+                await graph.edit(
+                    "Downloaded to {} in {} seconds.".format(downloaded_file_name, ms)
+                )
+                try:
+                    if downloaded_file_name.endswith((".webp")):
+                        resize_image(downloaded_file_name)
+                except AttributeError:
+                    return await graph.edit("`No media provided`")
                 try:
                     start = datetime.now()
                     media_urls = upload_file(downloaded_file_name)
@@ -81,8 +86,5 @@ def resize_image(image):
     im.save(image, "PNG")
 
 
-CMD_HELP.update({
-    "telegraph":
-    ">`.telegraph m|t`"
-    "\nUsage: Upload text & media on Telegraph."
-})
+CMD_HELP.update({"telegraph": ">`.tg` <m|t>"
+                 "\nUsage: Upload t(text) or m(media) on Telegraph."})
