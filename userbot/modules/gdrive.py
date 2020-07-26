@@ -553,7 +553,8 @@ async def change_permission(service, Id):
         service.permissions().create(fileId=Id, body=permission).execute()
     except HttpError as e:
         if f'"File not found: {Id}."' in str(e) or (
-                in str(e)):
+          '"Sharing folders that are inside a shared drive is not supported."'
+          in str(e)):
             return
         else:
             raise e
