@@ -133,7 +133,6 @@ async def download_api(dl):
             await dl.edit(f"`FileNotFoundError`: {URL} is not found.")
             return
     datas = driver.find_elements_by_class_name('download__meta')
-    """ - enumerate data to make sure we download the matched version - """
     md5_origin = None
     i = None
     for index, value in enumerate(datas):

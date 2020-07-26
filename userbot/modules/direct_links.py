@@ -3,7 +3,6 @@
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 #
-""" Userbot module containing various sites direct links generators"""
 
 from subprocess import PIPE, Popen
 import re
@@ -35,7 +34,6 @@ def subprocess_run(cmd):
 
 @register(outgoing=True, pattern=r"^.dir(?: |$)([\s\S]*)")
 async def direct_link_generator(request):
-    """ direct links generator """
     await request.edit("`Processing...`")
     textx = await request.get_reply_message()
     message = request.pattern_match.group(1)
@@ -79,7 +77,6 @@ async def direct_link_generator(request):
 
 
 def gdrive(url: str) -> str:
-    """ GDrive direct links generator """
     drive = 'https://drive.google.com'
     try:
         link = re.findall(r'\bhttps?://drive\.google\.com\S+', url)[0]
@@ -122,8 +119,6 @@ def gdrive(url: str) -> str:
 
 
 def zippy_share(url: str) -> str:
-    """ ZippyShare direct links generator
-    Based on https://github.com/LameLemon/ziggy"""
     reply = ''
     dl_url = ''
     try:
@@ -151,8 +146,6 @@ def zippy_share(url: str) -> str:
 
 
 def yandex_disk(url: str) -> str:
-    """ Yandex.Disk direct links generator
-    Based on https://github.com/wldhx/yadisk-direct"""
     reply = ''
     try:
         link = re.findall(r'\bhttps?://.*yadi\.sk\S+', url)[0]
@@ -171,8 +164,6 @@ def yandex_disk(url: str) -> str:
 
 
 def mega_dl(url: str) -> str:
-    """ MEGA.nz direct links generator
-    Using https://github.com/tonikelope/megadown"""
     reply = ''
     try:
         link = re.findall(r'\bhttps?://.*mega.*\.nz\S+', url)[0]
@@ -196,8 +187,6 @@ def mega_dl(url: str) -> str:
 
 
 def cm_ru(url: str) -> str:
-    """ cloud.mail.ru direct links generator
-    Using https://github.com/JrMasterModelBuilder/cmrudl.py"""
     reply = ''
     try:
         link = re.findall(r'\bhttps?://.*cloud\.mail\.ru\S+', url)[0]
@@ -222,7 +211,6 @@ def cm_ru(url: str) -> str:
 
 
 def mediafire(url: str) -> str:
-    """ MediaFire direct links generator """
     try:
         link = re.findall(r'\bhttps?://.*mediafire\.com\S+', url)[0]
     except IndexError:
@@ -239,7 +227,6 @@ def mediafire(url: str) -> str:
 
 
 def sourceforge(url: str) -> str:
-    """ SourceForge direct links generator """
     try:
         link = re.findall(r'\bhttps?://.*sourceforge\.net\S+', url)[0]
     except IndexError:
@@ -260,7 +247,6 @@ def sourceforge(url: str) -> str:
 
 
 def osdn(url: str) -> str:
-    """ OSDN direct links generator """
     osdn_link = 'https://osdn.net'
     try:
         link = re.findall(r'\bhttps?://.*osdn\.net\S+', url)[0]
@@ -282,7 +268,6 @@ def osdn(url: str) -> str:
 
 
 def github(url: str) -> str:
-    """ GitHub direct links generator """
     try:
         link = re.findall(r'\bhttps?://.*github\.com.*releases\S+', url)[0]
     except IndexError:
@@ -301,7 +286,6 @@ def github(url: str) -> str:
 
 
 def androidfilehost(url: str) -> str:
-    """ AFH direct links generator """
     try:
         link = re.findall(r'\bhttps?://.*androidfilehost.*fid.*\S+', url)[0]
     except IndexError:

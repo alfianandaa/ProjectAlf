@@ -18,7 +18,6 @@ async def _(event):
         try:
             msg = await conv.send_message(now)
             response = await conv.get_response()
-            """ - don't spam notif - """
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             await event.reply("`Please unblock` @SpotifyNowBot`...`")
@@ -43,7 +42,6 @@ async def _(event):
                 downloaded_file_name,
                 force_document=False,
             )
-            """ - cleanup chat after completed - """
             await event.client.delete_messages(conv.chat_id,
                                                [msg.id, response.id])
     await event.delete()
