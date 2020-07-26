@@ -2,6 +2,9 @@
 
 ```
 #include <std/disclaimer.h>
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6a7673d2f1c64245a055fc14e22db12c)](https://app.codacy.com/manual/alfiananda84/ProjectBish?utm_source=github.com&utm_medium=referral&utm_content=alfianandaa/ProjectBish&utm_campaign=Badge_Grade_Dashboard)
+
 /**
     Your Telegram account may get banned.
     I am not responsible for any improper use of this bot
