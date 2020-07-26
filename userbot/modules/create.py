@@ -1,7 +1,7 @@
-#this module original created by @spechide
-#port to userbot by @afdulfauzan
+# this module original created by @spechide
+# port to userbot by @afdulfauzan
 
-from telethon.tl import functions, types
+from telethon.tl import functions
 from userbot.events import register
 from userbot import CMD_HELP
 

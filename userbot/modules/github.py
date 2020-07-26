@@ -1,20 +1,18 @@
 from github import Github
 import aiohttp
-import asyncio
 import os
 import time
 from datetime import datetime
-from telethon import events
-from telethon.tl.types import DocumentAttributeVideo
 from userbot.events import register
 from userbot import CMD_HELP, GITHUB_ACCESS_TOKEN, GIT_REPO_NAME, bot
 
 GIT_TEMP_DIR = "./projectbish/temp/"
 
+
 @register(pattern=r".git (.*)", outgoing=True)
 async def github(event):
     URL = f"https://api.github.com/users/{event.pattern_match.group(1)}"
-    chat = await event.get_chat()
+    await event.get_chat()
     async with aiohttp.ClientSession() as session:
         async with session.get(URL) as request:
             if request.status == 404:
@@ -51,29 +49,30 @@ async def github(event):
 
                 await event.edit(REPLY)
 
+
 @register(outgoing=True, pattern="^.commit(?: |$)(.*)")
 async def download(event):
     if event.fwd_from:
-        return	
+        return
     if GITHUB_ACCESS_TOKEN is None:
-        await event.edit("`Please ADD Proper Access Token from github.com`") 
-        return   
+        await event.edit("`Please ADD Proper Access Token from github.com`")
+        return
     if GIT_REPO_NAME is None:
         await event.edit("`Please ADD Proper Github Repo Name of your userbot`")
-        return 
+        return
     mone = await event.reply("Processing ...")
     if not os.path.isdir(GIT_TEMP_DIR):
         os.makedirs(GIT_TEMP_DIR)
     start = datetime.now()
     reply_message = await event.get_reply_message()
     try:
-        c_time = time.time()
+        time.time()
         print("Downloading to TEMP directory")
         downloaded_file_name = await bot.download_media(
-                reply_message.media,
-                GIT_TEMP_DIR
-            )
-    except Exception as e: 
+            reply_message.media,
+            GIT_TEMP_DIR
+        )
+    except Exception as e:
         await mone.edit(str(e))
     else:
         end = datetime.now()
@@ -83,11 +82,12 @@ async def download(event):
         await mone.edit("Committing to Github....")
         await git_commit(downloaded_file_name, mone)
 
-async def git_commit(file_name,mone):        
+
+async def git_commit(file_name, mone):
     content_list = []
     access_token = GITHUB_ACCESS_TOKEN
     g = Github(access_token)
-    file = open(file_name,"r",encoding='utf-8')
+    file = open(file_name, "r", encoding='utf-8')
     commit_data = file.read()
     repo = g.get_repo(GIT_REPO_NAME)
     print(repo.name)
@@ -98,20 +98,24 @@ async def git_commit(file_name,mone):
         print(content_file)
     for i in content_list:
         create_file = True
-        if i == 'ContentFile(path="'+file_name+'")':
+        if i == 'ContentFile(path="' + file_name + '")':
             return await mone.edit("`File Already Exists`")
             create_file = False
-    file_name = "userbot/modules/" + file_name		
-    if create_file == True:
-        file_name = file_name.replace("./projectbish/temp/","")
+    file_name = "userbot/modules/" + file_name
+    if create_file:
+        file_name = file_name.replace("./projectbish/temp/", "")
         print(file_name)
         try:
-            repo.create_file(file_name, "UserBot: Add new module", commit_data, branch="master")
+            repo.create_file(
+                file_name,
+                "UserBot: Add new module",
+                commit_data,
+                branch="master")
             print("Committed File")
             ccess = GIT_REPO_NAME
             ccess = ccess.strip()
             await mone.edit(f"`Commited On UserBot Repo`\n\n[Your Modules](https://github.com/{ccess}/tree/master/{file_name})")
-        except:    
+        except BaseException:
             print("Cannot Create Module")
             await mone.edit("Cannot Upload Module")
     else:

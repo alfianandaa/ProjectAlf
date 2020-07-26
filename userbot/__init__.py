@@ -6,7 +6,7 @@
 """ Userbot initialization. """
 
 import os
-import time 
+import time
 
 from sys import version_info
 from logging import basicConfig, getLogger, INFO, DEBUG
@@ -24,22 +24,24 @@ load_dotenv("config.env")
 StartTime = time.time()
 
 # Bot Logs setup:
-CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE") or "False")
+CONSOLE_LOGGER_VERBOSE = sb(os.environ.get(
+    "CONSOLE_LOGGER_VERBOSE") or "False")
 
 if CONSOLE_LOGGER_VERBOSE:
     basicConfig(
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=DEBUG,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        level=DEBUG,
     )
 else:
     basicConfig(
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=INFO
-    )
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        level=INFO)
 LOGS = getLogger(__name__)
 
 if version_info[0] < 3 or version_info[1] < 8:
     LOGS.info(
-              "You MUST have a python version of at least 3.8."
-              "Multiple features depend on this. Bot quitting."
+        "You MUST have a python version of at least 3.8."
+        "Multiple features depend on this. Bot quitting."
     )
     quit(1)
 
@@ -72,9 +74,8 @@ LOGSPAMMER = sb(os.environ.get("LOGSPAMMER") or "False")
 ALIVE_NAME = os.environ.get("ALIVE_NAME") or None
 
 # Default .alive logo
-ALIVE_LOGO = ( 
-    os.environ.get("ALIVE_LOGO") or "https://telegra.ph/file/8a7c3d8ac26751d42465e.jpg"
-)
+ALIVE_LOGO = (os.environ.get("ALIVE_LOGO")
+              or "https://telegra.ph/file/8a7c3d8ac26751d42465e.jpg")
 
 # Default .alive username
 ALIVE_USERNAME = os.environ.get("ALIVE_USERNAME") or None
@@ -92,15 +93,15 @@ GIT_REPO_NAME = os.environ.get("GIT_REPO_NAME") or None
 GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN") or None
 
 # Custom (forked) repo URL for updater.
-UPSTREAM_REPO_URL = (
-    os.environ.get("UPSTREAM_REPO_URL") or "https://github.com/alfianandaa/ProjectBish"
-)
+UPSTREAM_REPO_URL = (os.environ.get("UPSTREAM_REPO_URL")
+                     or "https://github.com/alfianandaa/ProjectBish")
 
 # UPSTREAM_REPO_URL branch, the default is master
 UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH") or "master"
 
 # Console verbose logging
-CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE") or "False")
+CONSOLE_LOGGER_VERBOSE = sb(os.environ.get(
+    "CONSOLE_LOGGER_VERBOSE") or "False")
 
 # SQL Database URI
 DB_URI = os.environ.get("DATABASE_URL") or None
@@ -113,7 +114,8 @@ REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY") or None
 
 # Chrome Driver and Headless Google Chrome Binaries
 CHROME_DRIVER = os.environ.get("CHROME_DRIVER") or "/usr/bin/chromedriver"
-GOOGLE_CHROME_BIN = os.environ.get("GOOGLE_CHROME_BIN") or "/usr/bin/google-chrome"
+GOOGLE_CHROME_BIN = os.environ.get(
+    "GOOGLE_CHROME_BIN") or "/usr/bin/google-chrome"
 
 # OpenWeatherMap API Key
 OPEN_WEATHER_MAP_APPID = os.environ.get("OPEN_WEATHER_MAP_APPID") or None
@@ -145,12 +147,12 @@ LASTFM_SECRET = os.environ.get("LASTFM_SECRET") or None
 LASTFM_USERNAME = os.environ.get("LASTFM_USERNAME") or None
 LASTFM_PASSWORD_PLAIN = os.environ.get("LASTFM_PASSWORD") or None
 LASTFM_PASS = md5(LASTFM_PASSWORD_PLAIN)
-if LASTFM_API != None:
+if LASTFM_API is not None:
     lastfm = LastFMNetwork(
-       api_key=LASTFM_API,
-       api_secret=LASTFM_SECRET,
-       username=LASTFM_USERNAME,
-       password_hash=LASTFM_PASS,
+        api_key=LASTFM_API,
+        api_secret=LASTFM_SECRET,
+        username=LASTFM_USERNAME,
+        password_hash=LASTFM_PASS,
     )
 else:
     lastfm = None
@@ -161,7 +163,8 @@ G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID") or None
 G_DRIVE_CLIENT_SECRET = os.environ.get("G_DRIVE_CLIENT_SECRET") or None
 G_DRIVE_AUTH_TOKEN_DATA = os.environ.get("G_DRIVE_AUTH_TOKEN_DATA") or None
 G_DRIVE_FOLDER_ID = os.environ.get("G_DRIVE_FOLDER_ID") or None
-TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY") or "./downloads"
+TEMP_DOWNLOAD_DIRECTORY = os.environ.get(
+    "TMP_DOWNLOAD_DIRECTORY") or "./downloads"
 
 # Terminal Alias
 TERM_ALIAS = os.environ.get("TERM_ALIAS") or None
@@ -222,15 +225,14 @@ async def check_botlog_chatid():
     if entity.default_banned_rights.send_messages:
         LOGS.info(
             "Your account doesn't have rights to send messages to BOTLOG_CHATID "
-            "group. Check if you typed the Chat ID correctly."
-        )
+            "group. Check if you typed the Chat ID correctly.")
         quit(1)
 
 
 with bot:
     try:
         bot.loop.run_until_complete(check_botlog_chatid())
-    except:
+    except BaseException:
         LOGS.info(
             "BOTLOG_CHATID environment variable isn't a "
             "valid entity. Check your environment variables/config.env file."

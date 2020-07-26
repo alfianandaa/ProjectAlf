@@ -137,18 +137,15 @@ async def kick_marie_notes(kick):
             BOTLOG_CHATID, "I cleaned all Notes at " + str(kick.chat_id))
 
 
-CMD_HELP.update({
-    "notes":
-    "`#<notename>`"
-    "\nUsage: Gets the specified note."
-    "\n\n>`.save <notename> <notedata>` or reply to a message with >`.save <notename>`"
-    "\nUsage: Saves the replied message as a note with the notename. "
-    "(Works with pics, docs, and stickers too!)"
-    "\n\n>`.notes`"
-    "\nUsage: Gets all saved notes in a chat."
-    "\n\n>`.clear <notename>`"
-    "\nUsage: Deletes the specified note."
-    "\n\n>`.rmbotnotes <marie/rose>`"
-    "\nUsage: Removes all notes of admin bots"
-    " (Currently supported: Marie, Rose and their clones.) in the chat."
-})
+CMD_HELP.update({"notes": "`#<notename>`"
+                 "\nUsage: Gets the specified note."
+                 "\n\n>`.save <notename> <notedata>` or reply to a message with >`.save <notename>`"
+                 "\nUsage: Saves the replied message as a note with the notename. "
+                 "(Works with pics, docs, and stickers too!)"
+                 "\n\n>`.notes`"
+                 "\nUsage: Gets all saved notes in a chat."
+                 "\n\n>`.clear <notename>`"
+                 "\nUsage: Deletes the specified note."
+                 "\n\n>`.rmbotnotes <marie/rose>`"
+                 "\nUsage: Removes all notes of admin bots"
+                 " (Currently supported: Marie, Rose and their clones.) in the chat."})

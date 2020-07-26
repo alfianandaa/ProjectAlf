@@ -7,7 +7,7 @@ from telethon.errors import PhotoInvalidDimensionsError
 from telethon.tl.functions.messages import SendMediaRequest
 
 
-@register(outgoing=True, pattern="^\.pic(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.pic(?: |$)(.*)")
 async def on_file_to_photo(pics):
     await pics.edit("`Please wait...`")
     await sleep(2.5)
@@ -39,7 +39,7 @@ async def on_file_to_photo(pics):
         ))
     except PhotoInvalidDimensionsError:
         return
-        
+
 CMD_HELP.update({
     "pics":
     "`>.pic`"

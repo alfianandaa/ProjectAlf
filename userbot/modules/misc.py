@@ -81,15 +81,15 @@ async def bot_support(wannahelp):
     """ For .support command, just returns the group link. """
     await wannahelp.edit(
         "Join the UserButt Chat: @userbotindo"
-        )
+    )
 
 
 @register(outgoing=True, pattern="^.creator$")
 async def creator(e):
     await e.edit(
-         "Created By [TeKnoways](https://t.me/Three_Cube_TeKnoways)"
-         "\nKanged and Modified by [Aidil Aryanto](https://t.me/aidilaryanto)"
-         )
+        "Created By [TeKnoways](https://t.me/Three_Cube_TeKnoways)"
+        "\nKanged and Modified by [Aidil Aryanto](https://t.me/aidilaryanto)"
+    )
 
 
 @register(outgoing=True, pattern="^.readme$")

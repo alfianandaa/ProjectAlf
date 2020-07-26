@@ -5,10 +5,10 @@
 #
 # Port to UserBot by @MoveAngel
 
-from datetime import datetime
 from covid import Covid
 from userbot import CMD_HELP
 from userbot.events import register
+
 
 @register(outgoing=True, pattern="^.covid (.*)")
 async def corona(event):
@@ -35,7 +35,7 @@ async def corona(event):
 
 
 CMD_HELP.update({
-        "covid":
+    "covid":
         ">`.covid` **country**"
         "\nUsage: Get an information about data covid-19 in your country.\n"
-    })
+})

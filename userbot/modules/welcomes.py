@@ -4,6 +4,7 @@ from telethon.events import ChatAction
 from datetime import datetime
 from pytz import timezone
 
+
 @bot.on(ChatAction)
 async def welcome_to_chat(event):
     try:
@@ -42,7 +43,7 @@ async def welcome_to_chat(event):
                 time = "Selamat pagi 🌄"
             elif 11 <= jakarta_timezone.hour < 13:
                 time = "Selamat siang 🌤️"
-            elif 13 <= jakarta_timezone.hour <15:
+            elif 13 <= jakarta_timezone.hour < 15:
                 time = "Selamat siang 🌤️"
             elif 15 <= jakarta_timezone.hour < 18:
                 time = "Selamat sore 🌅"

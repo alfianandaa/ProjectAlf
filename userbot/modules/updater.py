@@ -132,8 +132,8 @@ async def update(event, repo, ups_rem, ac_br):
     await event.edit('`Successfully Updated!\n'
                      'UserBot is restarting... Wait for a second!`')
     if BOTLOG:
-       await event.client.send_message(BOTLOG_CHATID, "#UPDATE \n"
-                                    "UserBot was successfully updated")
+        await event.client.send_message(BOTLOG_CHATID, "#UPDATE \n"
+                                        "UserBot was successfully updated")
     # Spin a new instance of bot
     args = [sys.executable, "-m", "userbot"]
     execle(sys.executable, *args, environ)

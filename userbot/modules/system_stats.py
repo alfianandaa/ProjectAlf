@@ -25,6 +25,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 
 MODULESTR = 0
 
+
 async def get_readable_time(seconds: int) -> str:
     count = 0
     up_time = ""
@@ -51,6 +52,7 @@ async def get_readable_time(seconds: int) -> str:
     up_time += ":".join(time_list)
 
     return up_time
+
 
 @register(outgoing=True, pattern=r"^\.spc")
 async def psu(event):
@@ -218,21 +220,21 @@ async def pipcheck(pip):
             await pip.edit("`Use .help pip to see an example`")
 
 
-@register(outgoing=True, pattern="^\.(?:alive|on)\s?(.)?")
+@register(outgoing=True, pattern=r"^\.(?:alive|on)\s?(.)?")
 async def amireallyalive(alive):
     """ For .on command, check if the bot is running.  """
     logo = ALIVE_LOGO
-    uptime = await get_readable_time((time.time() - StartTime)) 
+    uptime = await get_readable_time((time.time() - StartTime))
     output = (f"`My Detail Ubot `\n"
-             f"┏━━━━━━━━━━━━━━━━━━━━━━━━\n"
-             f"┣[ 🧭 `Bot uptime :` {uptime}\n"
-             f"┣[ 👤 `User       :` {DEFAULTUSER}\n"
-             f"┣[ 🐍 `Python     :` v{python_version()}\n"
-             f"┣[ ⚙️ `Telethon   :` v{version.__version__}\n"
-             f"┣[ 👁‍🗨 `Username   :` {ALIVE_USERNAME}\n"
-             f"┣[ 🎮 `Running on :` {UPSTREAM_REPO_BRANCH}\n"
-             f"┗━━━━━━━━━━━━━━━━━━━━━━━━\n"
-             f"`All modules loaded with ({MODULESTR}) errors`")
+              f"┏━━━━━━━━━━━━━━━━━━━━━━━━\n"
+              f"┣[ 🧭 `Bot uptime :` {uptime}\n"
+              f"┣[ 👤 `User       :` {DEFAULTUSER}\n"
+              f"┣[ 🐍 `Python     :` v{python_version()}\n"
+              f"┣[ ⚙️ `Telethon   :` v{version.__version__}\n"
+              f"┣[ 👁‍🗨 `Username   :` {ALIVE_USERNAME}\n"
+              f"┣[ 🎮 `Running on :` {UPSTREAM_REPO_BRANCH}\n"
+              f"┗━━━━━━━━━━━━━━━━━━━━━━━━\n"
+              f"`All modules loaded with ({MODULESTR}) errors`")
     await bot.send_file(alive.chat_id, logo, caption=output)
     await alive.delete()
 

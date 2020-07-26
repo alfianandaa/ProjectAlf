@@ -28,7 +28,7 @@ UNAPPROVED_MSG = (
     "`Tunggu saja sampai aku melihat pesanmu.\n`"
     "`Sembari menunggu jangan spam pesan...\n`"
     "`Thank You`\n\n`"
-    "`Aku **Bot** :D.\n"  )
+    "`Aku **Bot** :D.\n")
 # =================================================================
 
 

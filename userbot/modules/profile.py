@@ -99,7 +99,7 @@ async def set_profilepic(propic):
 @register(outgoing=True, pattern="^.setbio (.*)")
 async def set_biograph(setbio):
     """ For .setbio command, set a new bio for your profile in Telegram. """
-    await setbio.edit("`Processing..`")    
+    await setbio.edit("`Processing..`")
     newbio = setbio.pattern_match.group(1)
     await setbio.client(UpdateProfileRequest(about=newbio))
     await setbio.edit(BIO_SUCCESS)
@@ -108,7 +108,7 @@ async def set_biograph(setbio):
 @register(outgoing=True, pattern="^.username (.*)")
 async def update_username(username):
     """ For .username command, set a new username in Telegram. """
-    await username.edit("`Processing..`")    
+    await username.edit("`Processing..`")
     newusername = username.pattern_match.group(1)
     try:
         await username.client(UpdateUsernameRequest(newusername))

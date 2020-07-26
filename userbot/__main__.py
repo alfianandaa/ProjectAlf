@@ -30,7 +30,7 @@ for module_name in ALL_MODULES:
 LOGS.info("You are running UserBot [v1]")
 
 LOGS.info(
-    "UserBot is now running !!!" 
+    "UserBot is now running !!!"
     "Test it by typing .alive or .ping in any chat.")
 
 
