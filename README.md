@@ -1,5 +1,7 @@
 # ProjectBish UserBot
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/04469f3d1b2242c2a2b3fd26561be641)](https://app.codacy.com/manual/alfianandaa/ProjectBish?utm_source=github.com&utm_medium=referral&utm_content=alfianandaa/ProjectBish&utm_campaign=Badge_Grade_Dashboard)
+
 <p align="center">
     <a href="https://github.com/alfianandaa/ProjectBish/actions?query=workflow%3AFailCheck" > <img src="https://img.shields.io/github/workflow/status/alfianandaa/ProjectBish/FailCheck/master?style=for-the-badge&logo=github-actions&logoColor=white" alt="Failcheck" /></a>
     <a href="https://github.com/alfianandaa/ProjectBish/actions?query=workflow%3Apylint"> <img src="https://img.shields.io/github/workflow/status/alfianandaa/ProjectBish/pylint/master?label=pylint&style=for-the-badge&logo=github-actions&logoColor=white" alt="Pylint" /></a>
