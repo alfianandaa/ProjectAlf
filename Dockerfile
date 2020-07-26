@@ -4,7 +4,7 @@ FROM dasbastard/slim-buster:dclxvi
 #
 # Clone repo and prepare working directory
 #
-RUN git clone -b master https://github.com/alfiananda84/ProjectBish /home/projectbish/
+RUN git clone -b master https://github.com/alfianandaa/ProjectBish /home/projectbish/
 RUN mkdir /home/projectbish/bin/
 WORKDIR /home/projectbish/
 
