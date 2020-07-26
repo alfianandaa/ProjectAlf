@@ -186,15 +186,15 @@ async def dyno_manage(dyno):
 
                     msg += (
                         f" -> `Dyno usage for`  {AppName}:\n"
-                        f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
-                        f"**|**  [`{AppPercentage}`**%**]\n\n"
+                        f"     •  **`{AppHours}` hour(s), `{AppMinutes}` minute(s)**  "
+                        f" -   **`{AppPercentage}`%**\n\n"
                     )
 
             msg = (
                 f"{msg}"
                 " -> `Dyno hours quota remaining this month`:\n"
-                f"     •  `{hours}`**h**  `{minutes}`**m**  "
-                f"**|**  [`{percentage}`**%**]\n\n"
+                f"     •  `{hours}` hour(s), `{minutes}` minute(s)** "
+                f" -  **`{percentage}`%**\n\n"
             )
         await dyno.edit(msg)
         return
