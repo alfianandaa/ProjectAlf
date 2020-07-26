@@ -33,7 +33,6 @@ async def _(event):
             msg = await conv.send_message(link)
             response = await conv.get_response()
             respond = await conv.get_response()
-            """ - don't spam notif - """
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             await event.reply("```Please unblock @WooMaiBot and try again```")
@@ -63,7 +62,6 @@ async def _(event):
             msg = await conv.send_message(d_link)
             details = await conv.get_response()
             song = await conv.get_response()
-            """ - don't spam notif - """
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             await event.edit("**Error:** `unblock` @MusicHuntersBot `and retry!`")
@@ -96,7 +94,6 @@ async def _(event):
                     incoming=True,
                     from_users=752979930))
             r = await res
-            """ - don't spam notif - """
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             await event.reply("```Please unblock @SpotifyMusicDownloaderBot and try again```")
