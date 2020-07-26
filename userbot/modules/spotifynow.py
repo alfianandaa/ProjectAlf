@@ -12,7 +12,7 @@ async def _(event):
     if event.fwd_from:
         return
     chat = "@SpotifyNowBot"
-    now = f"/now"
+    now = "/now"
     await event.edit("`Processing...`")
     async with event.client.conversation(chat) as conv:
         try:

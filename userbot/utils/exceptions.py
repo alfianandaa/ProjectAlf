@@ -16,6 +16,4 @@
 
 
 class CancelProcess(Exception):
-    """
-       Cancel Process
-    """
+    """Cancel Process"""

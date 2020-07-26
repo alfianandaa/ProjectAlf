@@ -254,7 +254,6 @@ async def download(gdrive, service, uri=None):
             names = []
             for name in os.listdir(TEMP_DOWNLOAD_DIRECTORY):
                 names.append(join(TEMP_DOWNLOAD_DIRECTORY, name))
-            """ asumming newest files are the cancelled one """
             newest = max(names, key=getctime)
             os.remove(newest)
             reply += (
@@ -1193,7 +1192,6 @@ async def set_upload_folder(gdrive):
         try:
             parent_Id = ext_id.split("folders/")[1]
         except IndexError:
-            """ - Try catch again if URL open?id= - """
             try:
                 parent_Id = ext_id.split("open?id=")[1]
             except IndexError:

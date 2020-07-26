@@ -4,9 +4,6 @@
 # you may not use this file except in compliance with the License.
 # credits to @AvinashReddy3108
 #
-"""
-This module updates the userbot based on upstream revision
-"""
 
 from os import remove, execle, path, environ
 import asyncio
@@ -142,7 +139,6 @@ async def update(event, repo, ups_rem, ac_br):
 
 @register(outgoing=True, pattern="^.update( now| deploy|$)")
 async def upstream(event):
-    "For .update command, check if the bot is up to date, update if specified"
     await event.edit("`Getting information....`")
     conf = event.pattern_match.group(1).strip()
     off_repo = UPSTREAM_REPO_URL
@@ -191,7 +187,6 @@ async def upstream(event):
     ups_rem.fetch(ac_br)
 
     changelog = await gen_chlog(repo, f'HEAD..upstream/{ac_br}')
-    """ - Special case for deploy - """
     if conf == "deploy":
         await event.edit('`Deploying userbot, please wait....`')
         await deploy(event, repo, ups_rem, ac_br, txt)

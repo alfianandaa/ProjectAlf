@@ -1106,7 +1106,6 @@ async def slap(replied_user, event):
 
 @register(outgoing=True, pattern="^-_-$", ignore_unsafe=True)
 async def lol(lel):
-    """ Ok... """
     okay = "-_-"
     for i in range(10):
         okay = okay[:-1] + "_-"
@@ -1138,25 +1137,21 @@ async def fun(e):
 
 @register(outgoing=True, pattern="^.fp$")
 async def facepalm(e):
-    """ Facepalm  🤦‍♂ """
     await e.edit("🤦‍♂")
 
 
 @register(outgoing=True, pattern="^.cry$")
 async def cry(e):
-    """ y u du dis, i cry everytime !! """
     await e.edit(choice(CRI))
 
 
 @register(outgoing=True, pattern="^.insult$")
 async def insult(e):
-    """ I make you cry !! """
     await e.edit(choice(INSULT_STRINGS))
 
 
 @register(outgoing=True, pattern="^.cp(?: |$)(.*)")
 async def copypasta(cp_e):
-    """ Copypasta the famous meme """
     textx = await cp_e.get_reply_message()
     message = cp_e.pattern_match.group(1)
 

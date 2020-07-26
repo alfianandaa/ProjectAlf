@@ -3,8 +3,6 @@
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 #
-""" Userbot module for managing events.
- One of the main components of the userbot. """
 
 import sys
 from asyncio import create_subprocess_shell as asyncsubshell
@@ -19,7 +17,6 @@ from userbot import bot, BOTLOG_CHATID, LOGSPAMMER
 
 
 def register(**args):
-    """ Register a new event. """
     pattern = args.get('pattern', None)
     disable_edited = args.get('disable_edited', False)
     ignore_unsafe = args.get('ignore_unsafe', False)

@@ -5,7 +5,6 @@
 #
 # The entire source code is OSSRPL except 'sed' which is GPLv3
 # License: GPLv3 and OSSRPL
-""" Userbot command for sed. """
 
 import re
 from sre_constants import error as sre_err
@@ -16,7 +15,6 @@ DELIMITERS = ("/", ":", "|", "_")
 
 
 async def separate_sed(sed_string):
-    """ Separate sed arguments. """
 
     if len(sed_string) < 2:
         return
@@ -63,7 +61,6 @@ async def separate_sed(sed_string):
 
 @register(outgoing=True, pattern="^.s")
 async def sed(command):
-    """ For sed command, use sed on Telegram. """
     sed_result = await separate_sed(command.text)
     textx = await command.get_reply_message()
     if sed_result:
