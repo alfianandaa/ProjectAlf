@@ -1,7 +1,19 @@
-<h1 align="center">UserBot</h1>
+# ProjectBish UserBot
+
+<p align="center">
+    <a href="https://github.com/alfianandaa/ProjectBish/actions?query=workflow%3AFailCheck" > <img src="https://img.shields.io/github/workflow/status/alfianandaa/ProjectBish/FailCheck/master?style=for-the-badge&logo=github-actions&logoColor=white" alt="Failcheck" /></a>
+    <a href="https://github.com/alfianandaa/ProjectBish/actions?query=workflow%3Apylint"> <img src="https://img.shields.io/github/workflow/status/alfianandaa/ProjectBish/pylint/master?label=pylint&style=for-the-badge&logo=github-actions&logoColor=white" alt="Pylint" /></a>
+    <a href="https://app.codacy.com/manual/alfianandaaa/ProjectBish/dashboard"> <img src="https://img.shields.io/codacy/grade/6a7673d2f1c64245a055fc14e22db12c?color=green&logo=codacy&logoColor=green&style=for-the-badge" alt="Codacy" /></a>
+    <a href="https://github.com/alfianandaa/ProjectBish"> <img src="https://img.shields.io/github/repo-size/alfianandaa/ProjectBish?color=green&logo=github&logoColor=green&style=for-the-badge" /></a>
+    <a href="https://github.com/alfianandaa/ProjectBish/commits/master"> <img src="https://img.shields.io/github/last-commit/alfianandaa/ProjectBish?color=greenlogo=github&logoColor=green&style=for-the-badge" /></a>
+    <a href="https://github.com/alfianandaa/ProjectBish/issues"> <img src="https://img.shields.io/github/issues/alfianandaa/ProjectBish?color=green&logo=github&logoColor=green&style=for-the-badge" /></a>
+    <a href="https://github.com/alfianandaa/ProjectBish/network/members"> <img src="https://img.shields.io/github/forks/alfianandaa/ProjectBish?color=green&logo=github&logoColor=green&style=for-the-badge" /></a>
+    <a href="https://hub.docker.com/r/dasbastard/slim-buster/tags"> <img src="https://img.shields.io/docker/v/dasbastard/slim-buster/dclxvi?color=red&label=docker%20tag&logo=docker&logoColor=red&style=for-the-badge" /></a>
+    <a href="https://hub.docker.com/r/dasbastard/slim-buster"> <img src="https://img.shields.io/docker/image-size/dasbastard/slim-buster/dclxvi?color=red&label=docker%20image%20size&logo=docker&logoColor=red&style=for-the-badge" /></a>
+    <a href="https://pypi.org/project/Telethon/"> <img src="https://img.shields.io/pypi/v/telethon?color=green&label=telethon&logo=python&logoColor=green&style=for-the-badge" /></a>
+</p>
 
 ```
-#include <std/disclaimer.h>
 /**
     Your Telegram account may get banned.
     I am not responsible for any improper use of this bot
@@ -43,6 +55,7 @@ Join [Userbotindo Support Group](https://t.me/userbotindo) for discussion, bug r
 * [adekmaulana](https://github.com/adekmaulana) - ProjectBish
 * [MoveAngel](https://github.com/MoveAngel) - One4uBot
 * [AidilAryanto](https://github.com/aidilaryanto) - ProjectDils 
+* [AnggaR69s](https://github.com/GengKapak/DCLXVI) - DCLXVI
 * [others](https://github.com/aidilaryanto/ProjectDils/graphs/contributors) that help to make this userbot awesome.
 
 ## License
