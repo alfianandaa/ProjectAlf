@@ -3,7 +3,7 @@
 <p align="center">
     <a href="https://github.com/alfianandaa/ProjectBish/actions?query=workflow%3AFailCheck" > <img src="https://img.shields.io/github/workflow/status/alfianandaa/ProjectBish/FailCheck/master?style=for-the-badge&logo=github-actions&logoColor=white" alt="Failcheck" /></a>
     <a href="https://github.com/alfianandaa/ProjectBish/actions?query=workflow%3Apylint"> <img src="https://img.shields.io/github/workflow/status/alfianandaa/ProjectBish/pylint/master?label=pylint&style=for-the-badge&logo=github-actions&logoColor=white" alt="Pylint" /></a>
-    <a href="https://app.codacy.com/manual/alfianandaaa/ProjectBish/dashboard"> <img src="https://img.shields.io/codacy/grade/6a7673d2f1c64245a055fc14e22db12c?color=green&logo=codacy&logoColor=green&style=for-the-badge" alt="Codacy" /></a>
+    <a href="https://app.codacy.com/manual/alfianandaa/ProjectBish/dashboard"> <img src="https://img.shields.io/codacy/grade/6a7673d2f1c64245a055fc14e22db12c?color=green&logo=codacy&logoColor=green&style=for-the-badge" alt="Codacy" /></a>
     <a href="https://github.com/alfianandaa/ProjectBish"> <img src="https://img.shields.io/github/repo-size/alfianandaa/ProjectBish?color=green&logo=github&logoColor=green&style=for-the-badge" /></a>
     <a href="https://github.com/alfianandaa/ProjectBish/commits/master"> <img src="https://img.shields.io/github/last-commit/alfianandaa/ProjectBish?color=greenlogo=github&logoColor=green&style=for-the-badge" /></a>
     <a href="https://github.com/alfianandaa/ProjectBish/issues"> <img src="https://img.shields.io/github/issues/alfianandaa/ProjectBish?color=green&logo=github&logoColor=green&style=for-the-badge" /></a>
