@@ -3,7 +3,6 @@
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 #
-''' A module for helping ban group join spammers. '''
 
 from asyncio import sleep
 from requests import get

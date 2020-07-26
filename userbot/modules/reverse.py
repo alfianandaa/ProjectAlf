@@ -5,7 +5,6 @@
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 #
-""" Userbot module for reverse searching stickers and images on Google """
 
 import io
 import os
@@ -28,7 +27,6 @@ opener.addheaders = [('User-agent', useragent)]
 
 @register(outgoing=True, pattern=r"^.reverse(?: |$)(\d*)")
 async def okgoogle(img):
-    """ For .reverse command, Google search images and stickers. """
     if os.path.isfile("okgoogle.png"):
         os.remove("okgoogle.png")
 
@@ -98,7 +96,6 @@ async def okgoogle(img):
 
 
 async def ParseSauce(googleurl):
-    """Parse/Scrape the HTML code for the info we want."""
 
     source = opener.open(googleurl).read()
     soup = BeautifulSoup(source, 'html.parser')

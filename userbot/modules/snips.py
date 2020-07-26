@@ -2,7 +2,6 @@
 #
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
-""" Userbot module containing commands for keeping global notes. """
 
 from userbot.events import register
 from userbot import CMD_HELP, BOTLOG_CHATID
@@ -13,7 +12,6 @@ from userbot import CMD_HELP, BOTLOG_CHATID
           ignore_unsafe=True,
           disable_errors=True)
 async def on_snip(event):
-    """ Snips logic. """
     try:
         from userbot.modules.sql_helper.snips_sql import get_snip
     except AttributeError:
@@ -38,7 +36,6 @@ async def on_snip(event):
 
 @register(outgoing=True, pattern=r"^.snip (\w*)")
 async def on_snip_save(event):
-    """ For .snip command, saves snips for future use. """
     try:
         from userbot.modules.sql_helper.snips_sql import add_snip
     except AttributeError:
@@ -76,7 +73,6 @@ async def on_snip_save(event):
 
 @register(outgoing=True, pattern="^.snips$")
 async def on_snip_list(event):
-    """ For .snips command, lists snips saved by you. """
     try:
         from userbot.modules.sql_helper.snips_sql import get_snips
     except AttributeError:
@@ -96,7 +92,6 @@ async def on_snip_list(event):
 
 @register(outgoing=True, pattern=r"^.remsnip (\w*)")
 async def on_snip_delete(event):
-    """ For .remsnip command, deletes a snip. """
     try:
         from userbot.modules.sql_helper.snips_sql import remove_snip
     except AttributeError:

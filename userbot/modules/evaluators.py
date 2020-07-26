@@ -3,7 +3,6 @@
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 #
-""" Userbot module for executing code and terminal commands from Telegram. """
 
 import asyncio
 from os import remove
@@ -14,7 +13,6 @@ from userbot.events import register
 
 @register(outgoing=True, pattern="^.eval(?: |$)(.*)")
 async def evaluate(query):
-    """ For .eval command, evaluates the given Python expression. """
     if query.is_channel and not query.is_group:
         return await query.edit("`Eval isn't permitted on channels`")
 
@@ -65,7 +63,6 @@ async def evaluate(query):
 
 @register(outgoing=True, pattern=r"^.exec(?: |$)([\s\S]*)")
 async def run(run_q):
-    """ For .exec command, which executes the dynamically created program """
     code = run_q.pattern_match.group(1)
 
     if run_q.is_channel and not run_q.is_group:
@@ -127,7 +124,6 @@ async def run(run_q):
 
 @register(outgoing=True, pattern="^.term(?: |$)(.*)")
 async def terminal_runner(term):
-    """ For .term command, runs bash commands and scripts on your server. """
     curruser = TERM_ALIAS
     command = term.pattern_match.group(1)
     try:

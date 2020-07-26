@@ -6,8 +6,6 @@
 # The entire source code is OSSRPL except
 # 'download, uploadir, uploadas, upload' which is MPL
 # License: MPL and OSSRPL
-""" Userbot module which contains everything related to
-     downloading/uploading from/to the server. """
 
 import json
 import os
@@ -28,7 +26,6 @@ from userbot.events import register
 
 @register(pattern=r".dl(?: |$)(.*)", outgoing=True)
 async def download(target_file):
-    """ For .download command, download files to the userbot's server. """
     await target_file.edit("Processing ...")
     input_str = target_file.pattern_match.group(1)
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
@@ -105,7 +102,6 @@ async def download(target_file):
 
 @register(pattern=r".upldir (.*)", outgoing=True)
 async def uploadir(udir_event):
-    """ For .uploadir command, allows you to upload everything from a folder in the server"""
     input_str = udir_event.pattern_match.group(1)
     if os.path.exists(input_str):
         await udir_event.edit("Processing ...")
@@ -181,7 +177,6 @@ async def uploadir(udir_event):
 
 @register(pattern=r".upl (.*)", outgoing=True)
 async def upload(u_event):
-    """ For .upload command, allows you to upload a file from the userbot's server """
     await u_event.edit("Processing ...")
     input_str = u_event.pattern_match.group(1)
     if input_str in ("userbot.session", "config.env"):
@@ -203,7 +198,6 @@ async def upload(u_event):
 
 
 def get_video_thumb(file, output=None, width=90):
-    """ Get video thumbnail """
     metadata = extractMetadata(createParser(file))
     popen = subprocess.Popen(
         [
@@ -230,7 +224,6 @@ def get_video_thumb(file, output=None, width=90):
 
 
 def extract_w_h(file):
-    """ Get width and height of media """
     command_to_run = [
         "ffprobe",
         "-v",
@@ -257,7 +250,6 @@ def extract_w_h(file):
 
 @register(pattern=r".uploadas(stream|vn|all) (.*)", outgoing=True)
 async def uploadas(uas_event):
-    """ For .uploadas command, allows you to specify some arguments for upload. """
     await uas_event.edit("Processing ...")
     type_of_upload = uas_event.pattern_match.group(1)
     supports_streaming = False

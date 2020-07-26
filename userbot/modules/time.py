@@ -3,8 +3,6 @@
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 #
-""" Userbot module for getting the date
-    and time of any country or the userbot server.  """
 
 from datetime import datetime as dt
 
@@ -17,7 +15,6 @@ from userbot.events import register
 
 
 async def get_tz(con):
-    """ Get time zone of the given country. """
     if "(Uk)" in con:
         con = con.replace("Uk", "UK")
     if "(Us)" in con:
@@ -43,11 +40,6 @@ async def get_tz(con):
 
 @register(outgoing=True, pattern="^.time(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?")
 async def time_func(tdata):
-    """ For .time command, return the time of
-        1. The country passed as an argument,
-        2. The default userbot country(set it by using .settime),
-        3. The server where the userbot runs.
-    """
     con = tdata.pattern_match.group(1).title()
     tz_num = tdata.pattern_match.group(2)
 
@@ -100,11 +92,6 @@ async def time_func(tdata):
 
 @register(outgoing=True, pattern="^.date(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?")
 async def date_func(dat):
-    """ For .date command, return the date of
-        1. The country passed as an argument,
-        2. The default userbot country(set it by using .settime),
-        3. The server where the userbot runs.
-    """
     con = dat.pattern_match.group(1).title()
     tz_num = dat.pattern_match.group(2)
 

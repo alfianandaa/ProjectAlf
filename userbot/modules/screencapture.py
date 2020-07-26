@@ -17,7 +17,6 @@ from userbot import CMD_HELP
 
 @register(pattern="^.ss (.*)", outgoing=True)
 async def capture(url):
-    """ For .ss command, capture a website's screenshot and send the photo. """
     await url.edit("`Processing...`")
     chrome_options = await options()
     chrome_options.add_argument("--test-type")

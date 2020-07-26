@@ -5,7 +5,6 @@
 #
 # The entire source code is OSSRPL except 'whois' which is MPL
 # License: MPL and OSSRPL
-""" Userbot module for getting info about any user on Telegram(including you!). """
 
 import os
 
@@ -56,7 +55,6 @@ async def who(event):
 
 
 async def get_user(event):
-    """ Get the user from argument or replied message. """
     if event.reply_to_msg_id and not event.pattern_match.group(1):
         previous_message = await event.get_reply_message()
         replied_user = await event.client(
@@ -90,7 +88,6 @@ async def get_user(event):
 
 
 async def fetch_info(replied_user, event):
-    """ Get details from the User object. """
     replied_user_profile_photos = await event.client(
         GetUserPhotosRequest(user_id=replied_user.user.id,
                              offset=42,

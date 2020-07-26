@@ -3,7 +3,6 @@
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 #
-""" Userbot module containing commands related to android"""
 
 import asyncio
 import re
@@ -27,7 +26,6 @@ DEVICES_DATA = ('https://raw.githubusercontent.com/androidtrackers/'
 
 @register(outgoing=True, pattern="^.magisk$")
 async def magisk(request):
-    """ magisk latest releases """
     magisk_dict = {
         "Stable":
         "https://raw.githubusercontent.com/topjohnwu/magisk_files/master/stable.json",
@@ -49,7 +47,6 @@ async def magisk(request):
 
 @register(outgoing=True, pattern=r"^.device(?: |$)(\S*)")
 async def device_info(request):
-    """ get android device basic info from its codename """
     textx = await request.get_reply_message()
     device = request.pattern_match.group(1)
     if device:
@@ -77,7 +74,6 @@ async def device_info(request):
 
 @register(outgoing=True, pattern=r"^.codename(?: |)([\S]*)(?: |)([\s\S]*)")
 async def codename_info(request):
-    """ search for android codename """
     textx = await request.get_reply_message()
     brand = request.pattern_match.group(1).lower()
     device = request.pattern_match.group(2).lower()
@@ -218,7 +214,6 @@ async def download_api(dl):
 
 @register(outgoing=True, pattern=r"^.specs(?: |)([\S]*)(?: |)([\s\S]*)")
 async def devices_specifications(request):
-    """ Mobile devices specifications """
     textx = await request.get_reply_message()
     brand = request.pattern_match.group(1).lower()
     device = request.pattern_match.group(2).lower()
@@ -270,7 +265,6 @@ async def devices_specifications(request):
 
 @register(outgoing=True, pattern=r"^.twrp(?: |$)(\S*)")
 async def twrp(request):
-    """ get android device twrp """
     textx = await request.get_reply_message()
     device = request.pattern_match.group(1)
     if device:

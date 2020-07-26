@@ -2,7 +2,6 @@
 # Author: Sumanjay (https://github.com/cyberboysumanjay) (@cyberboysumanjay)
 # All rights reserved.
 
-"""Syntax: .watch Movie/TV Show"""
 from userbot.events import register
 from justwatch import JustWatch
 from userbot import CMD_HELP, WATCH_COUNTRY

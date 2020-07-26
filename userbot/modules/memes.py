@@ -2,7 +2,6 @@
 #
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
-""" Userbot module for having some fun with people. """
 
 from asyncio import sleep
 from random import choice, getrandbits, randint
@@ -997,7 +996,6 @@ cursive = [
 
 @register(outgoing=True, pattern=r"^.(\w+)say (.*)")
 async def univsaye(cowmsg):
-    """ For .cowsay module, userbot wrapper for cow which says things. """
     arg = cowmsg.pattern_match.group(1).lower()
     text = cowmsg.pattern_match.group(2)
 
@@ -1013,7 +1011,6 @@ async def univsaye(cowmsg):
 
 @register(outgoing=True, pattern="^:/$", ignore_unsafe=True)
 async def kek(keks):
-    """ Check yourself ;)"""
     uio = ["/", "\\"]
     for i in range(1, 15):
         time.sleep(0.3)
@@ -1050,7 +1047,6 @@ async def coin(event):
 
 @register(pattern=r"^\.slap(?: |$)(.*)", outgoing=True)
 async def who(event):
-    """ slaps a user, or get slapped if not a reply. """
     replied_user = await get_user_from_event(event)
     if replied_user:
         replied_user = replied_user[0]
@@ -1068,7 +1064,6 @@ async def who(event):
 
 
 async def slap(replied_user, event):
-    """ Construct a funny slap sentence !! """
     user_id = replied_user.id
     first_name = replied_user.first_name
     username = replied_user.username
@@ -1194,7 +1189,6 @@ async def copypasta(cp_e):
 
 @register(outgoing=True, pattern="^.vapor(?: |$)(.*)")
 async def vapor(vpr):
-    """ Vaporize everything! """
     reply_text = list()
     textx = await vpr.get_reply_message()
     message = vpr.pattern_match.group(1)
@@ -1218,7 +1212,6 @@ async def vapor(vpr):
 
 @register(outgoing=True, pattern="^.str(?: |$)(.*)")
 async def stretch(stret):
-    """ Stretch it."""
     textx = await stret.get_reply_message()
     message = stret.text
     message = stret.pattern_match.group(1)
@@ -1237,7 +1230,6 @@ async def stretch(stret):
 
 @register(outgoing=True, pattern="^.zal(?: |$)(.*)")
 async def zal(zgfy):
-    """ Invoke the feeling of chaos. """
     reply_text = list()
     textx = await zgfy.get_reply_message()
     message = zgfy.pattern_match.group(1)
@@ -1275,13 +1267,11 @@ async def zal(zgfy):
 
 @register(outgoing=True, pattern="^.hello$")
 async def hoi(hello):
-    """ Greet everyone! """
     await hello.edit(choice(HELLOSTR))
 
 
 @register(outgoing=True, pattern="^.owo(?: |$)(.*)")
 async def faces(owo):
-    """ UwU """
     textx = await owo.get_reply_message()
     message = owo.pattern_match.group(1)
     if message:
@@ -1303,7 +1293,6 @@ async def faces(owo):
 
 @register(outgoing=True, pattern="^.ii(?: |$)(.*)")
 async def faces(ii):
-    """ Hilih """
     textx = await ii.get_reply_message()
     message = ii.pattern_match.group(1)
     if message:
@@ -1337,7 +1326,6 @@ async def sayhi(e):
 
 @register(outgoing=True, pattern="^.react$")
 async def react_meme(react):
-    """ Make your userbot react to everything. """
     await react.edit(choice(FACEREACTS))
 
 
@@ -1349,19 +1337,16 @@ async def shrugger(shg):
 
 @register(outgoing=True, pattern="^.chase$")
 async def police(chase):
-    """ Run boi run, i'm gonna catch you !! """
     await chase.edit(choice(CHASE_STR))
 
 
 @register(outgoing=True, pattern="^.run$")
 async def runner_lol(run):
-    """ Run, run, RUNNN! """
     await run.edit(choice(RUNS_STR))
 
 
 @register(outgoing=True, pattern="^.metoo$")
 async def metoo(hahayes):
-    """ Haha yes """
     await hahayes.edit(choice(METOOSTR))
 
 
@@ -1450,7 +1435,6 @@ async def love(event):
 
 @register(outgoing=True, pattern="^.mock(?: |$)(.*)")
 async def spongemocktext(mock):
-    """ Do it and find the real fun. """
     reply_text = list()
     textx = await mock.get_reply_message()
     message = mock.pattern_match.group(1)
@@ -1473,7 +1457,6 @@ async def spongemocktext(mock):
 
 @register(outgoing=True, pattern="^.clap(?: |$)(.*)")
 async def claptext(memereview):
-    """ Praise people! """
     textx = await memereview.get_reply_message()
     message = memereview.pattern_match.group(1)
     if message:
@@ -1490,7 +1473,6 @@ async def claptext(memereview):
 
 @register(outgoing=True, pattern="^.bt$")
 async def bluetext(bt_e):
-    """ Believe me, you will find this useful. """
     if await bt_e.get_reply_message() and bt_e.is_group:
         await bt_e.edit(
             "/BLUETEXT /MUST /CLICK.\n"
@@ -1526,7 +1508,6 @@ async def let_me_google_that_for_you(lmgtfy_q):
 
 @register(pattern=r".scam(?: |$)(.*)", outgoing=True)
 async def scam(event):
-    """ Just a small command to fake chat actions for fun !! """
     options = [
         'typing', 'contact', 'game', 'location', 'voice', 'round', 'video',
         'photo', 'document', 'cancel'
@@ -1560,7 +1541,6 @@ async def scam(event):
 
 @register(pattern=r".type(?: |$)(.*)", outgoing=True)
 async def typewriter(typew):
-    """ Just a small command to make your keyboard become a typewriter! """
     textx = await typew.get_reply_message()
     message = typew.pattern_match.group(1)
     if message:
