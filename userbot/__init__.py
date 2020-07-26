@@ -93,7 +93,7 @@ GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN") or None
 
 # Custom (forked) repo URL for updater.
 UPSTREAM_REPO_URL = (
-    os.environ.get("UPSTREAM_REPO_URL") or "https://github.com/alfiananda84/ProjectBish.git"
+    os.environ.get("UPSTREAM_REPO_URL") or "https://github.com/alfianandaa/ProjectBish"
 )
 
 # UPSTREAM_REPO_URL branch, the default is master
