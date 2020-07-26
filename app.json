@@ -1,0 +1,74 @@
+{
+  "name": "Project Bish UserBot fallback",
+  "description": "[projectbish] A modular Telegram userbot running on Python 3.8, this is a fallback for main userbot.",
+  "keywords": [
+    "telegram",
+    "userbot"
+  ],
+  "repository": "https://github.com/adekmaulana/ProjectBish",
+  "stack": "container",
+  "env": {
+    "API_KEY": {
+      "description": "Get this value from my.telegram.org.",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "Get this value from my.telegram.org.",
+      "required": true
+    },
+    "STRING_SESSION": {
+      "description": "Get this value by running [python3 string_session.py] in Termux or local system.",
+      "required": true
+    },
+    "HEROKU_API_KEY": {
+      "description": "Your Heroku main account API key, get it from 'https://dashboard.heroku.com/account'",
+      "value": "",
+      "required": true
+    },
+    "HEROKU_APP_NAME": {
+      "description": "Heroku app name main, the first app you deploy for userbot.",
+      "value": "",
+      "required": true
+    },
+    "HEROKU_API_KEY_FALLBACK": {
+      "description": "Your Heroku fallback account API key this is only needed if you choose to run fallback into different heroku account, get it from 'https://dashboard.heroku.com/account'",
+      "required": false
+    },
+    "HEROKU_APP_FALLBACK_NAME": {
+      "description": "Heroku app name fallback, this should be app name you make now.",
+      "value": "",
+      "required": true
+    },
+    "UPSTREAM_REPO_URL": {
+      "description": "Your forked repo.",
+      "value": "https://github.com/adekmaulana/ProjectBish",
+      "required": true
+    },
+    "MAIN_REPO_BRANCH": {
+      "description": "Your main branch repo.",
+      "value": "experimental",
+      "required": true
+    },
+    "UPSTREAM_REPO_BRANCH": {
+      "description": "Your forked repo branch.",
+      "value": "master-fallback",
+      "required": true
+    },
+    "BOTLOG": {
+      "description": "Incase you want to turn off logging, put this to false",
+      "value": "False"
+    },
+    "BOTLOG_CHATID": {
+      "description": "ChatID of the Log group. Set it to '0' if BOTLOG = False and/or if LOGSPAMMER = False.",
+      "value": "0"
+    },
+    "CONSOLE_LOGGER_VERBOSE": {
+      "description": "If you need verbosity on the console logging",
+      "value": "False"
+    },
+    "LOGSPAMMER": {
+      "description": "Set this to True in case you want the error logs to be stored in the userbot log group, instead of spitting out the file in the current chat, requires a valid BOTLOG_CHATID to be set.",
+      "value": "True"
+    }
+  }
+}
