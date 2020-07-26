@@ -1,5 +1,5 @@
-# We're using Debian slim buster
-FROM dasbastard/slim-buster:dclxvi
+# We're using Ubuntu 20.10
+FROM gengkapak/groovygorilla:latest
 
 #
 # Clone repo and prepare working directory
