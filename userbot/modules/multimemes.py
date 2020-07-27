@@ -7,7 +7,6 @@
 #
 # Based code + improve from AdekMaulana and aidilaryanto
 
-from PIL import Image
 import asyncio
 import re
 import random
@@ -16,8 +15,8 @@ from random import randint, uniform
 from logging import Logger as logger
 from telethon import events
 from PIL import Image, ImageEnhance, ImageOps
+from io import BytesIO
 import os
-import requests
 import requests
 import base64
 import json
@@ -25,7 +24,6 @@ import telethon
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.types import (
     DocumentAttributeFilename,
-    DocumentAttributeSticker,
     InputMediaUploadedDocument,
     InputPeerNotifySettings,
     InputStickerSetID,
@@ -82,7 +80,7 @@ EMOJI_PATTERN = re.compile(
 
 
 @register(outgoing=True, pattern="^.pch(?: |$)(.*)")
-async def quotecmd(message):  # noqa: C901
+async def q_cmd(message):  # noqa: C901
     if not QUOTES_API_TOKEN:
         return await message.edit(
             "`Error: Quotes API key is missing! Add it to environment variables or config.env.`"
@@ -494,7 +492,6 @@ async def fryerrr(fry):
                     reply_to=msg.id)
                 r = await conv.get_response()
             response = await conv.get_response()
-            """ - don't spam notif - """
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             await fry.reply("`Please unblock` @image_deepfrybot`...`")

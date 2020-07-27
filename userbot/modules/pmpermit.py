@@ -36,11 +36,15 @@ async def permitpm(event):
     if not PM_AUTO_BAN:
         return
     self_user = await event.client.get_me()
-    if event.is_private and event.chat_id != 777000 and event.chat_id != self_user.id and not (
-            await event.get_sender()).bot:
+    if (
+        event.is_private
+        and event.chat_id != 777000
+        and event.chat_id != self_user.id
+        and not (await event.get_sender()).bot
+    ):
         try:
-            from userbot.modules.sql_helper.pm_permit_sql import is_approved
             from userbot.modules.sql_helper.globals import gvarstatus
+            from userbot.modules.sql_helper.pm_permit_sql import is_approved
         except AttributeError:
             return
         apprv = is_approved(event.chat_id)
@@ -56,9 +60,8 @@ async def permitpm(event):
                 # Send the Unapproved Message again
                 if event.text != prevmsg:
                     async for message in event.client.iter_messages(
-                            event.chat_id,
-                            from_user='me',
-                            search=UNAPPROVED_MSG):
+                        event.chat_id, from_user="me", search=UNAPPROVED_MSG
+                    ):
                         await message.delete()
                     await event.reply(UNAPPROVED_MSG)
             else:
@@ -73,9 +76,8 @@ async def permitpm(event):
 
             if COUNT_PM[event.chat_id] > 4:
                 await event.respond(
-                    "`You were spamming my PM, which I didn't like.`\n"
-                    "`I Wouldn't let you to chat me again until further notice`\n"
-                    "`Bye`"
+                    "`You were spamming my Mastor's PM, which I didn't like.`\n"
+                    "`You have been BLOCKED and reported as SPAM, until further notice.`"
                 )
 
                 try:
@@ -97,9 +99,12 @@ async def permitpm(event):
                     name0 = str(name.first_name)
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        "[" + name0 + "](tg://user?id=" +
-                        str(event.chat_id) + ")" +
-                        " was just another retarded nibba",
+                        "["
+                        + name0
+                        + "](tg://user?id="
+                        + str(event.chat_id)
+                        + ")"
+                        + " was just another retarded nibba",
                     )
 
 

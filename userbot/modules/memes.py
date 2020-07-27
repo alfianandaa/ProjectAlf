@@ -1110,7 +1110,7 @@ async def decide(event):
     if decision != "decide":
         r = requests.get(f"https://yesno.wtf/api?force={decision}").json()
     else:
-        r = requests.get(f"https://yesno.wtf/api").json()
+        r = requests.get("https://yesno.wtf/api").json()
     await event.delete()
     await event.client.send_message(event.chat_id,
                                     str(r["answer"]).upper(),
@@ -1314,7 +1314,6 @@ async def react_meme(react):
 
 @register(outgoing=True, pattern="^.shg$")
 async def shrugger(shg):
-    r""" ¯\_(ツ)_/¯ """
     await shg.edit(choice(SHGS))
 
 

@@ -32,7 +32,6 @@ A modular Telegram userbot running on Python3 with sqlalchemy database.
 
 Based on RaphielGang's [Telegram-Paperplane](https://github.com/RaphielGang/Telegram-Paperplane) userbot with a lot of changes, features and module.
 
-
 ## How To Host
 
 The easiest way to deploy this userbot
@@ -41,25 +40,31 @@ The easiest way to deploy this userbot
 
 For further guide you can head to [Groups and Support](https://github.com/KeselekPermen69/UserButt#Groups-and-support) or read this [guide](https://telegra.ph/Host-a-Telegram-Userbot-05-07)
 
-
 ## Groups and Support
 
 Join [Userbot Indonesia Channel](https://t.me/userbotindocloud) for update notifications or announcement.
 
 Join [Userbotindo Support Group](https://t.me/userbotindo) for discussion, bug reporting, and help.
 
-
 ## Credits
 
-* [RaphielGang](https://github.com/RaphielGang) - Telegram-Paperplane
-* [AvinashReddy3108](https://github.com/AvinashReddy3108) - PaperplaneExtended
-* [Mkaraniya](https://github.com/mkaraniya) & [Dev73](https://github.com/Devp73) - OpenUserBot
-* [Mr.Miss](https://github.com/keselekpermen69) - UserButt
-* [adekmaulana](https://github.com/adekmaulana) - ProjectBish
-* [MoveAngel](https://github.com/MoveAngel) - One4uBot
-* [AidilAryanto](https://github.com/aidilaryanto) - ProjectDils 
-* [AnggaR69s](https://github.com/GengKapak/DCLXVI) - DCLXVI
-* [others](https://github.com/aidilaryanto/ProjectDils/graphs/contributors) that help to make this userbot awesome.
+• [RaphielGang](https://github.com/RaphielGang) - Telegram-Paperplane
+
+• [AvinashReddy3108](https://github.com/AvinashReddy3108) - PaperplaneExtended
+
+• [Mkaraniya](https://github.com/mkaraniya) & [Dev73](https://github.com/Devp73) - OpenUserBot
+
+• [Mr.Miss](https://github.com/keselekpermen69) - UserButt
+
+• [adekmaulana](https://github.com/adekmaulana) - ProjectBish
+
+• [MoveAngel](https://github.com/MoveAngel) - One4uBot
+
+• [AidilAryanto](https://github.com/aidilaryanto) - ProjectDils 
+
+• [AnggaR69s](https://github.com/GengKapak/DCLXVI) - DCLXVI
+
+• [others](https://github.com/aidilaryanto/ProjectDils/graphs/contributors) that help to make this userbot awesome.
 
 ## License
 

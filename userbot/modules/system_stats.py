@@ -56,7 +56,7 @@ async def get_readable_time(seconds: int) -> str:
 @register(outgoing=True, pattern=r"^\.spc")
 async def psu(event):
     uname = platform.uname()
-    softw = f"**System Information**\n"
+    softw = "**System Information**\n"
     softw += f"`System   : {uname.system}`\n"
     softw += f"`Release  : {uname.release}`\n"
     softw += f"`Version  : {uname.version}`\n"
@@ -80,7 +80,7 @@ async def psu(event):
     cpuu += "**CPU Usage Per Core**\n"
     for i, percentage in enumerate(psutil.cpu_percent(percpu=True)):
         cpuu += f"`Core {i}  : {percentage}%`\n"
-    cpuu += f"**Total CPU Usage**\n"
+    cpuu += "**Total CPU Usage**\n"
     cpuu += f"`All Core: {psutil.cpu_percent()}%`\n"
     # RAM Usage
     svmem = psutil.virtual_memory()
