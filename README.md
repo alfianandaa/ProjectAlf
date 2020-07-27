@@ -8,7 +8,7 @@
     <a href="https://github.com/alfianandaa/ProjectBish/commits/master"> <img src="https://img.shields.io/github/last-commit/alfianandaa/ProjectBish?color=greenlogo=github&logoColor=green&style=for-the-badge" /></a>
     <a href="https://github.com/alfianandaa/ProjectBish/issues"> <img src="https://img.shields.io/github/issues/alfianandaa/ProjectBish?color=green&logo=github&logoColor=green&style=for-the-badge" /></a>
     <a href="https://github.com/alfianandaa/ProjectBish/network/members"> <img src="https://img.shields.io/github/forks/alfianandaa/ProjectBish?color=green&logo=github&logoColor=green&style=for-the-badge" /></a>
-      <a href="https://hub.docker.com/r/gengkapak/groovygorilla"> <img src="https://img.shields.io/docker/image-size/gengkapak/groovygorilla/latest?label=docker%20image%20size&logo=docker&style=for-the-badge" /></a>
+     <a href="https://hub.docker.com/r/gengkapak/groovygorilla"> <img src="https://img.shields.io/docker/image-size/gengkapak/groovygorilla/latest?label=docker%20image%20size&logo=docker&style=for-the-badge" /></a>
     <a href="https://hub.docker.com/r/gengkapak/groovygorilla/tags"> <img src="https://img.shields.io/docker/v/gengkapak/groovygorilla/latest?label=docker%20version&logo=docker&style=for-the-badge" /></a>
     <a href="https://pypi.org/project/Telethon/"> <img src="https://img.shields.io/pypi/v/telethon?color=green&label=telethon&logo=python&logoColor=green&style=for-the-badge" /></a>
 </p>
@@ -34,20 +34,23 @@ Based on RaphielGang's [Telegram-Paperplane](https://github.com/RaphielGang/Tele
 
 
 ## How To Host
+
 The easiest way to deploy this userbot
 
-<p><a href="https://heroku.com/deploy?template=https://github.com/alfiananda84/ProjectBish/tree/master"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
+<p><a href="https://heroku.com/deploy?template=https://github.com/alfianandaa/ProjectBish/tree/master"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
 For further guide you can head to [Groups and Support](https://github.com/KeselekPermen69/UserButt#Groups-and-support) or read this [guide](https://telegra.ph/Host-a-Telegram-Userbot-05-07)
 
 
 ## Groups and Support
+
 Join [Userbot Indonesia Channel](https://t.me/userbotindocloud) for update notifications or announcement.
 
 Join [Userbotindo Support Group](https://t.me/userbotindo) for discussion, bug reporting, and help.
 
 
 ## Credits
+
 * [RaphielGang](https://github.com/RaphielGang) - Telegram-Paperplane
 * [AvinashReddy3108](https://github.com/AvinashReddy3108) - PaperplaneExtended
 * [Mkaraniya](https://github.com/mkaraniya) & [Dev73](https://github.com/Devp73) - OpenUserBot
@@ -59,4 +62,5 @@ Join [Userbotindo Support Group](https://t.me/userbotindo) for discussion, bug r
 * [others](https://github.com/aidilaryanto/ProjectDils/graphs/contributors) that help to make this userbot awesome.
 
 ## License
+
 Licensed under [Raphielscape Public License](https://github.com/aidilaryanto/ProjectDils/blob/master/LICENSE) - Version 1.d, February 2020
