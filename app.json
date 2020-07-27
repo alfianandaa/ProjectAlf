@@ -41,7 +41,7 @@
     },
     "UPSTREAM_REPO_URL": {
       "description": "Your forked repo.",
-      "value": "https://github.com/adekmaulana/ProjectBish",
+      "value": "https://github.com/alfianandaa/ProjectBish",
       "required": true
     },
     "MAIN_REPO_BRANCH": {
