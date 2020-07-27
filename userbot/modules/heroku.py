@@ -121,8 +121,7 @@ async def dyno_manage(dyno):
             'User-Agent': useragent,
             'Accept': 'application/vnd.heroku+json; version=3.account-quotas',
         }
-        user_id = []
-        user_id.append(heroku.account().id)
+        user_id = [heroku.account().id]
         if fallback is not None:
             user_id.append(fallback.account().id)
         msg = ''
@@ -198,7 +197,7 @@ async def dyno_manage(dyno):
             )
         await dyno.edit(msg)
         return
-    elif exe == "cancel deploy" or exe == "cancel build":
+    elif exe in ["cancel deploy", "cancel build"]:
         """
            Only cancel 1 recent builds from activity if build.id not supplied
         """
@@ -247,7 +246,6 @@ async def dyno_manage(dyno):
         url = f"https://nekobin.com/raw/{key}"
         await dyno.edit(f"`Here the heroku logs:`\n\nPasted to: [Nekobin]({url})")
         return os.remove("logs.txt")
-        return True
     elif exe == "help":
         await dyno.edit(
             ">`.dyno usage`"
