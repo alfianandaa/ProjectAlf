@@ -8,8 +8,8 @@
     <a href="https://github.com/alfianandaa/ProjectBish/commits/master"> <img src="https://img.shields.io/github/last-commit/alfianandaa/ProjectBish?color=greenlogo=github&logoColor=green&style=for-the-badge" /></a>
     <a href="https://github.com/alfianandaa/ProjectBish/issues"> <img src="https://img.shields.io/github/issues/alfianandaa/ProjectBish?color=green&logo=github&logoColor=green&style=for-the-badge" /></a>
     <a href="https://github.com/alfianandaa/ProjectBish/network/members"> <img src="https://img.shields.io/github/forks/alfianandaa/ProjectBish?color=green&logo=github&logoColor=green&style=for-the-badge" /></a>
-     <a href="https://hub.docker.com/r/gengkapak/groovygorilla"> <img src="https://img.shields.io/docker/image-size/gengkapak/groovygorilla/latest?label=docker%20image%20size&logo=docker&style=for-the-badge" /></a>
-    <a href="https://hub.docker.com/r/gengkapak/groovygorilla/tags"> <img src="https://img.shields.io/docker/v/gengkapak/groovygorilla/latest?label=docker%20version&logo=docker&style=for-the-badge" /></a>
+    <a href="https://hub.docker.com/r/alfianandaa/bish"> <img src="https://img.shields.io/docker/image-size/alfianandaa/bish/latest?label=docker%20image%20size&logo=docker&style=for-the-badge" /></a>
+    <a href="https://hub.docker.com/r/alfianandaa/bish/tags"> <img src="https://img.shields.io/docker/v/alfianandaa/bish/latest?label=docker%20version&logo=docker&style=for-the-badge" /></a>
     <a href="https://pypi.org/project/Telethon/"> <img src="https://img.shields.io/pypi/v/telethon?color=green&label=telethon&logo=python&logoColor=green&style=for-the-badge" /></a>
 </p>
 
