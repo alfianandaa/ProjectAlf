@@ -1,5 +1,5 @@
-# We're using Ubuntu 20.10
-FROM gengkapak/groovygorilla:latest
+# We're using Debian Slim Buster
+FROM alfianandaa/bish:latest
 
 #
 # Clone repo and prepare working directory
