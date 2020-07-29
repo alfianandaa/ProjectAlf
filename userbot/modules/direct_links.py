@@ -336,9 +336,6 @@ def androidfilehost(url: str) -> str:
 
 
 def useragent():
-    """
-    useragent random setter
-    """
     useragents = BeautifulSoup(
         requests.get(
             'https://developers.whatismybrowser.com/'

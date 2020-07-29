@@ -1096,7 +1096,7 @@ async def slap(replied_user, event):
 
 
 @register(outgoing=True, pattern="^-_-$", ignore_unsafe=True)
-async def lol(lel):
+async def llol(lel):
     okay = "-_-"
     for _ in range(10):
         okay = okay[:-1] + "_-"
@@ -1346,12 +1346,12 @@ async def iqless(e):
 
 
 @register(outgoing=True, pattern="^.fuck$")
-async def iqless(e):
+async def iqbot(e):
     await e.edit("🖕🖕🖕🖕🖕🖕🖕🖕\n🖕🖕🖕🖕🖕🖕🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕🖕🖕🖕🖕\n🖕🖕🖕🖕🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕")
 
 
 @register(outgoing=True, pattern="^.bye$")
-async def iqless(e):
+async def iqboot(e):
     await e.edit("Kek thx bye")
 
 
@@ -1561,7 +1561,7 @@ async def fail(e):
 
 
 @register(outgoing=True, pattern="^.lol$")
-async def lol(e):
+async def leol(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("`\n╱┏┓╱╱╱╭━━━╮┏┓╱╱╱╱ `"
                      "`\n╱┃┃╱╱╱┃╭━╮┃┃┃╱╱╱╱ `"
@@ -1618,7 +1618,7 @@ async def nih(e):
 
 
 @register(outgoing=True, pattern="^.fag$")
-async def gtfo(e):
+async def fgtfo(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("`\n█████████`"
                      "`\n█▄█████▄█`"
@@ -1659,7 +1659,7 @@ async def gey(e):
 
 
 @register(outgoing=True, pattern="^.gay$")
-async def gey(e):
+async def ghey(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("`\n┈┈┈╭━━━━━╮┈┈┈┈┈\n┈┈┈┃┊┊┊┊┊┃┈┈┈┈┈`"
                      "`\n┈┈┈┃┊┊╭━╮┻╮┈┈┈┈\n┈┈┈╱╲┊┃▋┃▋┃┈┈┈┈\n┈┈╭┻┊┊╰━┻━╮┈┈┈┈`"
