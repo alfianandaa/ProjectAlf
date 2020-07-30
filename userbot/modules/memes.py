@@ -18,8 +18,6 @@ from userbot import CMD_HELP
 from userbot.events import register
 from userbot.modules.admin import get_user_from_event
 
-from userbot import bot
-
 
 # ================= CONSTANT =================
 METOOSTR = [

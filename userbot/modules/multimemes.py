@@ -24,10 +24,6 @@ import telethon
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.types import (
     DocumentAttributeFilename,
-    InputMediaUploadedDocument,
-    InputPeerNotifySettings,
-    InputStickerSetID,
-    InputStickerSetShortName,
     MessageMediaPhoto)
 from userbot import bot, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, QUOTES_API_TOKEN
 from userbot.events import register
