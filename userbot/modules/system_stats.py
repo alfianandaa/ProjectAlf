@@ -16,7 +16,7 @@ from shutil import which
 from os import remove
 from telethon import __version__, version
 
-from userbot import bot, CMD_HELP, ALIVE_NAME, ALIVE_LOGO, ALIVE_USERNAME, UPSTREAM_REPO_BRANCH, StartTime
+from userbot import bot, CMD_HELP, ALIVE_NAME, ALIVE_LOGO, UPSTREAM_REPO_BRANCH, StartTime
 from userbot.events import register
 
 # ================= CONSTANT =================
@@ -220,6 +220,7 @@ async def pipcheck(pip):
 @register(outgoing=True, pattern=r"^\.(?:alive|on)\s?(.)?")
 async def amireallyalive(alive):
     logo = ALIVE_LOGO
+    user = await bot.get_me()
     uptime = await get_readable_time((time.time() - StartTime))
     output = (f"`My Detail Ubot `\n"
               f"┏━━━━━━━━━━━━━━━━━━━━━━━━\n"
@@ -227,7 +228,7 @@ async def amireallyalive(alive):
               f"┣[ 👤 `User       :` {DEFAULTUSER}\n"
               f"┣[ 🐍 `Python     :` v{python_version()}\n"
               f"┣[ ⚙️ `Telethon   :` v{version.__version__}\n"
-              f"┣[ 👁‍🗨 `Username   :` {ALIVE_USERNAME}\n"
+              f"┣[ 👁‍🗨 `Username   :` @{user.username}\n"
               f"┣[ 🎮 `Running on :` {UPSTREAM_REPO_BRANCH}\n"
               f"┗━━━━━━━━━━━━━━━━━━━━━━━━\n"
               f"`All modules loaded with ({MODULESTR}) errors`")
