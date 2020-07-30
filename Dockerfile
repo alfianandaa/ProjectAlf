@@ -1,5 +1,5 @@
-# We're using Debian Slim Buster
-FROM alfianandaa/bish:latest
+# We're using Ubuntu 20.10
+FROM alfianandaa/bish:groovy
 
 #
 # Clone repo and prepare working directory
