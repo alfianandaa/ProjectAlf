@@ -26,7 +26,7 @@ async def telegraphs(grop):
             result = await grop.client(functions.messages.ExportChatInviteRequest(
                 peer=created_chat_id,
             ))
-            await grop.edit("Your {} Group Created Successfully. Click [{}]({}) to join".format(group_name, group_name, result.link))
+            await grop.edit("Your {} Group Created Successfully. Click [{}]({}) to join".format(group_name, result.link))
         except Exception as e:  # pylint:disable=C0103,W0703
             await grop.edit(str(e))
     elif type_of_group in ["g", "c"]:
@@ -40,7 +40,7 @@ async def telegraphs(grop):
             result = await grop.client(functions.messages.ExportChatInviteRequest(
                 peer=created_chat_id,
             ))
-            await grop.edit("Your {} Group/Channel Created Successfully. Click [{}]({}) to join".format(group_name, group_name, result.link))
+            await grop.edit("Your {} Group/Channel Created Successfully. Click [{}]({}) to join".format(group_name, result.link))
         except Exception as e:  # pylint:disable=C0103,W0703
             await grop.edit(str(e))
 

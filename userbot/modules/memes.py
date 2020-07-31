@@ -18,8 +18,6 @@ from userbot import CMD_HELP
 from userbot.events import register
 from userbot.modules.admin import get_user_from_event
 
-from userbot import bot
-
 
 # ================= CONSTANT =================
 METOOSTR = [
@@ -1254,7 +1252,7 @@ async def hoi(hello):
 
 
 @register(outgoing=True, pattern="^.owo(?: |$)(.*)")
-async def faces(owo):
+async def focos(owo):
     textx = await owo.get_reply_message()
     message = owo.pattern_match.group(1)
     if message:

@@ -609,7 +609,7 @@ async def get_anime(message):
 
 
 @register(outgoing=True, pattern=r"^\.smanga ?(.*)")
-async def manga(message):
+async def smanga(message):
     search_query = message.pattern_match.group(1)
     await message.get_reply_message()
     await message.edit("`Searching Manga..`")
@@ -625,7 +625,7 @@ async def manga(message):
 
 
 @register(outgoing=True, pattern=r"^\.sanime ?(.*)")
-async def anime(message):
+async def sanime(message):
     search_query = message.pattern_match.group(1)
     await message.get_reply_message()
     await message.edit("`Searching Anime..`")
