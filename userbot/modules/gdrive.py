@@ -419,12 +419,12 @@ async def download_gdrive(gdrive, service, uri):
                     eta = round((file_size - downloaded) / speed)
                     prog_str = "`Downloading` | [{0}{1}] `{2}%`".format(
                         "".join(
-                            "●" for i in range(
+                            "█" for i in range(
                                 math.floor(
                                     percentage /
                                     10))),
                         "".join(
-                            "○" for i in range(
+                            "░" for i in range(
                                 10 -
                                 math.floor(
                                     percentage /
@@ -478,12 +478,12 @@ async def download_gdrive(gdrive, service, uri):
                     eta = round((file_size - downloaded) / speed)
                     prog_str = "`Downloading` | [{0}{1}] `{2}%`".format(
                         "".join(
-                            "●" for i in range(
+                            "█" for i in range(
                                 math.floor(
                                     percentage /
                                     10))),
                         "".join(
-                            "○" for i in range(
+                            "░" for i in range(
                                 10 -
                                 math.floor(
                                     percentage /
@@ -643,12 +643,12 @@ async def upload(gdrive, service, file_path, file_name, mimeType):
             eta = round((file_size - uploaded) / speed)
             prog_str = "`Uploading` | [{0}{1}] `{2}%`".format(
                 "".join(
-                    "●" for i in range(
+                    "█" for i in range(
                         math.floor(
                             percentage /
                             10))),
                 "".join(
-                    "○" for i in range(
+                    "░" for i in range(
                         10 -
                         math.floor(
                             percentage /
@@ -1244,12 +1244,12 @@ async def check_progress_for_dl(gdrive, gid, previous):
                 downloaded = percentage * int(file.total_length) / 100
                 prog_str = "`Downloading` | [{0}{1}] `{2}`".format(
                     "".join(
-                        "●" for i in range(
+                        "█" for i in range(
                             math.floor(
                                 percentage /
                                 10))),
                     "".join(
-                        "○" for i in range(
+                        "░" for i in range(
                             10 -
                             math.floor(
                                 percentage /
