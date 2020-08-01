@@ -164,7 +164,7 @@ async def dyno_manage(dyno):
                 for App in apps:
                     msg += (
                         f" -> `Dyno usage for`  **{App.name}**:\n"
-                        f"     •  `0` hour(s)  `0` minute(s)  "
+                        f"     •  **`0` hour(s),  `0` minute(s)**  "
                         f" -   **`0`%**\n\n"
                     )
             else:
