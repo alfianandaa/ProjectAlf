@@ -171,20 +171,28 @@ async def download_api(dl):
         percentage = downloaded / file_size * 100
         speed = round(downloaded / diff, 2)
         eta = round((file_size - downloaded) / speed)
-        prog_str = "`{0}` | [{1}{2}] `{3}%`".format(
-            status,
-            "".join(["█" for i in range(
-                    math.floor(percentage / 10))]),
-            "".join(["░"for i in range(
-                    10 - math.floor(percentage / 10))]),
-            round(percentage, 2))
+        prog_str = "[{0}{1}] `{2}%`".format(
+            "".join(
+                "█" for i in range(
+                    math.floor(
+                        percentage /
+                        10))),
+            "".join(
+                "░" for i in range(
+                    10 -
+                    math.floor(
+                        percentage /
+                        10))),
+                round(
+                    percentage,
+                    2),
+        )
         current_message = (
-            "`[DOWNLOAD]`\n\n"
-            f"`{file_name}`\n"
-            f"`Status`\n{prog_str}\n"
-            f"`{humanbytes(downloaded)} of {humanbytes(file_size)}"
-            f" @ {humanbytes(speed)}`\n"
-            f"`ETA` -> {time_formatter(eta)}"
+            f"{file_name} - {status}\n"
+            f"{prog_str}\n"
+            f"`Size:` {humanbytes(downloaded)} of {humanbytes(file_size)}\n"
+            f"`Speed:` {humanbytes(speed)}/s\n"
+            f"`ETA:` {time_formatter(eta)}\n"
         )
         if round(diff % 15.00) == 0 and display_message != current_message or (
                 downloaded == file_size):

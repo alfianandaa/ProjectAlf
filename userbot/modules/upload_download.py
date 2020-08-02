@@ -63,13 +63,11 @@ async def download(target_file):
             estimated_total_time = downloader.get_eta(human=True)
             try:
                 current_message = (
-                    f"`Name` : `{file_name}`\n"
-                    "Status"
-                    f"\n**{status}**... | {progress_str}"
-                    f"\n{humanbytes(downloaded)} of {humanbytes(total_length)}"
-                    f" @ {speed}"
-                    f"\n`ETA` -> {estimated_total_time}"
-                )
+                    f"{file_name} - {status}\n"
+                    f"{progress_str}"
+                    f"`Size:` {humanbytes(downloaded)} of {humanbytes(total_length)}"
+                    f"`Speed:` {speed}"
+                    f"\n`ETA:` {estimated_total_time}")
 
                 if round(diff %
                          10.00) == 0 and current_message != display_message:

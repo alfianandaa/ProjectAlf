@@ -417,7 +417,7 @@ async def download_gdrive(gdrive, service, uri):
                     percentage = downloaded / file_size * 100
                     speed = round(downloaded / diff, 2)
                     eta = round((file_size - downloaded) / speed)
-                    prog_str = "`Downloading` | [{0}{1}] `{2}%`".format(
+                    prog_str = "[{0}{1}] `{2}%`".format(
                         "".join(
                             "█" for i in range(
                                 math.floor(
@@ -434,13 +434,11 @@ async def download_gdrive(gdrive, service, uri):
                             2),
                     )
                     current_message = (
-                        "`[FILE - DOWNLOAD]`\n\n"
-                        f"`{file_name}`\n"
-                        f"`Status`\n{prog_str}\n"
-                        f"`{humanbytes(downloaded)} of {humanbytes(file_size)}"
-                        f" @ {humanbytes(speed)}`\n"
-                        f"`ETA` -> {time_formatter(eta)}"
-                    )
+                        f"{file_name} - Downloading\n"
+                        f"{prog_str}\n"
+                        f"`Size:` {humanbytes(downloaded)} of {humanbytes(file_size)}"
+                        f"`Speed:` {humanbytes(speed)}`\n"
+                        f"`ETA:` {time_formatter(eta)}")
                     if (
                         round(diff % 15.00) == 0
                         and (display_message != current_message)
@@ -476,7 +474,7 @@ async def download_gdrive(gdrive, service, uri):
                     percentage = downloaded / file_size * 100
                     speed = round(downloaded / diff, 2)
                     eta = round((file_size - downloaded) / speed)
-                    prog_str = "`Downloading` | [{0}{1}] `{2}%`".format(
+                    prog_str = " [{0}{1}] `{2}%`".format(
                         "".join(
                             "█" for i in range(
                                 math.floor(
@@ -493,13 +491,11 @@ async def download_gdrive(gdrive, service, uri):
                             2),
                     )
                     current_message = (
-                        "`[FILE - DOWNLOAD]`\n\n"
-                        f"`{file_name}`\n"
-                        f"`Status`\n{prog_str}\n"
-                        f"`{humanbytes(downloaded)} of {humanbytes(file_size)}"
-                        f" @ {humanbytes(speed)}`\n"
-                        f"`ETA` -> {time_formatter(eta)}"
-                    )
+                        f"{file_name} - Downloading\n"
+                        f"{prog_str}\n"
+                        f"`Size:` {humanbytes(downloaded)} of {humanbytes(file_size)}"
+                        f"`Speed:` {humanbytes(speed)}`\n"
+                        f"`ETA:` {time_formatter(eta)}")
                     if (
                         round(diff % 15.00) == 0
                         and (display_message != current_message)
@@ -641,7 +637,7 @@ async def upload(gdrive, service, file_path, file_name, mimeType):
             percentage = uploaded / file_size * 100
             speed = round(uploaded / diff, 2)
             eta = round((file_size - uploaded) / speed)
-            prog_str = "`Uploading` | [{0}{1}] `{2}%`".format(
+            prog_str = "[{0}{1}] `{2}%`".format(
                 "".join(
                     "█" for i in range(
                         math.floor(
@@ -658,12 +654,11 @@ async def upload(gdrive, service, file_path, file_name, mimeType):
                     2),
             )
             current_message = (
-                "`[FILE - UPLOAD]`\n\n"
-                f"`{file_name}`\n"
-                f"`Status`\n{prog_str}\n"
-                f"`{humanbytes(uploaded)} of {humanbytes(file_size)} "
-                f"@ {humanbytes(speed)}`\n"
-                f"`ETA` -> {time_formatter(eta)}"
+                f"{file_name} - Uploading\n"
+                f"{prog_str}\n"
+                f"`Size: {humanbytes(uploaded)} of {humanbytes(file_size)}"
+                f"`Speed:` {humanbytes(speed)}`\n"
+                f"`ETA:` {time_formatter(eta)}"
             )
             if round(diff % 15.00) == 0 and (
                     display_message != current_message) or (
@@ -1242,7 +1237,7 @@ async def check_progress_for_dl(gdrive, gid, previous):
             if not complete and not file.error_message:
                 percentage = int(file.progress)
                 downloaded = percentage * int(file.total_length) / 100
-                prog_str = "`Downloading` | [{0}{1}] `{2}`".format(
+                prog_str = "[{0}{1}] `{2}`".format(
                     "".join(
                         "█" for i in range(
                             math.floor(
@@ -1257,15 +1252,11 @@ async def check_progress_for_dl(gdrive, gid, previous):
                     file.progress_string(),
                 )
                 msg = (
-                    "`[URI - DOWNLOAD]`\n\n"
-                    f"`{file.name}`\n"
-                    f"`Status` -> **{file.status.capitalize()}**\n"
+                    f"{file.name} - Downloading\n"
                     f"{prog_str}\n"
-                    f"`{humanbytes(downloaded)} of"
-                    f" {file.total_length_string()}"
-                    f" @ {file.download_speed_string()}`\n"
-                    f"`ETA` -> {file.eta_string()}\n"
-                )
+                    f"`Size:` {humanbytes(downloaded)} of {file.total_length_string()}\n"
+                    f"`Speed:` {file.download_speed_string()}\n"
+                    f"`ETA:` {file.eta_string()}\n")
                 if msg != previous or downloaded == file.total_length_string():
                     await gdrive.edit(msg)
                     msg = previous

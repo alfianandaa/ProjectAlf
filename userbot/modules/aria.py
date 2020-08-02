@@ -190,7 +190,7 @@ async def check_progress_for_dl(gid, event, previous):
             if not (complete or file.error_message):
                 percentage = int(file.progress)
                 downloaded = percentage * int(file.total_length) / 100
-                prog_str = "`Downloading` | [{0}{1}] `{2}`".format(
+                prog_str = "[{0}{1}] `{2}`".format(
                     "".join(
                         "█" for i in range(
                             math.floor(
@@ -205,12 +205,11 @@ async def check_progress_for_dl(gid, event, previous):
                     file.progress_string(),
                 )
                 msg = (
-                    f"`Name`: `{file.name}`\n"
-                    f"`Status` -> **{file.status.capitalize()}**\n"
+                    f"{file.name} - Downloading\n"
                     f"{prog_str}\n"
-                    f"`{humanbytes(downloaded)} of {file.total_length_string()}"
-                    f" @ {file.download_speed_string()}`\n"
-                    f"`ETA` -> {file.eta_string()}\n")
+                    f"`Size:` {humanbytes(downloaded)} of {file.total_length_string()}\n"
+                    f"`Speed:` {file.download_speed_string()}\n"
+                    f"`ETA:` {file.eta_string()}\n")
                 if msg != previous:
                     await event.edit(msg)
                     msg = previous
