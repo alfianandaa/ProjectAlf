@@ -30,14 +30,19 @@
 
 A modular Telegram userbot running on Python3 with sqlalchemy database.
 
-Based on RaphielGang's [Telegram-Paperplane](https://github.com/RaphielGang/Telegram-Paperplane) userbot with a lot of changes, features and module.
+Based on RaphielGang's [Telegram-Paperplane](https://github.com/RaphielGang/Telegram-Paperplane) And [ProjectDils](https://github.com/aidilaryanto/ProjectDils)
 
 ## How To Host
 The easiest way to deploy this userbot
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/alfianandaa/ProjectBish/tree/master"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="210" height="34.45"/></a></p>
 
-<p><a href="https://heroku.com/deploy?template=https://github.com/alfianandaa/ProjectBish/tree/master"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
+## Generate String
+Generate string using repl.it
+<p align="center"><a href="https://bish.alfiananda.repl.run/"> <img src="https://img.shields.io/badge/Generate%20Session-lightgrey?style=for-the-badge&logo=repl.it" width="210" height="34.45"/></a></p>
 
-For further guide you can head to [Groups and Support](https://github.com/KeselekPermen69/UserButt#Groups-and-support) or read this [guide](https://telegra.ph/Host-a-Telegram-Userbot-05-07)
+## Usefull guides
+How to deploy this UserBot
+<p align="center"><a href="https://telegra.ph/Host-a-Telegram-Userbot-05-07"> <img src="https://img.shields.io/badge/how%20to%20deploy-important?style=for-the-badge&logo=github" width="210" height="34.45"/></a></p>
 
 ## Groups and Support
 Join [Userbot Indonesia Channel](https://t.me/userbotindocloud) for update notifications or announcement.
