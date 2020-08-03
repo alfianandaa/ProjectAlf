@@ -457,7 +457,14 @@ async def lastname(steal):
             except YouBlockedUserError:
                 await steal.reply("```Please unblock @sangmatainfo_bot and try again```")
                 return
-            if response.text.startswith("No records"):
+            if r.text.startswith("Name"):
+                respond = await conv.get_response()
+                await steal.edit(f"{r.message}")
+                await steal.client.delete_messages(
+                    conv.chat_id, [msg.id, r.id, response.id, respond.id]
+                )
+                return
+            if response.text.startswith("No records") or r.text.startswith("No records"):
                 await steal.edit("```No records found for this user```")
                 await steal.client.delete_messages(
                     conv.chat_id, [msg.id, r.id, response.id]
