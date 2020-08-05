@@ -26,7 +26,7 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: 'pylint: auto fixes'
-          commit_options: '--no-verify'
+          commit_options: '--no-verify --signoff'
           repository: .
           commit_user_name: Alfiananda P.A
           commit_user_email: genengbendo12@gmail.com
