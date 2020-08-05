@@ -464,7 +464,8 @@ async def lastname(steal):
                     conv.chat_id, [msg.id, r.id, response.id, respond.id]
                 )
                 return
-            if response.text.startswith("No records") or r.text.startswith("No records"):
+            if response.text.startswith(
+                    "No records") or r.text.startswith("No records"):
                 await steal.edit("```No records found for this user```")
                 await steal.client.delete_messages(
                     conv.chat_id, [msg.id, r.id, response.id]
