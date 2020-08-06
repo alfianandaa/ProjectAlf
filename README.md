@@ -1,5 +1,7 @@
 # ProjectAlf UserBot
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7e84073e440a469f9cc71f0ff60b84e1)](https://app.codacy.com/manual/alfianandaa/ProjectAlf?utm_source=github.com&utm_medium=referral&utm_content=alfianandaa/ProjectAlf&utm_campaign=Badge_Grade_Settings)
+
 <p align="center">
     <a href="https://github.com/alfianandaa/ProjectAlf/actions?query=workflow%3AFailCheck" > <img src="https://img.shields.io/github/workflow/status/alfianandaa/ProjectAlf/FailCheck/master?style=for-the-badge&logo=github-actions&logoColor=green" alt="Failcheck" /></a>
     <a href="https://github.com/alfianandaa/ProjectAlf/actions?query=workflow%3Apylint"> <img src="https://img.shields.io/github/workflow/status/alfianandaa/ProjectAlf/pylint/master?label=pylint&style=for-the-badge&logo=github-actions&logoColor=green" alt="Pylint" /></a>
