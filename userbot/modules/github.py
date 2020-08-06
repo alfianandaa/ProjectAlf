@@ -6,7 +6,7 @@ from datetime import datetime
 from userbot.events import register
 from userbot import CMD_HELP, GITHUB_ACCESS_TOKEN, GIT_REPO_NAME, bot
 
-GIT_TEMP_DIR = "./projectbish/temp/"
+GIT_TEMP_DIR = "./projectalf/temp/"
 
 
 @register(pattern=r".git (.*)", outgoing=True)
@@ -102,12 +102,12 @@ async def git_commit(file_name, mone):
             return await mone.edit("`File Already Exists`")
     file_name = "userbot/modules/" + file_name
     if create_file:
-        file_name = file_name.replace("./projectbish/temp/", "")
+        file_name = file_name.replace("./projectalf/temp/", "")
         print(file_name)
         try:
             repo.create_file(
                 file_name,
-                "UserBot: Add new module",
+                "ProjectAlf: Add new module",
                 commit_data,
                 branch="master")
             print("Committed File")
