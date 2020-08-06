@@ -63,29 +63,6 @@ async def killdabot(event):
     exit()
 
 
-@register(outgoing=True, pattern="^.community$")
-async def bot_community(community):
-    await community.edit(
-        "Join RaphielGang's awesome userbot community: @userbot_support"
-        "\nDo note that Paperplane Extended is an unoficial fork of their "
-        "Paperplane project and it may get limited or no support for bugs.")
-
-
-@register(outgoing=True, pattern="^.support$")
-async def bot_support(wannahelp):
-    await wannahelp.edit(
-        "Join the UserBot Chat: @userbotindo"
-    )
-
-
-@register(outgoing=True, pattern="^.creator$")
-async def creator(e):
-    await e.edit(
-        "Created By [TeKnoways](https://t.me/Three_Cube_TeKnoways)"
-        "\nKanged and Modified by [Aidil Aryanto](https://t.me/aidilaryanto)"
-    )
-
-
 @register(outgoing=True, pattern="^.readme$")
 async def reedme(e):
     await e.edit(
