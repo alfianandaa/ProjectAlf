@@ -127,10 +127,10 @@ async def update(event, repo, ups_rem, ac_br):
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
     await event.edit('`Successfully Updated!\n'
-                     'UserBot is restarting... Wait for a second!`')
+                     'ProjectAlf is restarting... Wait for a second!`')
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#UPDATE \n"
-                                        "UserBot was successfully updated")
+                                        "ProjectAlf was successfully updated")
     # Spin a new instance of bot
     args = [sys.executable, "-m", "userbot"]
     execle(sys.executable, *args, environ)
@@ -194,7 +194,7 @@ async def upstream(event):
 
     if changelog == '' and not force_update:
         await event.edit(
-            '\n`UserBot is`  **up-to-date**  `with`  '
+            '\n`ProjectAlf is`  **up-to-date**  `on`  '
             f'**{UPSTREAM_REPO_BRANCH}**\n')
         return repo.__del__()
 
@@ -208,7 +208,7 @@ async def upstream(event):
         await event.edit(
             '`Force-Syncing to latest stable userbot code, please wait...`')
     if conf == "now":
-        await event.edit('`Updating UserBot, please wait....`')
+        await event.edit('`Updating ProjectAlf, please wait....`')
         await update(event, repo, ups_rem, ac_br)
     return
 
