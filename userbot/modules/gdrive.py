@@ -656,7 +656,7 @@ async def upload(gdrive, service, file_path, file_name, mimeType):
             current_message = (
                 f"{file_name} - Uploading\n"
                 f"{prog_str}\n"
-                f"`Size: {humanbytes(uploaded)} of {humanbytes(file_size)}"
+                f"`Size: {humanbytes(uploaded)} of {humanbytes(file_size)}\n"
                 f"`Speed:` {humanbytes(speed)}`\n"
                 f"`ETA:` {time_formatter(eta)}"
             )
