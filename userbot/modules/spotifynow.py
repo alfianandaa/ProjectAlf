@@ -37,10 +37,12 @@ async def _(event):
                 response.media,
                 TEMP_DOWNLOAD_DIRECTORY
             )
+            link = response.reply_markup.rows[0].buttons[0].url
             await event.client.send_file(
                 event.chat_id,
                 downloaded_file_name,
                 force_document=False,
+                caption=f"[Play on Spotify]({link})"
             )
             await event.client.delete_messages(conv.chat_id,
                                                [msg.id, response.id])
