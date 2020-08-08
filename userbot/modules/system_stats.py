@@ -219,7 +219,6 @@ async def pipcheck(pip):
 
 @register(outgoing=True, pattern=r"^\.(?:alive|on)\s?(.)?")
 async def amireallyalive(alive):
-    logo = ALIVE_LOGO
     user = await bot.get_me()
     uptime = await get_readable_time((time.time() - StartTime))
     output = (f"`My Detail Ubot `\n"
@@ -232,9 +231,16 @@ async def amireallyalive(alive):
               f"┣[ 🎮 `Running on :` {UPSTREAM_REPO_BRANCH}\n"
               f"┗━━━━━━━━━━━━━━━━━━━━━━━━\n"
               f"`All modules loaded:` {len(modules)}")
-    await bot.send_file(alive.chat_id, logo, caption=output)
-    await alive.delete()
-
+    if ALIVE_LOGO:
+        try:
+            logo = ALIVE_LOGO
+            await bot.send_file(alive.chat_id, logo, caption=output)
+            await alive.delete()
+        except BaseException:
+            await alive.edit(output + "\n\n *`The provided logo is invalid."
+                             "\nMake sure the link is directed to the logo picture`")
+    else:
+        await alive.edit(output)
 
 @register(outgoing=True, pattern="^.aliveu")
 async def amireallyaliveuser(username):
