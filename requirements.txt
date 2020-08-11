@@ -43,7 +43,7 @@ search-engine-parser
 speedtest-cli
 sqlalchemy
 TgCrypto
-telethon==1.15.0
+telethon
 telethon-session-sqlalchemy
 telegraph
 urbandict
