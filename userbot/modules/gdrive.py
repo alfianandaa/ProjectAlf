@@ -580,8 +580,9 @@ async def create_dir(service, folder_name):
         'name': folder_name,
         'mimeType': 'application/vnd.google-apps.folder',
     }
-    try:
-        pass
+    try:	
+        if parent_Id is not None:
+            pass
     except NameError:
         if G_DRIVE_FOLDER_ID is not None:
             metadata['parents'] = [G_DRIVE_FOLDER_ID]
