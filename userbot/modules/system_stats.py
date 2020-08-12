@@ -242,6 +242,7 @@ async def amireallyalive(alive):
     else:
         await alive.edit(output)
 
+
 @register(outgoing=True, pattern="^.aliveu")
 async def amireallyaliveuser(username):
     message = username.text
