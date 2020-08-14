@@ -4,6 +4,9 @@
 # you may not use this file except in compliance with the License.
 #
 
+import sys
+
+
 from importlib import import_module
 from sys import argv
 
@@ -20,7 +23,7 @@ try:
     bot.start()
 except PhoneNumberInvalidError:
     print(INVALID_PH)
-    exit(1)
+    sys.exit(1)
 
 for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)

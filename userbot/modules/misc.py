@@ -60,7 +60,7 @@ async def killdabot(event):
     # Spin a new instance of bot
     execl(sys.executable, sys.executable, *sys.argv)
     # Shut the existing one down
-    exit()
+    sys.exit()
 
 
 @register(outgoing=True, pattern="^.readme$")
