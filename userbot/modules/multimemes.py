@@ -21,7 +21,6 @@ from telethon.tl.types import (
     DocumentAttributeFilename,
     MessageMediaPhoto)
 from userbot import bot, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
-from userbot.events import register
 
 THUMB_IMAGE_PATH = "./thumb_image.jpg"
 
