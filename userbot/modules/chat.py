@@ -114,27 +114,35 @@ async def keep_read(message):
                 await message.client.send_read_acknowledge(message.chat_id)
 
 
-# Regex-Ninja module by @Kandnub
-regexNinja = False
-
-
-@register(outgoing=True, pattern="^s/")
+@register(outgoing=True, pattern=r"^s/")
 async def sedNinja(event):
-    if regexNinja:
-        await sleep(.5)
+    """For regex-ninja module, auto delete command starting with s/"""
+    try:
+        from userbot.modules.sql_helper.globals import gvarstatus
+    except AttributeError:
+        return await event.edit("`Running on Non-SQL mode!`")
+    if gvarstatus("regexNinja"):
         await event.delete()
 
 
 @register(outgoing=True, pattern="^.regexninja (on|off)$")
 async def sedNinjaToggle(event):
-    global regexNinja
+    """Enables or disables the regex ninja module."""
     if event.pattern_match.group(1) == "on":
-        regexNinja = True
+        try:
+            from userbot.modules.sql_helper.globals import addgvar
+        except AttributeError:
+            return await event.edit("`Running on Non-SQL mode!`")
+        addgvar("regexNinja", True)
         await event.edit("`Successfully enabled ninja mode for Regexbot.`")
         await sleep(1)
         await event.delete()
     elif event.pattern_match.group(1) == "off":
-        regexNinja = False
+        try:
+            from userbot.modules.sql_helper.globals import delgvar
+        except AttributeError:
+            return await event.edit("`Running on Non-SQL mode!`")
+        delgvar("regexNinja")
         await event.edit("`Successfully disabled ninja mode for Regexbot.`")
         await sleep(1)
         await event.delete()
