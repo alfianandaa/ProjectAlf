@@ -77,8 +77,9 @@ async def fetch_info(chat, event):
     # chat.chats is a list so we use get_entity() to avoid IndexError
     chat_obj_info = await event.client.get_entity(chat.full_chat.id)
     broadcast = (
-        chat_obj_info.broadcast if hasattr(chat_obj_info, "broadcast") else False
-    )
+        chat_obj_info.broadcast if hasattr(
+            chat_obj_info,
+            "broadcast") else False)
     chat_type = "Channel" if broadcast else "Group"
     chat_title = chat_obj_info.title
     warn_emoji = emojize(":warning:")
@@ -138,18 +139,20 @@ async def fetch_info(chat, event):
         if hasattr(chat.full_chat, "participants_count")
         else chat_obj_info.participants_count
     )
-    admins = (
-        chat.full_chat.admins_count if hasattr(chat.full_chat, "admins_count") else None
-    )
+    admins = (chat.full_chat.admins_count if hasattr(
+        chat.full_chat, "admins_count") else None)
     banned_users = (
-        chat.full_chat.kicked_count if hasattr(chat.full_chat, "kicked_count") else None
-    )
+        chat.full_chat.kicked_count if hasattr(
+            chat.full_chat,
+            "kicked_count") else None)
     restrcited_users = (
-        chat.full_chat.banned_count if hasattr(chat.full_chat, "banned_count") else None
-    )
+        chat.full_chat.banned_count if hasattr(
+            chat.full_chat,
+            "banned_count") else None)
     members_online = (
-        chat.full_chat.online_count if hasattr(chat.full_chat, "online_count") else 0
-    )
+        chat.full_chat.online_count if hasattr(
+            chat.full_chat,
+            "online_count") else 0)
     group_stickers = (
         chat.full_chat.stickerset.title
         if hasattr(chat.full_chat, "stickerset") and chat.full_chat.stickerset
@@ -167,7 +170,8 @@ async def fetch_info(chat, event):
         else None
     )
     exp_count = chat.full_chat.pts if hasattr(chat.full_chat, "pts") else None
-    username = chat_obj_info.username if hasattr(chat_obj_info, "username") else None
+    username = chat_obj_info.username if hasattr(
+        chat_obj_info, "username") else None
     bots_list = chat.full_chat.bot_info  # this is a list
     bots = 0
     supergroup = (
@@ -175,16 +179,12 @@ async def fetch_info(chat, event):
         if hasattr(chat_obj_info, "megagroup") and chat_obj_info.megagroup
         else "No"
     )
-    slowmode = (
-        "<b>Yes</b>"
-        if hasattr(chat_obj_info, "slowmode_enabled") and chat_obj_info.slowmode_enabled
-        else "No"
-    )
+    slowmode = ("<b>Yes</b>" if hasattr(chat_obj_info, "slowmode_enabled")
+                and chat_obj_info.slowmode_enabled else "No")
     slowmode_time = (
-        chat.full_chat.slowmode_seconds
-        if hasattr(chat_obj_info, "slowmode_enabled") and chat_obj_info.slowmode_enabled
-        else None
-    )
+        chat.full_chat.slowmode_seconds if hasattr(
+            chat_obj_info,
+            "slowmode_enabled") and chat_obj_info.slowmode_enabled else None)
     restricted = (
         "<b>Yes</b>"
         if hasattr(chat_obj_info, "restricted") and chat_obj_info.restricted
@@ -196,7 +196,8 @@ async def fetch_info(chat, event):
         else "No"
     )
     username = "@{}".format(username) if username else None
-    creator_username = "@{}".format(creator_username) if creator_username else None
+    creator_username = "@{}".format(
+        creator_username) if creator_username else None
     # end of spaghetti block
 
     if admins is None:

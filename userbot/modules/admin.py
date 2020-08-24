@@ -530,8 +530,7 @@ async def rm_deletedacc(show):
         if del_u > 0:
             del_status = (
                 f"`Found` **{del_u}** `ghost/deleted/zombie account(s) in this group,"
-                "\nclean them by using .zombies clean`"
-            )
+                "\nclean them by using .zombies clean`")
         return await show.edit(del_status)
 
     # Here laying the sanity check
@@ -762,7 +761,9 @@ async def get_user_from_event(event):
         if event.message.entities is not None:
             probable_user_mention_entity = event.message.entities[0]
 
-            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
+            if isinstance(
+                    probable_user_mention_entity,
+                    MessageEntityMentionName):
                 user_id = probable_user_mention_entity.user_id
                 user_obj = await event.client.get_entity(user_id)
                 return user_obj
@@ -852,7 +853,9 @@ async def get_userdel_from_event(event):
         if event.message.entities is not None:
             probable_user_mention_entity = event.message.entities[0]
 
-            if isinstance(probable_user_mention_entity, MessageEntityMentionName):
+            if isinstance(
+                    probable_user_mention_entity,
+                    MessageEntityMentionName):
                 user_id = probable_user_mention_entity.user_id
                 user_obj = await event.client.get_entity(user_id)
                 return user_obj
@@ -942,6 +945,4 @@ CMD_HELP.update(
         "\n\n>`.users` or >`.users <name of member>`"
         "\nUsage: Retrieves all (or queried) users in the chat."
         "\n\n>`.setgpic <reply to image>`"
-        "\nUsage: Changes the group's display picture."
-    }
-)
+        "\nUsage: Changes the group's display picture."})

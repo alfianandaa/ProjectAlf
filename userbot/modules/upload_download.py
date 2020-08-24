@@ -36,7 +36,10 @@ async def download(target_file):
         # https://stackoverflow.com/a/761825/4723940
         file_name = file_name.strip()
         head, tail = os.path.split(file_name)
-        if head and not os.path.isdir(os.path.join(TEMP_DOWNLOAD_DIRECTORY, head)):
+        if head and not os.path.isdir(
+            os.path.join(
+                TEMP_DOWNLOAD_DIRECTORY,
+                head)):
             os.makedirs(os.path.join(TEMP_DOWNLOAD_DIRECTORY, head))
             file_name = os.path.join(head, tail)
         downloaded_file_name = TEMP_DOWNLOAD_DIRECTORY + "" + file_name
@@ -64,10 +67,11 @@ async def download(target_file):
                     f"{progress_str}"
                     f"`Size:` {humanbytes(downloaded)} of {humanbytes(total_length)}"
                     f"`Speed:` {speed}"
-                    f"\n`ETA:` {estimated_total_time}"
-                )
+                    f"\n`ETA:` {estimated_total_time}")
 
-                if round(diff % 10.00) == 0 and current_message != display_message:
+                if round(
+                        diff %
+                        10.00) == 0 and current_message != display_message:
                     await target_file.edit(current_message)
                     display_message = current_message
             except Exception as e:
@@ -199,25 +203,22 @@ async def upload(u_event):
 
 def get_video_thumb(file, output=None, width=90):
     metadata = extractMetadata(createParser(file))
-    popen = subprocess.Popen(
-        [
-            "ffmpeg",
-            "-i",
-            file,
-            "-ss",
-            str(
-                int((0, metadata.get("duration").seconds)[metadata.has("duration")] / 2)
-            ),
-            "-filter:v",
-            "scale={}:-1".format(width),
-            "-vframes",
-            "1",
-            output,
-        ],
-        shell=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.DEVNULL,
-    )
+    popen = subprocess.Popen(["ffmpeg",
+                              "-i",
+                              file,
+                              "-ss",
+                              str(int((0,
+                                       metadata.get("duration").seconds)[metadata.has("duration")] / 2)),
+                              "-filter:v",
+                              "scale={}:-1".format(width),
+                              "-vframes",
+                              "1",
+                              output,
+                              ],
+                             shell=True,
+                             stdout=subprocess.PIPE,
+                             stderr=subprocess.DEVNULL,
+                             )
     if not popen.returncode and os.path.lexists(file):
         return output
     return None
@@ -236,7 +237,8 @@ def extract_w_h(file):
     ]
     # https://stackoverflow.com/a/11236144/4723940
     try:
-        t_response = subprocess.check_output(command_to_run, stderr=subprocess.STDOUT)
+        t_response = subprocess.check_output(
+            command_to_run, stderr=subprocess.STDOUT)
     except subprocess.CalledProcessError as exc:
         LOGS.warning(exc)
     else:

@@ -42,7 +42,9 @@ async def get_readable_time(seconds: int) -> str:
 
     while count < 4:
         count += 1
-        remainder, result = divmod(seconds, 60) if count < 3 else divmod(seconds, 24)
+        remainder, result = divmod(
+            seconds, 60) if count < 3 else divmod(
+            seconds, 24)
         if seconds == 0 and remainder == 0:
             break
         time_list.append(int(result))
@@ -73,8 +75,10 @@ async def psu(event):
     softw += f"`Boot Time: {bt.day}/{bt.month}/{bt.year}  {bt.hour}:{bt.minute}:{bt.second}`\n"
     # CPU Cores
     cpuu = "**CPU Info**\n"
-    cpuu += "`Physical cores   : " + str(psutil.cpu_count(logical=False)) + "`\n"
-    cpuu += "`Total cores      : " + str(psutil.cpu_count(logical=True)) + "`\n"
+    cpuu += "`Physical cores   : " + \
+        str(psutil.cpu_count(logical=False)) + "`\n"
+    cpuu += "`Total cores      : " + \
+        str(psutil.cpu_count(logical=True)) + "`\n"
     # CPU frequencies
     cpufreq = psutil.cpu_freq()
     cpuu += f"`Max Frequency    : {cpufreq.max:.2f}Mhz`\n"
@@ -124,7 +128,8 @@ async def sysdetails(sysd):
             )
 
             stdout, stderr = await fetch.communicate()
-            result = str(stdout.decode().strip()) + str(stderr.decode().strip())
+            result = str(stdout.decode().strip()) + \
+                str(stderr.decode().strip())
 
             await sysd.edit("`" + result + "`")
         except FileNotFoundError:
@@ -248,19 +253,18 @@ async def amireallyalivereset(ureset):
     await ureset.edit("`" "Successfully reset user for alive!" "`")
 
 
-CMD_HELP.update(
-    {
-        "sysd": ">`.sysd`"
-        "\nUsage: Shows system information using neofetch.\n\n"
-        ">`.spc`"
-        "\nUsage: Show system specification.",
-        "botver": ">`.botver`" "\nUsage: Shows the userbot version.",
-        "pip": ">`.pip <module(s)>`" "\nUsage: Does a search of pip modules(s).",
-        "alive": ">`.alive`"
-        "\nUsage: Type .alive to see wether your bot is working or not."
-        "\n\n>`.aliveu <text>`"
-        "\nUsage: Changes the 'user' in alive to the text you want."
-        "\n\n>`.resetalive`"
-        "\nUsage: Resets the user to default.",
-    }
-)
+CMD_HELP.update({"sysd": ">`.sysd`"
+                 "\nUsage: Shows system information using neofetch.\n\n"
+                 ">`.spc`"
+                 "\nUsage: Show system specification.",
+                 "botver": ">`.botver`"
+                 "\nUsage: Shows the userbot version.",
+                 "pip": ">`.pip <module(s)>`"
+                 "\nUsage: Does a search of pip modules(s).",
+                 "alive": ">`.alive`"
+                 "\nUsage: Type .alive to see wether your bot is working or not."
+                 "\n\n>`.aliveu <text>`"
+                 "\nUsage: Changes the 'user' in alive to the text you want."
+                 "\n\n>`.resetalive`"
+                 "\nUsage: Resets the user to default.",
+                 })

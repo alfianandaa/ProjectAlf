@@ -73,7 +73,8 @@ async def add_note(fltr):
         return await fltr.edit(success.format("added", keyword))
 
 
-@register(pattern=r"#\w*", disable_edited=True, disable_errors=True, ignore_unsafe=True)
+@register(pattern=r"#\w*", disable_edited=True,
+          disable_errors=True, ignore_unsafe=True)
 async def incom_note(getnt):
     try:
         if not (await getnt.get_sender()).bot:
@@ -141,6 +142,4 @@ CMD_HELP.update(
         "\nUsage: Deletes the specified note."
         "\n\n>`.rmbotnotes <marie/rose>`"
         "\nUsage: Removes all notes of admin bots"
-        " (Currently supported: Marie, Rose and their clones.) in the chat."
-    }
-)
+        " (Currently supported: Marie, Rose and their clones.) in the chat."})

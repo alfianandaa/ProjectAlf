@@ -149,8 +149,7 @@ async def moni(event):
             currency_from = input_sgra[1].upper()
             currency_to = input_sgra[2].upper()
             request_url = "https://api.exchangeratesapi.io/latest?base={}".format(
-                currency_from
-            )
+                currency_from)
             current_response = get(request_url).json()
             if currency_to in current_response["rates"]:
                 current_rate = float(current_response["rates"][currency_to])
@@ -331,13 +330,15 @@ async def imdb(e):
         movie_name = e.pattern_match.group(1)
         remove_space = movie_name.split(" ")
         final_name = "+".join(remove_space)
-        page = get("https://www.imdb.com/find?ref_=nv_sr_fn&q=" + final_name + "&s=all")
+        page = get(
+            "https://www.imdb.com/find?ref_=nv_sr_fn&q=" +
+            final_name +
+            "&s=all")
         soup = BeautifulSoup(page.content, "lxml")
         odds = soup.findAll("tr", "odd")
         mov_title = odds[0].findNext("td").findNext("td").text
-        mov_link = (
-            "http://www.imdb.com/" + odds[0].findNext("td").findNext("td").a["href"]
-        )
+        mov_link = ("http://www.imdb.com/" +
+                    odds[0].findNext("td").findNext("td").a["href"])
         page1 = get(mov_link)
         soup = BeautifulSoup(page1.content, "lxml")
         if soup.find("div", "poster"):
@@ -369,7 +370,8 @@ async def imdb(e):
             actors.pop()
             stars = actors[0] + "," + actors[1] + "," + actors[2]
         if soup.find("div", "inline canwrap"):
-            story_line = soup.find("div", "inline canwrap").findAll("p")[0].text
+            story_line = soup.find(
+                "div", "inline canwrap").findAll("p")[0].text
         else:
             story_line = "Not available"
         info = soup.findAll("div", "txt-block")
@@ -638,21 +640,25 @@ CMD_HELP.update(
         "carbon": ">`.carbon <text> [or reply]`"
         "\nUsage: Beautify your code using carbon.now.sh\n"
         "Use .crblang <text> to set language for your code.",
-        "google": ">`.google <query>`" "\nUsage: Does a search on Google.",
-        "wiki": ">`.wiki <query>`" "\nUsage: Does a search on Wikipedia.",
-        "ud": ">`.ud <query>`" "\nUsage: Does a search on Urban Dictionary.",
+        "google": ">`.google <query>`"
+        "\nUsage: Does a search on Google.",
+        "wiki": ">`.wiki <query>`"
+        "\nUsage: Does a search on Wikipedia.",
+        "ud": ">`.ud <query>`"
+        "\nUsage: Does a search on Urban Dictionary.",
         "tts": ">`.tts <text> [or reply]`"
         "\nUsage: Translates text to speech for the language which is set."
         "\nUse >`.lang tts <language code>` to set language for tts. (Default is English.)",
         "trt": ">`.trt <text> [or reply]`"
         "\nUsage: Translates text to the language which is set."
         "\nUse >`.lang trt <language code>` to set language for trt. (Default is English)",
-        "yt": ">`.yt <text>`" "\nUsage: Does a YouTube search.",
-        "imdb": ">`.imdb <movie-name>`" "\nUsage: Shows movie info and other stuff.",
+        "yt": ">`.yt <text>`"
+        "\nUsage: Does a YouTube search.",
+        "imdb": ">`.imdb <movie-name>`"
+        "\nUsage: Shows movie info and other stuff.",
         "rip": ">`.aud <url> or vid <url>`"
         "\nUsage: Download videos and songs from YouTube "
         "(and [many other sites](https://ytdl-org.github.io/youtube-dl/supportedsites.html)).",
         "wolfram": ".wolfram <query>"
         "\nUsage: Get answers to questions using WolframAlpha Spoken Results API.",
-    }
-)
+    })

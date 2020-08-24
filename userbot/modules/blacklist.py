@@ -88,14 +88,10 @@ async def on_delete_blacklist(rmbl):
         await rmbl.edit("`Blacklist` **{}** `was deleted successfully`".format(text))
 
 
-CMD_HELP.update(
-    {
-        "blacklist": ">`.listbl`"
-        "\nUsage: Lists all active userbot blacklist in a chat."
-        "\n\n>`.addbl <keyword>`"
-        "\nUsage: Saves the message to the 'blacklist keyword'."
-        "\nThe bot will delete to the message whenever 'blacklist keyword' is mentioned."
-        "\n\n>`.rmbl <keyword>`"
-        "\nUsage: Stops the specified blacklist."
-    }
-)
+CMD_HELP.update({"blacklist": ">`.listbl`"
+                 "\nUsage: Lists all active userbot blacklist in a chat."
+                 "\n\n>`.addbl <keyword>`"
+                 "\nUsage: Saves the message to the 'blacklist keyword'."
+                 "\nThe bot will delete to the message whenever 'blacklist keyword' is mentioned."
+                 "\n\n>`.rmbl <keyword>`"
+                 "\nUsage: Stops the specified blacklist."})

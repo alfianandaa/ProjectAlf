@@ -181,6 +181,4 @@ CMD_HELP.update(
         "\n\n>`.checkwelcome`"
         "\nUsage: Check whether you have a welcome note in the chat."
         "\n\n>`.rmwelcome`"
-        "\nUsage: Deletes the welcome note for the current chat."
-    }
-)
+        "\nUsage: Deletes the welcome note for the current chat."})

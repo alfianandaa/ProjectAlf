@@ -15,8 +15,8 @@ from userbot import BOT_TOKEN, BOT_USERNAME
 from userbot.events import register
 
 logging.basicConfig(
-    format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s", level=logging.WARNING
-)
+    format="[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s",
+    level=logging.WARNING)
 
 
 @register(outgoing=True, pattern="^.helpme")

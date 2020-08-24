@@ -144,7 +144,8 @@ async def dyno_usage(dyno):
             for apps in Apps:
                 if apps.get("app_uuid") == app.id:
                     AppQuotaUsed = apps.get("quota_used") / 60
-                    AppPercentage = math.floor(apps.get("quota_used") * 100 / quota)
+                    AppPercentage = math.floor(
+                        apps.get("quota_used") * 100 / quota)
                     break
             else:
                 AppQuotaUsed = 0
@@ -180,31 +181,23 @@ async def _(dyno):
         log.write(app.get_log())
     fd = codecs.open("logs.txt", "r", encoding="utf-8")
     data = fd.read()
-    key = (
-        requests.post("https://nekobin.com/api/documents", json={"content": data})
-        .json()
-        .get("result")
-        .get("key")
-    )
+    key = (requests.post("https://nekobin.com/api/documents",
+                         json={"content": data}) .json() .get("result") .get("key"))
     url = f"https://nekobin.com/raw/{key}"
     await dyno.edit(f"`Here the heroku logs:`\n\nPasted to: [Nekobin]({url})")
     return os.remove("logs.txt")
 
 
-CMD_HELP.update(
-    {
-        "heroku": ">.`usage`"
-        "\nUsage: Check your heroku dyno hours remaining"
-        "\n\n>`.set var <NEW VAR> <VALUE>`"
-        "\nUsage: add new variable or update existing value variable"
-        "\n!!! WARNING !!!, after setting a variable the bot will restarted"
-        "\n\n>`.get var or .get var <VAR>`"
-        "\nUsage: get your existing varibles, use it only on your private group!"
-        "\nThis returns all of your private information, please be caution..."
-        "\n\n>`.del var <VAR>`"
-        "\nUsage: delete existing variable"
-        "\n!!! WARNING !!!, after deleting variable the bot will restarted"
-        "\n\n>`.logs`"
-        "\nUsage: Get heroku dyno logs"
-    }
-)
+CMD_HELP.update({"heroku": ">.`usage`"
+                 "\nUsage: Check your heroku dyno hours remaining"
+                 "\n\n>`.set var <NEW VAR> <VALUE>`"
+                 "\nUsage: add new variable or update existing value variable"
+                 "\n!!! WARNING !!!, after setting a variable the bot will restarted"
+                 "\n\n>`.get var or .get var <VAR>`"
+                 "\nUsage: get your existing varibles, use it only on your private group!"
+                 "\nThis returns all of your private information, please be caution..."
+                 "\n\n>`.del var <VAR>`"
+                 "\nUsage: delete existing variable"
+                 "\n!!! WARNING !!!, after deleting variable the bot will restarted"
+                 "\n\n>`.logs`"
+                 "\nUsage: Get heroku dyno logs"})
