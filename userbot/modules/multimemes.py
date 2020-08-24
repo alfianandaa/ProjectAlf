@@ -8,19 +8,19 @@
 # Based code + improve from AdekMaulana and aidilaryanto
 
 import asyncio
-import re
-import random
 import io
-from random import randint, uniform
-from telethon import events
-from PIL import Image, ImageEnhance, ImageOps
 import os
-from userbot.events import register
+import random
+import re
+from random import randint, uniform
+
+from PIL import Image, ImageEnhance, ImageOps
+from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.types import (
-    DocumentAttributeFilename,
-    MessageMediaPhoto)
-from userbot import bot, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
+from telethon.tl.types import DocumentAttributeFilename, MessageMediaPhoto
+
+from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
+from userbot.events import register
 
 THUMB_IMAGE_PATH = "./thumb_image.jpg"
 
@@ -37,7 +37,8 @@ EMOJI_PATTERN = re.compile(
     "\U0001FA00-\U0001FA6F"  # Chess Symbols
     "\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
     "\U00002702-\U000027B0"  # Dingbats
-    "]+")
+    "]+"
+)
 
 
 @register(outgoing=True, pattern="^.mmf(?: |$)(.*)")
@@ -45,7 +46,9 @@ async def mim(event):
     if event.fwd_from:
         return
     if not event.reply_to_msg_id:
-        await event.edit("`Syntax: reply to an image with .mmf` 'text on top' ; 'text on bottom' ")
+        await event.edit(
+            "`Syntax: reply to an image with .mmf` 'text on top' ; 'text on bottom' "
+        )
         return
     reply_message = await event.get_reply_message()
     if not reply_message.media:
@@ -57,7 +60,9 @@ async def mim(event):
         await event.edit("```Reply to actual users message.```")
         return
     else:
-        await event.edit("```Transfiguration Time! Mwahaha Memifying this image! (」ﾟﾛﾟ)｣ ```")
+        await event.edit(
+            "```Transfiguration Time! Mwahaha Memifying this image! (」ﾟﾛﾟ)｣ ```"
+        )
         await asyncio.sleep(5)
 
     async with bot.conversation("@MemeAutobot") as bot_conv:
@@ -73,9 +78,13 @@ async def mim(event):
             await event.reply("```Please unblock @MemeAutobot and try again```")
             return
         if response.text.startswith("Forward"):
-            await event.edit("```can you kindly disable your forward privacy settings for good, Nibba?```")
+            await event.edit(
+                "```can you kindly disable your forward privacy settings for good, Nibba?```"
+            )
         if "Okay..." in response.text:
-            await event.edit("```🛑 🤨 NANI?! This is not an image! This will take sum tym to convert to image... UwU 🧐 🛑```")
+            await event.edit(
+                "```🛑 🤨 NANI?! This is not an image! This will take sum tym to convert to image... UwU 🧐 🛑```"
+            )
             thumb = None
             if os.path.exists(THUMB_IMAGE_PATH):
                 thumb = THUMB_IMAGE_PATH
@@ -86,11 +95,9 @@ async def mim(event):
                 file_name = "meme.png"
                 reply_message = await event.get_reply_message()
                 to_download_directory = TEMP_DOWNLOAD_DIRECTORY
-                downloaded_file_name = os.path.join(
-                    to_download_directory, file_name)
+                downloaded_file_name = os.path.join(to_download_directory, file_name)
                 downloaded_file_name = await bot.download_media(
-                    reply_message,
-                    downloaded_file_name,
+                    reply_message, downloaded_file_name,
                 )
                 if os.path.exists(downloaded_file_name):
                     await bot.send_file(
@@ -107,11 +114,9 @@ async def mim(event):
             response = await bot_conv.get_response()
             the_download_directory = TEMP_DOWNLOAD_DIRECTORY
             files_name = "memes.webp"
-            download_file_name = os.path.join(
-                the_download_directory, files_name)
+            download_file_name = os.path.join(the_download_directory, files_name)
             await bot.download_media(
-                response.media,
-                download_file_name,
+                response.media, download_file_name,
             )
             requires_file_name = TEMP_DOWNLOAD_DIRECTORY + "memes.webp"
             await bot.send_file(  # pylint:disable=E0602
@@ -124,7 +129,9 @@ async def mim(event):
             # await bot.send_message(event.chat_id, "`☠️☠️Ah Shit... Here we go
             # Again!🔥🔥`")
         elif not is_message_image(reply_message):
-            await event.edit("Invalid message type. Plz choose right message type u NIBBA.")
+            await event.edit(
+                "Invalid message type. Plz choose right message type u NIBBA."
+            )
             return
         else:
             await bot.send_file(event.chat_id, response.media)
@@ -169,9 +176,8 @@ async def quotess(qotli):
     async with bot.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(
-                    incoming=True,
-                    from_users=1031952739))
+                events.NewMessage(incoming=True, from_users=1031952739)
+            )
             msg = await bot.forward_messages(chat, reply_message)
             response = await response
             await bot.send_read_acknowledge(conv.chat_id)
@@ -179,16 +185,17 @@ async def quotess(qotli):
             await qotli.reply("```Please unblock @QuotLyBot and try again```")
             return
         if response.text.startswith("Hi!"):
-            await qotli.edit("```Can you kindly disable your forward privacy settings for good?```")
+            await qotli.edit(
+                "```Can you kindly disable your forward privacy settings for good?```"
+            )
         else:
             await qotli.delete()
             await bot.forward_messages(qotli.chat_id, response.message)
             await bot.send_read_acknowledge(qotli.chat_id)
-            await qotli.client.delete_messages(conv.chat_id,
-                                               [msg.id, response.id])
+            await qotli.client.delete_messages(conv.chat_id, [msg.id, response.id])
 
 
-@register(outgoing=True, pattern=r'^.hz(:? |$)(.*)?')
+@register(outgoing=True, pattern=r"^.hz(:? |$)(.*)?")
 async def hazz(hazmat):
     await hazmat.edit("`Sending information...`")
     level = hazmat.pattern_match.group(2)
@@ -213,15 +220,11 @@ async def hazz(hazmat):
             msg = await conv.send_message(reply_message)
             if level:
                 m = f"/hazmat {level}"
-                msg_reply = await conv.send_message(
-                    m,
-                    reply_to=msg.id)
+                msg_reply = await conv.send_message(m, reply_to=msg.id)
                 r = await conv.get_response()
             elif reply_message.gif:
                 m = "/hazmat"
-                msg_reply = await conv.send_message(
-                    m,
-                    reply_to=msg.id)
+                msg_reply = await conv.send_message(m, reply_to=msg.id)
                 r = await conv.get_response()
             response = await conv.get_response()
             await bot.send_read_acknowledge(conv.chat_id)
@@ -231,32 +234,30 @@ async def hazz(hazmat):
         if response.text.startswith("I can't"):
             await hazmat.edit("`Can't handle this GIF...`")
             await hazmat.client.delete_messages(
-                conv.chat_id,
-                [msg.id, response.id, r.id, msg_reply.id])
+                conv.chat_id, [msg.id, response.id, r.id, msg_reply.id]
+            )
             return
         else:
             downloaded_file_name = await hazmat.client.download_media(
-                response.media,
-                TEMP_DOWNLOAD_DIRECTORY
+                response.media, TEMP_DOWNLOAD_DIRECTORY
             )
             await hazmat.client.send_file(
                 hazmat.chat_id,
                 downloaded_file_name,
                 force_document=False,
-                reply_to=message_id_to_reply
+                reply_to=message_id_to_reply,
             )
             if msg_reply is not None:
                 await hazmat.client.delete_messages(
-                    conv.chat_id,
-                    [msg.id, msg_reply.id, r.id, response.id])
+                    conv.chat_id, [msg.id, msg_reply.id, r.id, response.id]
+                )
             else:
-                await hazmat.client.delete_messages(conv.chat_id,
-                                                    [msg.id, response.id])
+                await hazmat.client.delete_messages(conv.chat_id, [msg.id, response.id])
     await hazmat.delete()
     return os.remove(downloaded_file_name)
 
 
-@register(outgoing=True, pattern=r'^.df(:? |$)([1-8])?')
+@register(outgoing=True, pattern=r"^.df(:? |$)([1-8])?")
 async def fryerrr(fry):
     await fry.edit("`Sending information...`")
     level = fry.pattern_match.group(2)
@@ -279,9 +280,7 @@ async def fryerrr(fry):
             msg = await conv.send_message(reply_message)
             if level:
                 m = f"/deepfry {level}"
-                msg_level = await conv.send_message(
-                    m,
-                    reply_to=msg.id)
+                msg_level = await conv.send_message(m, reply_to=msg.id)
                 r = await conv.get_response()
             response = await conv.get_response()
             await bot.send_read_acknowledge(conv.chat_id)
@@ -292,24 +291,22 @@ async def fryerrr(fry):
             await fry.edit("`Please disable your forward privacy setting...`")
         else:
             downloaded_file_name = await fry.client.download_media(
-                response.media,
-                TEMP_DOWNLOAD_DIRECTORY
+                response.media, TEMP_DOWNLOAD_DIRECTORY
             )
             await fry.client.send_file(
                 fry.chat_id,
                 downloaded_file_name,
                 force_document=False,
-                reply_to=message_id_to_reply
+                reply_to=message_id_to_reply,
             )
             try:
                 msg_level
             except NameError:
-                await fry.client.delete_messages(conv.chat_id,
-                                                 [msg.id, response.id])
+                await fry.client.delete_messages(conv.chat_id, [msg.id, response.id])
             else:
                 await fry.client.delete_messages(
-                    conv.chat_id,
-                    [msg.id, response.id, r.id, msg_level.id])
+                    conv.chat_id, [msg.id, response.id, r.id, msg_level.id]
+                )
     await fry.delete()
     return os.remove(downloaded_file_name)
 
@@ -356,7 +353,7 @@ async def deepfryer(event):
 async def deepfry(img: Image) -> Image:
     colours = (
         (randint(50, 200), randint(40, 170), randint(40, 190)),
-        (randint(190, 255), randint(170, 240), randint(180, 250))
+        (randint(190, 255), randint(170, 240), randint(180, 250)),
     )
 
     img = img.copy().convert("RGB")
@@ -364,12 +361,18 @@ async def deepfry(img: Image) -> Image:
     # Crush image to hell and back
     img = img.convert("RGB")
     width, height = img.width, img.height
-    img = img.resize((int(width ** uniform(0.8, 0.9)),
-                      int(height ** uniform(0.8, 0.9))), resample=Image.LANCZOS)
-    img = img.resize((int(width ** uniform(0.85, 0.95)),
-                      int(height ** uniform(0.85, 0.95))), resample=Image.BILINEAR)
-    img = img.resize((int(width ** uniform(0.89, 0.98)),
-                      int(height ** uniform(0.89, 0.98))), resample=Image.BICUBIC)
+    img = img.resize(
+        (int(width ** uniform(0.8, 0.9)), int(height ** uniform(0.8, 0.9))),
+        resample=Image.LANCZOS,
+    )
+    img = img.resize(
+        (int(width ** uniform(0.85, 0.95)), int(height ** uniform(0.85, 0.95))),
+        resample=Image.BILINEAR,
+    )
+    img = img.resize(
+        (int(width ** uniform(0.89, 0.98)), int(height ** uniform(0.89, 0.98))),
+        resample=Image.BICUBIC,
+    )
     img = img.resize((width, height), resample=Image.BICUBIC)
     img = ImageOps.posterize(img, randint(3, 7))
 
@@ -392,10 +395,17 @@ async def check_media(reply_message):
         if reply_message.photo:
             data = reply_message.photo
         elif reply_message.document:
-            if DocumentAttributeFilename(
-                    file_name='AnimatedSticker.tgs') in reply_message.media.document.attributes:
+            if (
+                DocumentAttributeFilename(file_name="AnimatedSticker.tgs")
+                in reply_message.media.document.attributes
+            ):
                 return False
-            if reply_message.gif or reply_message.video or reply_message.audio or reply_message.voice:
+            if (
+                reply_message.gif
+                or reply_message.video
+                or reply_message.audio
+                or reply_message.voice
+            ):
                 return False
             data = reply_message.media.document
         else:
@@ -420,16 +430,19 @@ async def waifu(animu):
             return
     animus = [20, 32, 33, 40, 41, 42, 58]
     sticcers = await bot.inline_query(
-        "stickerizerbot", f"#{random.choice(animus)}{(deEmojify(text))}")
-    await sticcers[0].click(animu.chat_id,
-                            reply_to=animu.reply_to_msg_id,
-                            silent=True if animu.is_reply else False,
-                            hide_via=True)
+        "stickerizerbot", f"#{random.choice(animus)}{(deEmojify(text))}"
+    )
+    await sticcers[0].click(
+        animu.chat_id,
+        reply_to=animu.reply_to_msg_id,
+        silent=True if animu.is_reply else False,
+        hide_via=True,
+    )
     await animu.delete()
 
 
 def deEmojify(inputString: str) -> str:
-    return re.sub(EMOJI_PATTERN, '', inputString)
+    return re.sub(EMOJI_PATTERN, "", inputString)
 
 
 @register(outgoing=True, pattern=r"^\.sg(?: |$)(.*)")
@@ -454,7 +467,9 @@ async def lastname(steal):
                 r = await conv.get_response()
                 response = await conv.get_response()
             except YouBlockedUserError:
-                await steal.reply("```Please unblock @sangmatainfo_bot and try again```")
+                await steal.reply(
+                    "```Please unblock @sangmatainfo_bot and try again```"
+                )
                 return
             if r.text.startswith("Name"):
                 respond = await conv.get_response()
@@ -463,8 +478,9 @@ async def lastname(steal):
                     conv.chat_id, [msg.id, r.id, response.id, respond.id]
                 )
                 return
-            if response.text.startswith(
-                    "No records") or r.text.startswith("No records"):
+            if response.text.startswith("No records") or r.text.startswith(
+                "No records"
+            ):
                 await steal.edit("```No records found for this user```")
                 await steal.client.delete_messages(
                     conv.chat_id, [msg.id, r.id, response.id]
@@ -480,41 +496,42 @@ async def lastname(steal):
         return await steal.edit("`Error: `@SangMataInfo_bot` is not responding!.`")
 
 
-CMD_HELP.update({
-    "memify":
-        ">`.mmf texttop ; textbottom`"
+CMD_HELP.update(
+    {
+        "memify": ">`.mmf texttop ; textbottom`"
         "\nUsage: Reply a sticker/image/gif and send with cmd."
-})
+    }
+)
 
-CMD_HELP.update({
-    "sangmata":
-        ".sg \
+CMD_HELP.update(
+    {
+        "sangmata": ".sg \
           \nUsage: Steal ur or friend name."
-})
+    }
+)
 
-CMD_HELP.update({
-    "quotly":
-        ">`.q`"
-        "\nUsage: Enhance ur text to sticker."
-})
+CMD_HELP.update({"quotly": ">`.q`" "\nUsage: Enhance ur text to sticker."})
 
-CMD_HELP.update({
-    "hazmat":
-        ">`.hz or .hz [flip, x2, rotate (degree), background (number), black]`"
+CMD_HELP.update(
+    {
+        "hazmat": ">`.hz or .hz [flip, x2, rotate (degree), background (number), black]`"
         "\nUsage: Reply to a image / sticker to suit up!"
-})
+    }
+)
 
-CMD_HELP.update({
-    "deepfry":
-        ">`.df or .df [level(1-8)]`"
+CMD_HELP.update(
+    {
+        "deepfry": ">`.df or .df [level(1-8)]`"
         "\nUsage: deepfry image/sticker from the reply."
         "\n@image_deepfrybot"
         "\n\n>`.deepfry`"
         "\nUsage: krispi image"
-})
+    }
+)
 
-CMD_HELP.update({
-    "waifu":
-        ">`.waifu`"
+CMD_HELP.update(
+    {
+        "waifu": ">`.waifu`"
         "\nUsage: Enchance your text with beautiful anime girl templates."
-})
+    }
+)

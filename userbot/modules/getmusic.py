@@ -4,23 +4,28 @@
 
 import asyncio
 import glob
-from bs4 import BeautifulSoup
-import requests
-import deezloader
 import os
 import shutil
 import time
 
-from telethon import events
-from pylast import User
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from userbot import bot, CMD_HELP, DEEZER_ARL_TOKEN, TEMP_DOWNLOAD_DIRECTORY, LASTFM_USERNAME, lastfm
+import deezloader
+import requests
+from bs4 import BeautifulSoup
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
-from telethon.tl.types import DocumentAttributeAudio
-from telethon.tl.types import DocumentAttributeVideo
+from pylast import User
+from telethon import events
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 
-
+from userbot import (
+    CMD_HELP,
+    DEEZER_ARL_TOKEN,
+    LASTFM_USERNAME,
+    TEMP_DOWNLOAD_DIRECTORY,
+    bot,
+    lastfm,
+)
 from userbot.events import register
 from userbot.utils import progress
 
@@ -33,9 +38,8 @@ def getmusicvideo(cat):
         "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
     }
     html = requests.get(
-        "https://www.youtube.com/results?search_query=" +
-        search,
-        headers=headers).text
+        "https://www.youtube.com/results?search_query=" + search, headers=headers
+    ).text
     soup = BeautifulSoup(html, "html.parser")
     for link in soup.find_all("a"):
         if "/watch?v=" in link.get("href"):
@@ -167,28 +171,26 @@ async def _(event):
         await event.edit("`Downloading music taking some times,  Stay Tuned.....`")
         try:
             response = conv.wait_event(
-                events.NewMessage(
-                    incoming=True,
-                    from_users=752979930))
+                events.NewMessage(incoming=True, from_users=752979930)
+            )
             msg = await bot.send_message(chat, link)
             respond = await response
             res = conv.wait_event(
-                events.NewMessage(
-                    incoming=True,
-                    from_users=752979930))
+                events.NewMessage(incoming=True, from_users=752979930)
+            )
             r = await res
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await event.reply("```Please unblock @SpotifyMusicDownloaderBot and try again```")
+            await event.reply(
+                "```Please unblock @SpotifyMusicDownloaderBot and try again```"
+            )
             return
         await bot.forward_messages(event.chat_id, respond.message)
-    await event.client.delete_messages(conv.chat_id,
-                                       [msg.id, r.id, respond.id])
+    await event.client.delete_messages(conv.chat_id, [msg.id, r.id, respond.id])
     await event.delete()
 
 
-@register(outgoing=True,
-          pattern=r"^\.deez (.+?|) (FLAC|MP3\_320|MP3\_256|MP3\_128)")
+@register(outgoing=True, pattern=r"^\.deez (.+?|) (FLAC|MP3\_320|MP3\_256|MP3\_128)")
 async def _(event):
     if event.fwd_from:
         return
@@ -200,7 +202,8 @@ async def _(event):
         "wrong_cmd_syntax": "bruh, now i think how far should we go. please terminate my Session 🥺",
         "server_error": "We're experiencing technical difficulties.",
         "processing": "`Downloading..`",
-        "uploading": "`Uploading...`"}
+        "uploading": "`Uploading...`",
+    }
 
     ARL_TOKEN = DEEZER_ARL_TOKEN
 
@@ -231,7 +234,7 @@ async def _(event):
                 quality=required_qty,
                 recursive_quality=True,
                 recursive_download=True,
-                not_interface=True
+                not_interface=True,
             )
             await event.edit(strings["uploading"])
             await upload_track(required_track, event)
@@ -246,7 +249,7 @@ async def _(event):
                 recursive_quality=True,
                 recursive_download=True,
                 not_interface=True,
-                zips=False
+                zips=False,
             )
             for required_track in reqd_albums:
                 await event.edit(strings["uploading"])
@@ -262,7 +265,7 @@ async def _(event):
                 quality=required_qty,
                 recursive_quality=True,
                 recursive_download=True,
-                not_interface=True
+                not_interface=True,
             )
             await upload_track(required_track, event)
             await event.edit(strings["uploading"])
@@ -277,7 +280,7 @@ async def _(event):
                 recursive_quality=True,
                 recursive_download=True,
                 not_interface=True,
-                zips=False
+                zips=False,
             )
             for required_track in reqd_albums:
                 await event.edit(strings["uploading"])
@@ -306,7 +309,7 @@ async def upload_track(track_location, message):
             voice=False,
             title=title,
             performer=performer,
-            waveform=None
+            waveform=None,
         )
     ]
     supports_streaming = True
@@ -323,17 +326,19 @@ async def upload_track(track_location, message):
     )
     os.remove(track_location)
 
-CMD_HELP.update({
-    "getmusic":
-    ">`.netease <Artist - Song Title>`"
-    "\nUsage: Download music with @WooMaiBot"
-    "\n\n>`.netease now`"
-    "\nUsage: Download current LastFM scrobble use `@WooMaiBot`."
-    "\n\n>`.vsong` **Artist - Song Title**"
-    "\nUsage: Finding and uploading videoclip."
-    "\n\n>`.smd <Artist - Song Title>`"
-    "\nUsage: Download music from Spotify"
-    "\n\n>`.deez <spotify/deezer link> FORMAT`"
-    "\nUsage: Download music from deezer."
-    "\n*Format : `FLAC`, `MP3_320`, `MP3_256`, `MP3_128`."
-})
+
+CMD_HELP.update(
+    {
+        "getmusic": ">`.netease <Artist - Song Title>`"
+        "\nUsage: Download music with @WooMaiBot"
+        "\n\n>`.netease now`"
+        "\nUsage: Download current LastFM scrobble use `@WooMaiBot`."
+        "\n\n>`.vsong` **Artist - Song Title**"
+        "\nUsage: Finding and uploading videoclip."
+        "\n\n>`.smd <Artist - Song Title>`"
+        "\nUsage: Download music from Spotify"
+        "\n\n>`.deez <spotify/deezer link> FORMAT`"
+        "\nUsage: Download music from deezer."
+        "\n*Format : `FLAC`, `MP3_320`, `MP3_256`, `MP3_128`."
+    }
+)
