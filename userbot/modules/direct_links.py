@@ -53,76 +53,31 @@ async def direct_link_generator(request):
         reply = "`No links found!`"
         await request.edit(reply)
     for link in links:
-        if "drive.google.com" in link:
-            reply += gdrive(link)
-        elif "zippyshare.com" in link:
-            reply += zippy_share(link)
-        elif "mega." in link:
-            reply += mega_dl(link)
-        elif "yadi.sk" in link:
-            reply += yandex_disk(link)
-        elif "cloud.mail.ru" in link:
-            reply += cm_ru(link)
-        elif "mediafire.com" in link:
-            reply += mediafire(link)
-        elif "sourceforge.net" in link:
-            reply += sourceforge(link)
-        elif "osdn.net" in link:
-            reply += osdn(link)
-        elif "github.com" in link:
-            reply += github(link)
-        elif "androidfilehost.com" in link:
-            reply += androidfilehost(link)
+        if 'zippyshare.com' in link:
+            reply += await zippy_share(link)
+        elif 'yadi.sk' in link:
+            reply += await yandex_disk(link)
+        elif 'cloud.mail.ru' in link:
+            reply += await cm_ru(link)
+        elif 'mediafire.com' in link:
+            reply += await mediafire(link)
+        elif 'sourceforge.net' in link:
+            reply += await sourceforge(link)
+        elif 'osdn.net' in link:
+            reply += await osdn(link)
+        elif 'github.com' in link:
+            reply += await github(link)
+        elif 'androidfilehost.com' in link:
+            reply += await androidfilehost(link)
         else:
             reply += re.findall(r"\bhttps?://(.*?[^/]+)",
                                 link)[0] + "is not supported"
     await request.edit(reply)
 
 
-def gdrive(url: str) -> str:
-    drive = "https://drive.google.com"
-    try:
-        link = re.findall(r"\bhttps?://drive\.google\.com\S+", url)[0]
-    except IndexError:
-        reply = "`No Google drive links found`\n"
-        return reply
-    file_id = ""
-    reply = ""
-    if link.find("view") != -1:
-        file_id = link.split("/")[-2]
-    elif link.find("open?id=") != -1:
-        file_id = link.split("open?id=")[1].strip()
-    elif link.find("uc?id=") != -1:
-        file_id = link.split("uc?id=")[1].strip()
-    url = f"{drive}/uc?export=download&id={file_id}"
-    download = requests.get(url, stream=True, allow_redirects=False)
-    cookies = download.cookies
-    try:
-        # In case of small file size, Google downloads directly
-        dl_url = download.headers["location"]
-        if "accounts.google.com" in dl_url:  # non-public file
-            reply += "`Link is not public!`\n"
-            return reply
-        name = "Direct Download Link"
-    except KeyError:
-        # In case of download warning page
-        page = BeautifulSoup(download.content, "lxml")
-        export = drive + page.find("a", {"id": "uc-download-link"}).get("href")
-        name = page.find("span", {"class": "uc-name-size"}).text
-        response = requests.get(
-            export, stream=True, allow_redirects=False, cookies=cookies
-        )
-        dl_url = response.headers["location"]
-        if "accounts.google.com" in dl_url:
-            reply += "Link is not public!"
-            return reply
-    reply += f"[{name}]({dl_url})\n"
-    return reply
-
-
-def zippy_share(url: str) -> str:
-    reply = ""
-    dl_url = ""
+async def zippy_share(url: str) -> str:
+    reply = ''
+    dl_url = ''
     try:
         link = re.findall(r"\bhttps?://.*zippyshare\.com\S+", url)[0]
     except IndexError:
@@ -149,8 +104,8 @@ def zippy_share(url: str) -> str:
     return reply
 
 
-def yandex_disk(url: str) -> str:
-    reply = ""
+async def yandex_disk(url: str) -> str:
+    reply = ''
     try:
         link = re.findall(r"\bhttps?://.*yadi\.sk\S+", url)[0]
     except IndexError:
@@ -167,31 +122,8 @@ def yandex_disk(url: str) -> str:
     return reply
 
 
-def mega_dl(url: str) -> str:
-    reply = ""
-    try:
-        link = re.findall(r"\bhttps?://.*mega.*\.nz\S+", url)[0]
-    except IndexError:
-        reply = "`No MEGA.nz links found`\n"
-        return reply
-    cmd = f"bin/megadown -q -m {link}"
-    result = subprocess_run(cmd)
-    try:
-        data = json.loads(result[0])
-    except json.JSONDecodeError:
-        reply += "`Error: Can't extract the link`\n"
-        return reply
-    except IndexError:
-        return reply
-    dl_url = data["url"]
-    name = data["file_name"]
-    size = naturalsize(int(data["file_size"]))
-    reply += f"[{name} ({size})]({dl_url})\n"
-    return reply
-
-
-def cm_ru(url: str) -> str:
-    reply = ""
+async def cm_ru(url: str) -> str:
+    reply = ''
     try:
         link = re.findall(r"\bhttps?://.*cloud\.mail\.ru\S+", url)[0]
     except IndexError:
@@ -214,7 +146,7 @@ def cm_ru(url: str) -> str:
     return reply
 
 
-def mediafire(url: str) -> str:
+async def mediafire(url: str) -> str:
     try:
         link = re.findall(r"\bhttps?://.*mediafire\.com\S+", url)[0]
     except IndexError:
@@ -230,7 +162,7 @@ def mediafire(url: str) -> str:
     return reply
 
 
-def sourceforge(url: str) -> str:
+async def sourceforge(url: str) -> str:
     try:
         link = re.findall(r"\bhttps?://.*sourceforge\.net\S+", url)[0]
     except IndexError:
@@ -254,8 +186,8 @@ def sourceforge(url: str) -> str:
     return reply
 
 
-def osdn(url: str) -> str:
-    osdn_link = "https://osdn.net"
+async def osdn(url: str) -> str:
+    osdn_link = 'https://osdn.net'
     try:
         link = re.findall(r"\bhttps?://.*osdn\.net\S+", url)[0]
     except IndexError:
@@ -278,7 +210,7 @@ def osdn(url: str) -> str:
     return reply
 
 
-def github(url: str) -> str:
+async def github(url: str) -> str:
     try:
         link = re.findall(r"\bhttps?://.*github\.com.*releases\S+", url)[0]
     except IndexError:
@@ -296,7 +228,7 @@ def github(url: str) -> str:
     return reply
 
 
-def androidfilehost(url: str) -> str:
+async def androidfilehost(url: str) -> str:
     try:
         link = re.findall(r"\bhttps?://.*androidfilehost.*fid.*\S+", url)[0]
     except IndexError:
@@ -304,8 +236,8 @@ def androidfilehost(url: str) -> str:
         return reply
     fid = re.findall(r"\?fid=(.*)", link)[0]
     session = requests.Session()
-    user_agent = useragent()
-    headers = {"user-agent": user_agent}
+    user_agent = await useragent()
+    headers = {'user-agent': user_agent}
     res = session.get(link, headers=headers, allow_redirects=True)
     headers = {
         "origin": "https://androidfilehost.com",
@@ -346,7 +278,7 @@ def androidfilehost(url: str) -> str:
     return reply
 
 
-def useragent():
+async def useragent():
     useragents = BeautifulSoup(
         requests.get(
             "https://developers.whatismybrowser.com/"
