@@ -186,6 +186,8 @@ WATCH_COUNTRY = os.environ.get("WATCH_COUNTRY") or None
 BOT_TOKEN = os.environ.get("BOT_TOKEN") or None
 BOT_USERNAME = os.environ.get("BOT_USERNAME") or None
 
+# Uptobox
+USR_TOKEN = os.environ.get("USR_TOKEN_UPTOBOX", None)
 
 # Setting Up CloudMail.ru and MEGA.nz extractor binaries,
 # and giving them correct perms to work properly.

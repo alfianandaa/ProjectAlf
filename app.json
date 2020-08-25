@@ -178,6 +178,10 @@
       "description": "Image in .alive message. the value MUST A DIRECT LINK or Will Crash!",
       "value": "https://telegra.ph/file/09b16d6627c5dfe47342e.jpg",
       "required": false
+    },
+    "USR_TOKEN_UPTOBOX": {
+      "description": "API for direct link uptobox, https://docs.uptobox.com/#how-to-find-my-api-token",
+      "required": false
     }
   },
   "addons": [
