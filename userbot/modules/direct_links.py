@@ -4,11 +4,13 @@
 # you may not use this file except in compliance with the License.
 #
 
+from asyncio import create_subprocess_shell as asyncSubprocess
+from asyncio.subprocess import PIPE as asyncPIPE
+
 import json
 import re
 import urllib.parse
 from random import choice
-from subprocess import PIPE, Popen
 
 import requests
 from bs4 import BeautifulSoup
@@ -18,25 +20,19 @@ from userbot import CMD_HELP
 from userbot.events import register
 
 
-def subprocess_run(cmd):
-    subproc = Popen(
-        cmd,
-        stdout=PIPE,
-        stderr=PIPE,
-        shell=True,
-        universal_newlines=True)
-    talk = subproc.communicate()
+async def subprocess_run(cmd):
+    reply = ""
+    subproc = await asyncSubprocess(cmd, stdout=asyncPIPE, stderr=asyncPIPE)
+    result = await subproc.communicate()
     exitCode = subproc.returncode
     if exitCode != 0:
-        reply = ""
         reply += (
-            "```An error was detected while running the subprocess:\n"
-            f"exit code: {exitCode}\n"
-            f"stdout: {talk[0]}\n"
-            f"stderr: {talk[1]}```"
-        )
+            '**An error was detected while running subprocess.**\n'
+            f'exitCode : `{exitCode}`\n'
+            f'stdout : `{result[0].decode().strip()}`\n'
+            f'stderr : `{result[1].decode().strip()}`')
         return reply
-    return talk
+    return result
 
 
 @register(outgoing=True, pattern=r"^.dir(?: |$)([\s\S]*)")
