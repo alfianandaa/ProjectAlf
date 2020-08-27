@@ -11,7 +11,6 @@ import json
 import asyncio
 import re
 import urllib.parse
-import json
 import aiohttp
 from random import choice
 
