@@ -24,11 +24,11 @@ from userbot.events import register
 
 
 async def subprocess_run(cmd):
-    reply = ""
     subproc = await asyncSubprocess(cmd, stdout=asyncPIPE, stderr=asyncPIPE)
     result = await subproc.communicate()
     exitCode = subproc.returncode
     if exitCode != 0:
+        reply = ""
         reply += (
             '**An error was detected while running subprocess.**\n'
             f'exitCode : `{exitCode}`\n'
@@ -293,10 +293,7 @@ async def uptobox(request, url: str) -> str:
     if USR_TOKEN is None:
         await request.edit('`Set USR_TOKEN_UPTOBOX first!`')
         return
-    if link.endswith('/'):
-        index = -2
-    else:
-        index = -1
+    index = -2 if link.endswith('/') else -1
     FILE_CODE = link.split('/')[index]
     origin = 'https://uptobox.com/api/link'
     uri = f'{origin}/info?fileCodes={FILE_CODE}'
@@ -334,7 +331,6 @@ async def uptobox(request, url: str) -> str:
                         await request.edit(
                             f"[{file_name} ({file_size})]({webLink})"
                         )
-                        return
                     else:
                         await request.edit(
                             "`[ERROR]`\n"
@@ -342,7 +338,7 @@ async def uptobox(request, url: str) -> str:
                             f"`reason`: **{result.get('data')}**\n"
                             f"`status`: **{status}**"
                         )
-                        return
+                    return
             elif status == "Success":
                 webLink = result.get('data').get('dlLink')
                 await request.edit(
