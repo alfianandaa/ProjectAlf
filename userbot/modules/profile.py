@@ -34,7 +34,7 @@ USERNAME_TAKEN = "```This username is already taken.```"
 # ===============================================================
 
 
-@register(outgoing=True, pattern="^.reserved$")
+@register(outgoing=True, pattern=r"^\.reserved$")
 async def mine(event):
     result = await bot(GetAdminedPublicChannelsRequest())
     output_str = ""
@@ -43,7 +43,7 @@ async def mine(event):
     await event.edit(output_str)
 
 
-@register(outgoing=True, pattern="^.name")
+@register(outgoing=True, pattern=r"^\.name")
 async def update_name(name):
     newname = name.text[6:]
     if " " not in newname:
@@ -58,7 +58,7 @@ async def update_name(name):
     await name.edit(NAME_OK)
 
 
-@register(outgoing=True, pattern="^.setpfp$")
+@register(outgoing=True, pattern=r"^\.setpfp$")
 async def set_profilepic(propic):
     await propic.edit("`Processing..`")
     replymsg = await propic.get_reply_message()
@@ -86,7 +86,7 @@ async def set_profilepic(propic):
             await propic.edit(INVALID_MEDIA)
 
 
-@register(outgoing=True, pattern="^.setbio (.*)")
+@register(outgoing=True, pattern=r"^\.setbio (.*)")
 async def set_biograph(setbio):
     await setbio.edit("`Processing..`")
     newbio = setbio.pattern_match.group(1)
@@ -94,7 +94,7 @@ async def set_biograph(setbio):
     await setbio.edit(BIO_SUCCESS)
 
 
-@register(outgoing=True, pattern="^.username (.*)")
+@register(outgoing=True, pattern=r"^\.username (.*)")
 async def update_username(username):
     await username.edit("`Processing..`")
     newusername = username.pattern_match.group(1)
@@ -105,7 +105,7 @@ async def update_username(username):
         await username.edit(USERNAME_TAKEN)
 
 
-@register(outgoing=True, pattern="^.count$")
+@register(outgoing=True, pattern=r"^\.count$")
 async def count(event):
     u = 0
     g = 0
@@ -141,7 +141,7 @@ async def count(event):
     await event.edit(result)
 
 
-@register(outgoing=True, pattern=r"^.delpfp")
+@register(outgoing=True, pattern=r"^\.delpfp")
 async def remove_profilepic(delpfp):
     group = delpfp.text[8:]
     if group == "all":

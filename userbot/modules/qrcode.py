@@ -18,7 +18,7 @@ from userbot import CMD_HELP, LOGS
 from userbot.events import register
 
 
-@register(pattern=r"^.decode$", outgoing=True)
+@register(pattern=r"^\.decode$", outgoing=True)
 async def parseqr(qr_e):
     downloaded_file_name = await qr_e.client.download_media(
         await qr_e.get_reply_message()
@@ -52,7 +52,7 @@ async def parseqr(qr_e):
     await qr_e.edit(qr_contents)
 
 
-@register(pattern=r".barcode(?: |$)([\s\S]*)", outgoing=True)
+@register(pattern=r"\.barcode(?: |$)([\s\S]*)", outgoing=True)
 async def bq(event):
     await event.edit("`Processing..`")
     input_str = event.pattern_match.group(1)
@@ -89,7 +89,7 @@ async def bq(event):
     await event.delete()
 
 
-@register(pattern=r".makeqr(?: |$)([\s\S]*)", outgoing=True)
+@register(pattern=r"\.makeqr(?: |$)([\s\S]*)", outgoing=True)
 async def make_qr(makeqr):
     input_str = makeqr.pattern_match.group(1)
     message = "SYNTAX: `.makeqr <long text to include>`"

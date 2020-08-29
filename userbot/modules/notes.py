@@ -10,7 +10,7 @@ from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from userbot.events import register
 
 
-@register(outgoing=True, pattern="^.notes$")
+@register(outgoing=True, pattern=r"^\.notes$")
 async def notes_active(svd):
     try:
         from userbot.modules.sql_helper.notes_sql import get_notes
@@ -25,7 +25,7 @@ async def notes_active(svd):
     await svd.edit(message)
 
 
-@register(outgoing=True, pattern=r"^.clear (\w*)")
+@register(outgoing=True, pattern=r"^\.clear (\w*)")
 async def remove_notes(clr):
     try:
         from userbot.modules.sql_helper.notes_sql import rm_note
@@ -38,7 +38,7 @@ async def remove_notes(clr):
         return await clr.edit("`Successfully deleted note:` **{}**".format(notename))
 
 
-@register(outgoing=True, pattern=r"^.save (\w*)")
+@register(outgoing=True, pattern=r"^\.save (\w*)")
 async def add_note(fltr):
     try:
         from userbot.modules.sql_helper.notes_sql import add_note
@@ -106,7 +106,7 @@ async def incom_note(getnt):
         pass
 
 
-@register(outgoing=True, pattern="^.rmbotnotes (.*)")
+@register(outgoing=True, pattern=r"^\.rmbotnotes (.*)")
 async def kick_marie_notes(kick):
     bot_type = kick.pattern_match.group(1).lower()
     if bot_type not in ["marie", "rose"]:

@@ -40,7 +40,7 @@ async def filter_incoming_handler(handler):
         pass
 
 
-@register(outgoing=True, pattern=r"^.filter (.*)")
+@register(outgoing=True, pattern=r"^\.filter (.*)")
 async def add_new_filter(new_handler):
     try:
         from userbot.modules.sql_helper.filter_sql import add_filter
@@ -83,7 +83,7 @@ async def add_new_filter(new_handler):
         await new_handler.edit(success.format(keyword, "updated"))
 
 
-@register(outgoing=True, pattern=r"^.stop (.*)")
+@register(outgoing=True, pattern=r"^\.stop (.*)")
 async def remove_a_filter(r_handler):
     try:
         from userbot.modules.sql_helper.filter_sql import remove_filter
@@ -98,7 +98,7 @@ async def remove_a_filter(r_handler):
         )
 
 
-@register(outgoing=True, pattern="^.rmbotfilters (.*)")
+@register(outgoing=True, pattern=r"^\.rmbotfilters (.*)")
 async def kick_marie_filter(event):
     event.text[0]
     bot_type = event.pattern_match.group(1).lower()
@@ -122,7 +122,7 @@ async def kick_marie_filter(event):
         )
 
 
-@register(outgoing=True, pattern="^.filters$")
+@register(outgoing=True, pattern=r"^\.filters$")
 async def filters_active(event):
     try:
         from userbot.modules.sql_helper.filter_sql import get_filters

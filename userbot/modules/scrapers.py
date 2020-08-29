@@ -55,14 +55,14 @@ TTS_LANG = "en"
 TRT_LANG = "en"
 
 
-@register(outgoing=True, pattern="^.crblang (.*)")
+@register(outgoing=True, pattern=r"^\.crblang (.*)")
 async def setlang(prog):
     global CARBONLANG
     CARBONLANG = prog.pattern_match.group(1)
     await prog.edit(f"Language for carbon.now.sh set to {CARBONLANG}")
 
 
-@register(outgoing=True, pattern="^.carbon")
+@register(outgoing=True, pattern=r"^\.carbon")
 async def carbon_api(e):
     await e.edit("`Processing...`")
     CARBON = "https://carbon.now.sh/?l={lang}&code={code}"
@@ -108,7 +108,7 @@ async def carbon_api(e):
     await e.delete()  # Deleting msg
 
 
-@register(outgoing=True, pattern="^.img (.*)")
+@register(outgoing=True, pattern=r"^\.img (.*)")
 async def img_sampler(event):
     await event.edit("`Processing...`")
     query = event.pattern_match.group(1)
@@ -139,7 +139,7 @@ async def img_sampler(event):
     await event.delete()
 
 
-@register(outgoing=True, pattern="^.currency (.*)")
+@register(outgoing=True, pattern=r"^\.currency (.*)")
 async def moni(event):
     input_str = event.pattern_match.group(1)
     input_sgra = input_str.split(" ")
@@ -167,7 +167,7 @@ async def moni(event):
         return await event.edit("`Invalid syntax.`")
 
 
-@register(outgoing=True, pattern=r"^.google (.*)")
+@register(outgoing=True, pattern=r"^\.google (.*)")
 async def gsearch(q_event):
     match = q_event.pattern_match.group(1)
     page = findall(r"page=\d+", match)
@@ -200,7 +200,7 @@ async def gsearch(q_event):
         )
 
 
-@register(outgoing=True, pattern=r"^.wiki (.*)")
+@register(outgoing=True, pattern=r"^\.wiki (.*)")
 async def wiki(wiki_q):
     match = wiki_q.pattern_match.group(1)
     try:
@@ -229,7 +229,7 @@ async def wiki(wiki_q):
         )
 
 
-@register(outgoing=True, pattern="^.ud (.*)")
+@register(outgoing=True, pattern=r"^\.ud (.*)")
 async def urban_dict(ud_e):
     await ud_e.edit("Processing...")
     query = ud_e.pattern_match.group(1)
@@ -281,7 +281,7 @@ async def urban_dict(ud_e):
         await ud_e.edit("No result found for **" + query + "**")
 
 
-@register(outgoing=True, pattern=r"^.tts(?: |$)([\s\S]*)")
+@register(outgoing=True, pattern=r"^\.tts(?: |$)([\s\S]*)")
 async def text_to_speech(query):
     textx = await query.get_reply_message()
     message = query.pattern_match.group(1)
@@ -324,7 +324,7 @@ async def text_to_speech(query):
 
 
 # kanged from Blank-x ;---;
-@register(outgoing=True, pattern="^.imdb (.*)")
+@register(outgoing=True, pattern=r"^\.imdb (.*)")
 async def imdb(e):
     try:
         movie_name = e.pattern_match.group(1)
@@ -419,7 +419,7 @@ async def imdb(e):
         await e.edit("Plox enter **Valid movie name** kthx")
 
 
-@register(outgoing=True, pattern=r"^.trt(?: |$)([\s\S]*)")
+@register(outgoing=True, pattern=r"^\.trt(?: |$)([\s\S]*)")
 async def translateme(trans):
     translator = Translator()
     textx = await trans.get_reply_message()
@@ -448,7 +448,7 @@ async def translateme(trans):
         )
 
 
-@register(pattern=".lang (trt|tts) (.*)", outgoing=True)
+@register(pattern=r"^\.lang (trt|tts) (.*)", outgoing=True)
 async def lang(value):
     util = value.pattern_match.group(1).lower()
     if util == "trt":
@@ -480,7 +480,7 @@ async def lang(value):
         )
 
 
-@register(outgoing=True, pattern="^.yt (.*)")
+@register(outgoing=True, pattern=r"^\.yt (.*)")
 async def yt_search(video_q):
     query = video_q.pattern_match.group(1)
     if not query:
@@ -498,7 +498,7 @@ async def yt_search(video_q):
     await video_q.edit(output, link_preview=False)
 
 
-@register(outgoing=True, pattern=r".(aud|vid) (.*)")
+@register(outgoing=True, pattern=r"\.(aud|vid) (.*)")
 async def download_video(v_url):
     url = v_url.pattern_match.group(2)
     type = v_url.pattern_match.group(1).lower()
@@ -610,7 +610,7 @@ def deEmojify(inputString):
     return get_emoji_regexp().sub("", inputString)
 
 
-@register(outgoing=True, pattern=r"^.wolfram (.*)")
+@register(outgoing=True, pattern=r"^\.wolfram (.*)")
 async def wolfram(wvent):
     if WOLFRAM_ID is None:
         await wvent.edit(

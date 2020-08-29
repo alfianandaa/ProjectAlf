@@ -160,7 +160,7 @@ async def _(event):
     os.system("rm -rf *.webm")
 
 
-@register(outgoing=True, pattern="^.smd(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.smd(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return

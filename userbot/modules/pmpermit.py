@@ -156,7 +156,7 @@ async def auto_accept(event):
                     )
 
 
-@register(outgoing=True, pattern="^.notifoff$")
+@register(outgoing=True, pattern=r"^\.notifoff$")
 async def notifoff(noff_event):
     try:
         from userbot.modules.sql_helper.globals import addgvar
@@ -166,7 +166,7 @@ async def notifoff(noff_event):
     await noff_event.edit("`Notifications from unapproved PM's are silenced!`")
 
 
-@register(outgoing=True, pattern="^.notifon$")
+@register(outgoing=True, pattern=r"^\.notifon$")
 async def notifon(non_event):
     try:
         from userbot.modules.sql_helper.globals import delgvar
@@ -176,7 +176,7 @@ async def notifon(non_event):
     await non_event.edit("`Notifications from unapproved PM's unmuted!`")
 
 
-@register(outgoing=True, pattern="^.approve$")
+@register(outgoing=True, pattern=r"^\.approve$")
 async def approvepm(apprvpm):
     try:
         from userbot.modules.sql_helper.pm_permit_sql import approve
@@ -213,7 +213,7 @@ async def approvepm(apprvpm):
         )
 
 
-@register(outgoing=True, pattern="^.disapprove$")
+@register(outgoing=True, pattern=r"^\.disapprove$")
 async def disapprovepm(disapprvpm):
     try:
         from userbot.modules.sql_helper.pm_permit_sql import dissprove
@@ -243,7 +243,7 @@ async def disapprovepm(disapprvpm):
         )
 
 
-@register(outgoing=True, pattern="^.block$")
+@register(outgoing=True, pattern=r"^\.block$")
 async def blockpm(block):
     if block.reply_to_msg_id:
         reply = await block.get_reply_message()
@@ -273,7 +273,7 @@ async def blockpm(block):
         )
 
 
-@register(outgoing=True, pattern="^.unblock$")
+@register(outgoing=True, pattern=r"^\.unblock$")
 async def unblockpm(unblock):
     if unblock.reply_to_msg_id:
         reply = await unblock.get_reply_message()

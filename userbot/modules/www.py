@@ -13,7 +13,7 @@ from userbot import CMD_HELP
 from userbot.events import register
 
 
-@register(outgoing=True, pattern="^.speed$")
+@register(outgoing=True, pattern=r"^\.speed$")
 async def speedtst(spd):
     await spd.edit("`Running speed test . . .`")
     test = Speedtest()
@@ -51,7 +51,7 @@ def speed_convert(size):
     return f"{round(size, 2)} {units[zero]}"
 
 
-@register(outgoing=True, pattern="^.dc$")
+@register(outgoing=True, pattern=r"^\.dc$")
 async def neardc(event):
     result = await event.client(functions.help.GetNearestDcRequest())
     await event.edit(
@@ -61,7 +61,7 @@ async def neardc(event):
     )
 
 
-@register(outgoing=True, pattern="^.ping$")
+@register(outgoing=True, pattern=r"^\.ping$")
 async def pingme(pong):
     start = datetime.now()
     await pong.edit("`Pong!`")

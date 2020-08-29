@@ -145,7 +145,7 @@ async def update(event, repo, ups_rem, ac_br):
     return
 
 
-@register(outgoing=True, pattern="^.update( now| deploy|$)")
+@register(outgoing=True, pattern=r"^\.update( now| deploy|$)")
 async def upstream(event):
     await event.edit("`Getting information....`")
     conf = event.pattern_match.group(1).strip()

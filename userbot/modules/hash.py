@@ -13,7 +13,7 @@ from userbot import CMD_HELP
 from userbot.events import register
 
 
-@register(outgoing=True, pattern="^.hash (.*)")
+@register(outgoing=True, pattern=r"^\.hash (.*)")
 async def gethash(hash_q):
     hashtxt_ = hash_q.pattern_match.group(1)
     hashtxt = open("hashdis.txt", "w+")
@@ -56,7 +56,7 @@ async def gethash(hash_q):
         await hash_q.reply(ans)
 
 
-@register(outgoing=True, pattern="^.base64 (en|de) (.*)")
+@register(outgoing=True, pattern=r"^\.base64 (en|de) (.*)")
 async def endecrypt(query):
     if query.pattern_match.group(1) == "en":
         lething = str(pybase64.b64encode(

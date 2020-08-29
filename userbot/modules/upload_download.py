@@ -24,7 +24,7 @@ from userbot.events import register
 from userbot.utils import humanbytes, progress
 
 
-@register(pattern=r".dl(?: |$)(.*)", outgoing=True)
+@register(pattern=r"\.dl(?: |$)(.*)", outgoing=True)
 async def download(target_file):
     await target_file.edit("Processing ...")
     input_str = target_file.pattern_match.group(1)
@@ -102,7 +102,7 @@ async def download(target_file):
         await target_file.edit("Reply to a message to download to my local server.")
 
 
-@register(pattern=r".upldir (.*)", outgoing=True)
+@register(pattern=r"\.upldir (.*)", outgoing=True)
 async def uploadir(udir_event):
     input_str = udir_event.pattern_match.group(1)
     if os.path.exists(input_str):
@@ -178,7 +178,7 @@ async def uploadir(udir_event):
         await udir_event.edit("404: Directory Not Found")
 
 
-@register(pattern=r".upl (.*)", outgoing=True)
+@register(pattern=r"\.upl (.*)", outgoing=True)
 async def upload(u_event):
     await u_event.edit("Processing ...")
     input_str = u_event.pattern_match.group(1)
@@ -249,7 +249,7 @@ def extract_w_h(file):
         return width, height
 
 
-@register(pattern=r".uploadas(stream|vn|all) (.*)", outgoing=True)
+@register(pattern=r"^\.uploadas(stream|vn|all) (.*)", outgoing=True)
 async def uploadas(uas_event):
     await uas_event.edit("Processing ...")
     type_of_upload = uas_event.pattern_match.group(1)

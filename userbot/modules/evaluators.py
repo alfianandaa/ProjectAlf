@@ -12,7 +12,7 @@ from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, TERM_ALIAS
 from userbot.events import register
 
 
-@register(outgoing=True, pattern="^.eval(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.eval(?: |$)(.*)")
 async def evaluate(query):
     if query.is_channel and not query.is_group:
         return await query.edit("`Eval isn't permitted on channels`")
@@ -65,7 +65,7 @@ async def evaluate(query):
         )
 
 
-@register(outgoing=True, pattern=r"^.exec(?: |$)([\s\S]*)")
+@register(outgoing=True, pattern=r"^\.exec(?: |$)([\s\S]*)")
 async def run(run_q):
     code = run_q.pattern_match.group(1)
 
@@ -133,7 +133,7 @@ async def run(run_q):
         )
 
 
-@register(outgoing=True, pattern="^.term(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.term(?: |$)(.*)")
 async def terminal_runner(term):
     curruser = TERM_ALIAS
     command = term.pattern_match.group(1)

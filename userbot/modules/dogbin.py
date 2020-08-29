@@ -14,7 +14,7 @@ from userbot.events import register
 DOGBIN_URL = "https://del.dog/"
 
 
-@register(outgoing=True, pattern=r"^.paste(?: |$)([\s\S]*)")
+@register(outgoing=True, pattern=r"^\.paste(?: |$)([\s\S]*)")
 async def paste(pstl):
     dogbin_final_url = ""
     match = pstl.pattern_match.group(1).strip()
@@ -74,7 +74,7 @@ async def paste(pstl):
         )
 
 
-@register(outgoing=True, pattern="^.getpaste(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.getpaste(?: |$)(.*)")
 async def get_dogbin_content(dog_url):
     textx = await dog_url.get_reply_message()
     message = dog_url.pattern_match.group(1)

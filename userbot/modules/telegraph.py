@@ -12,7 +12,7 @@ r = telegraph.create_account(short_name="telegraph")
 auth_url = r["auth_url"]
 
 
-@register(outgoing=True, pattern="^.tg (m|t)$")
+@register(outgoing=True, pattern=r"^\.tg (m|t)$")
 async def telegraphs(graph):
     await graph.edit("`Processing...`")
     if not graph.text[0].isalpha() and graph.text[0] not in (

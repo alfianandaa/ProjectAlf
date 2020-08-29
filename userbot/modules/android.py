@@ -21,7 +21,7 @@ from userbot.utils import chrome, human_to_bytes, humanbytes, md5, time_formatte
 GITHUB = "https://github.com"
 
 
-@register(outgoing=True, pattern="^.magisk$")
+@register(outgoing=True, pattern=r"^\.magisk$")
 async def magisk(request):
     magisk_dict = {
         "Stable": "https://raw.githubusercontent.com/topjohnwu/magisk_files/master/stable.json",
@@ -38,7 +38,7 @@ async def magisk(request):
     await request.edit(releases)
 
 
-@register(outgoing=True, pattern=r"^.device(?: |$)(\S*)")
+@register(outgoing=True, pattern=r"^\.device(?: |$)(\S*)")
 async def device_info(request):
     textx = await request.get_reply_message()
     codename = request.pattern_match.group(1)
@@ -69,7 +69,7 @@ async def device_info(request):
     await request.edit(reply)
 
 
-@register(outgoing=True, pattern=r"^.codename(?: |)([\S]*)(?: |)([\s\S]*)")
+@register(outgoing=True, pattern=r"^\.codename(?: |)([\S]*)(?: |)([\s\S]*)")
 async def codename_info(request):
     textx = await request.get_reply_message()
     brand = request.pattern_match.group(1).lower()
@@ -113,7 +113,7 @@ async def codename_info(request):
     await request.edit(reply)
 
 
-@register(outgoing=True, pattern="^.pixeldl(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.pixeldl(?: |$)(.*)")
 async def download_api(dl):
     await dl.edit("`Collecting information...`")
     URL = dl.pattern_match.group(1)
@@ -213,7 +213,7 @@ async def download_api(dl):
     return
 
 
-@register(outgoing=True, pattern=r"^.specs(?: |)([\S]*)(?: |)([\s\S]*)")
+@register(outgoing=True, pattern=r"^\.specs(?: |)([\S]*)(?: |)([\s\S]*)")
 async def devices_specifications(request):
     textx = await request.get_reply_message()
     brand = request.pattern_match.group(1).lower()
@@ -272,7 +272,7 @@ async def devices_specifications(request):
     await request.edit(reply)
 
 
-@register(outgoing=True, pattern=r"^.twrp(?: |$)(\S*)")
+@register(outgoing=True, pattern=r"^\.twrp(?: |$)(\S*)")
 async def twrp(request):
     textx = await request.get_reply_message()
     device = request.pattern_match.group(1)

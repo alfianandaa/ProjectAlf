@@ -77,7 +77,7 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 # ================================================
 
 
-@register(outgoing=True, pattern="^.setgpic$")
+@register(outgoing=True, pattern=r"^\.setgpic$")
 async def set_group_photo(gpic):
     if not gpic.is_group:
         await gpic.edit("`I don't think this is a group.`")
@@ -113,7 +113,7 @@ async def set_group_photo(gpic):
             await gpic.edit(PP_ERROR)
 
 
-@register(outgoing=True, pattern="^.promote(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.promote(?: |$)(.*)")
 async def promote(promt):
     # Get targeted chat
     chat = await promt.get_chat()
@@ -163,7 +163,7 @@ async def promote(promt):
         )
 
 
-@register(outgoing=True, pattern="^.demote(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.demote(?: |$)(.*)")
 async def demote(dmod):
     # Admin right check
     chat = await dmod.get_chat()
@@ -212,7 +212,7 @@ async def demote(dmod):
         )
 
 
-@register(outgoing=True, pattern="^.ban(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.ban(?: |$)(.*)")
 async def ban(bon):
     # Here laying the sanity check
     chat = await bon.get_chat()
@@ -265,7 +265,7 @@ async def ban(bon):
         )
 
 
-@register(outgoing=True, pattern="^.unban(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.unban(?: |$)(.*)")
 async def nothanos(unbon):
     # Here laying the sanity check
     chat = await unbon.get_chat()
@@ -301,7 +301,7 @@ async def nothanos(unbon):
         await unbon.edit("`Uh oh my unban logic broke!`")
 
 
-@register(outgoing=True, pattern="^.mute(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.mute(?: |$)(.*)")
 async def spider(spdr):
     # Check if the function running under SQL mode
     try:
@@ -355,7 +355,7 @@ async def spider(spdr):
             return await spdr.edit("`Uh oh my mute logic broke!`")
 
 
-@register(outgoing=True, pattern="^.unmute(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.unmute(?: |$)(.*)")
 async def unmoot(unmot):
     # Admin or creator check
     chat = await unmot.get_chat()
@@ -431,7 +431,7 @@ async def muter(moot):
             await moot.delete()
 
 
-@register(outgoing=True, pattern="^.ungmute(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.ungmute(?: |$)(.*)")
 async def ungmoot(un_gmute):
     # Admin or creator check
     chat = await un_gmute.get_chat()
@@ -473,7 +473,7 @@ async def ungmoot(un_gmute):
             )
 
 
-@register(outgoing=True, pattern="^.gmute(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.gmute(?: |$)(.*)")
 async def gspider(gspdr):
     # Admin or creator check
     chat = await gspdr.get_chat()
@@ -513,7 +513,7 @@ async def gspider(gspdr):
             )
 
 
-@register(outgoing=True, pattern="^.zombies(?: |$)(.*)", groups_only=False)
+@register(outgoing=True, pattern=r"^\.zombies(?: |$)(.*)", groups_only=False)
 async def rm_deletedacc(show):
 
     con = show.pattern_match.group(1).lower()
@@ -581,7 +581,7 @@ async def rm_deletedacc(show):
         )
 
 
-@register(outgoing=True, pattern="^.all$")
+@register(outgoing=True, pattern=r"^\.all$")
 async def tagaso(event):
     if event.fwd_from:
         return
@@ -593,7 +593,7 @@ async def tagaso(event):
     await bot.send_message(chat, mentions, reply_to=event.message.reply_to_msg_id)
 
 
-@register(outgoing=True, pattern="^.admins$")
+@register(outgoing=True, pattern=r"^\.admins$")
 async def get_admin(show):
     info = await show.client.get_entity(show.chat_id)
     title = info.title if info.title else "this chat"
@@ -612,7 +612,7 @@ async def get_admin(show):
     await show.edit(mentions, parse_mode="html")
 
 
-@register(outgoing=True, pattern="^.pin(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.pin(?: |$)(.*)")
 async def pin(msg):
     # Admin or creator check
     chat = await msg.get_chat()
@@ -656,7 +656,7 @@ async def pin(msg):
         )
 
 
-@register(outgoing=True, pattern="^.kick(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.kick(?: |$)(.*)")
 async def kick(usr):
     # Admin or creator check
     chat = await usr.get_chat()
@@ -697,7 +697,7 @@ async def kick(usr):
         )
 
 
-@register(outgoing=True, pattern="^.users ?(.*)")
+@register(outgoing=True, pattern=r"^\.users ?(.*)")
 async def get_users(show):
     info = await show.client.get_entity(show.chat_id)
     title = info.title if info.title else "this chat"
@@ -787,7 +787,7 @@ async def get_user_from_id(user, event):
     return user_obj
 
 
-@register(outgoing=True, pattern="^.usersdel ?(.*)")
+@register(outgoing=True, pattern=r"^\.usersdel ?(.*)")
 async def get_usersdel(show):
     info = await show.client.get_entity(show.chat_id)
     title = info.title if info.title else "this chat"
@@ -879,7 +879,7 @@ async def get_userdel_from_id(user, event):
     return user_obj
 
 
-@register(outgoing=True, pattern="^.bots$", groups_only=True)
+@register(outgoing=True, pattern=r"^\.bots$", groups_only=True)
 async def get_bots(show):
     info = await show.client.get_entity(show.chat_id)
     title = info.title if info.title else "this chat"

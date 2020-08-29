@@ -98,7 +98,7 @@ logger.setLevel(logging.ERROR)
 # =========================================================== #
 
 
-@register(pattern="^.gdauth(?: |$)", outgoing=True)
+@register(pattern=r"^\.gdauth(?: |$)", outgoing=True)
 async def generate_credentials(gdrive):
     if helper.get_credentials(str(gdrive.from_id)) is not None:
         await gdrive.edit("`You already authorized token...`")
@@ -177,7 +177,7 @@ async def create_app(gdrive):
     return build("drive", "v3", credentials=creds, cache_discovery=False)
 
 
-@register(pattern="^.gdreset(?: |$)", outgoing=True)
+@register(pattern=r"^\.gdreset(?: |$)", outgoing=True)
 async def reset_credentials(gdrive):
     await gdrive.edit("`Resetting information...`")
     helper.clear_credentials(str(gdrive.from_id))
@@ -703,7 +703,7 @@ async def reset_parentId():
     return
 
 
-@register(pattern=r"^.gdlist(?: |$)(-l \d+)?(?: |$)?(.*)?(?: |$)", outgoing=True)
+@register(pattern=r"^\.gdlist(?: |$)(-l \d+)?(?: |$)?(.*)?(?: |$)", outgoing=True)
 async def lists(gdrive):
     await gdrive.edit("`Getting information...`")
     checker = gdrive.pattern_match.group(1)
@@ -803,7 +803,7 @@ async def lists(gdrive):
     return
 
 
-@register(pattern="^.gdf (mkdir|rm|chck) (.*)", outgoing=True)
+@register(pattern=r"^\.gdf (mkdir|rm|chck) (.*)", outgoing=True)
 async def google_drive_managers(gdrive):
     await gdrive.edit("`Sending information...`")
     service = await create_app(gdrive)
@@ -931,7 +931,7 @@ async def google_drive_managers(gdrive):
     return
 
 
-@register(pattern="^.gdabort(?: |$)", outgoing=True)
+@register(pattern=r"^\.gdabort(?: |$)", outgoing=True)
 async def cancel_process(gdrive):
     global is_cancelled
     downloads = aria2.get_downloads()
@@ -944,7 +944,7 @@ async def cancel_process(gdrive):
     await gdrive.delete()
 
 
-@register(pattern="^.gd(?: |$)(.*)", outgoing=True)
+@register(pattern=r"^\.gd(?: |$)(.*)", outgoing=True)
 async def google_drive(gdrive):
     reply = ""
     value = gdrive.pattern_match.group(1)
@@ -1111,7 +1111,7 @@ async def google_drive(gdrive):
     return
 
 
-@register(pattern="^.gdfset (put|rm)(?: |$)(.*)", outgoing=True)
+@register(pattern=r"^\.gdfset (put|rm)(?: |$)(.*)", outgoing=True)
 async def set_upload_folder(gdrive):
     await gdrive.edit("`Sending information...`")
     global parent_Id

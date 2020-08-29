@@ -55,7 +55,7 @@ afk_start = {}
 # =================================================================
 
 
-@register(outgoing=True, pattern="^.afk(?: |$)(.*)", disable_errors=True)
+@register(outgoing=True, pattern=r"^\.afk(?: |$)(.*)", disable_errors=True)
 async def set_afk(afk_e):
     afk_e.text
     string = afk_e.pattern_match.group(1)

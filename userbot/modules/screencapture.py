@@ -15,7 +15,7 @@ from userbot.events import register
 from userbot.utils import chrome, options
 
 
-@register(pattern="^.ss (.*)", outgoing=True)
+@register(pattern=r"^\.ss (.*)", outgoing=True)
 async def capture(url):
     await url.edit("`Processing...`")
     chrome_options = await options()

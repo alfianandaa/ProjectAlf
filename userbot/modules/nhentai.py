@@ -11,7 +11,7 @@ from userbot import CMD_HELP, bot
 from userbot.events import register
 
 
-@register(outgoing=True, pattern="^.nhentai(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.nhentai(?: |$)(.*)")
 async def _(hentai):
     if hentai.fwd_from:
         return

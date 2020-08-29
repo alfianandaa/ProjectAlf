@@ -38,7 +38,8 @@ async def get_tz(con):
         return
 
 
-@register(outgoing=True, pattern="^.time(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?")
+@register(outgoing=True,
+          pattern=r"^\.time(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?")
 async def time_func(tdata):
     con = tdata.pattern_match.group(1).title()
     tz_num = tdata.pattern_match.group(2)
@@ -92,7 +93,8 @@ async def time_func(tdata):
         )
 
 
-@register(outgoing=True, pattern="^.date(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?")
+@register(outgoing=True,
+          pattern=r"^\.date(?: |$)(.*)(?<![0-9])(?: |$)([0-9]+)?")
 async def date_func(dat):
     con = dat.pattern_match.group(1).title()
     tz_num = dat.pattern_match.group(2)

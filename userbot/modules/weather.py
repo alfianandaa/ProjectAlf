@@ -33,7 +33,7 @@ async def get_tz(con):
         return
 
 
-@register(outgoing=True, pattern="^.weather(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.weather(?: |$)(.*)")
 async def get_weather(weather):
 
     if not OWM_API:

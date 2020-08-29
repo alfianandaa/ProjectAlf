@@ -65,7 +65,7 @@ def dogbin(magnets):
     return urls
 
 
-@register(outgoing=True, pattern=r"^.tos(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.tos(?: |$)(.*)")
 async def tor_search(event):
     if event.fwd_from:
         return

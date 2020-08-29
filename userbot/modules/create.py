@@ -7,7 +7,7 @@ from userbot import CMD_HELP
 from userbot.events import register
 
 
-@register(outgoing=True, pattern="^.create (b|g|c)(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.create (b|g|c)(?: |$)(.*)")
 async def telegraphs(grop):
     if grop.text[0].isalpha() or grop.text[0] in ("/", "#", "@", "!"):
         return

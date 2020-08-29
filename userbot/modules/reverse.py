@@ -27,7 +27,7 @@ useragent = (
 opener.addheaders = [("User-agent", useragent)]
 
 
-@register(outgoing=True, pattern=r"^.reverse(?: |$)(\d*)")
+@register(outgoing=True, pattern=r"^\.reverse(?: |$)(\d*)")
 async def okgoogle(img):
     if os.path.isfile("okgoogle.png"):
         os.remove("okgoogle.png")

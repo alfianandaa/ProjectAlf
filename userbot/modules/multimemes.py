@@ -41,7 +41,7 @@ EMOJI_PATTERN = re.compile(
 )
 
 
-@register(outgoing=True, pattern="^.mmf(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.mmf(?: |$)(.*)")
 async def mim(event):
     if event.fwd_from:
         return
@@ -158,7 +158,7 @@ async def silently_send_message(conv, text):
     return response
 
 
-@register(outgoing=True, pattern="^.q(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.q(?: |$)(.*)")
 async def quotess(qotli):
     if qotli.fwd_from:
         return
@@ -197,7 +197,7 @@ async def quotess(qotli):
             await qotli.client.delete_messages(conv.chat_id, [msg.id, response.id])
 
 
-@register(outgoing=True, pattern=r"^.hz(:? |$)(.*)?")
+@register(outgoing=True, pattern=r"^\.hz(:? |$)(.*)?")
 async def hazz(hazmat):
     await hazmat.edit("`Sending information...`")
     level = hazmat.pattern_match.group(2)
@@ -259,7 +259,7 @@ async def hazz(hazmat):
     return os.remove(downloaded_file_name)
 
 
-@register(outgoing=True, pattern=r"^.df(:? |$)([1-8])?")
+@register(outgoing=True, pattern=r"^\.df(:? |$)([1-8])?")
 async def fryerrr(fry):
     await fry.edit("`Sending information...`")
     level = fry.pattern_match.group(2)
@@ -313,7 +313,7 @@ async def fryerrr(fry):
     return os.remove(downloaded_file_name)
 
 
-@register(pattern="^.deepfry(?: |$)(.*)", outgoing=True)
+@register(pattern=r"^\.deepfry(?: |$)(.*)", outgoing=True)
 async def deepfryer(event):
     try:
         frycount = int(event.pattern_match.group(1))
@@ -421,7 +421,7 @@ async def check_media(reply_message):
         return data
 
 
-@register(outgoing=True, pattern="^.waifu(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.waifu(?: |$)(.*)")
 async def waifu(animu):
     text = animu.pattern_match.group(1)
     if not text:

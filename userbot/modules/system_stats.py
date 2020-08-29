@@ -136,7 +136,7 @@ async def sysdetails(sysd):
             await sysd.edit("`Install neofetch first !!`")
 
 
-@register(outgoing=True, pattern="^.botver$")
+@register(outgoing=True, pattern=r"^\.botver$")
 async def bot_ver(event):
     if event.text[0].isalpha() or event.text[0] in ("/", "#", "@", "!"):
         return
@@ -162,7 +162,7 @@ async def bot_ver(event):
         )
 
 
-@register(outgoing=True, pattern="^.pip(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.pip(?: |$)(.*)")
 async def pipcheck(pip):
     if pip.text[0].isalpha() or pip.text[0] in ("/", "#", "@", "!"):
         return
@@ -234,7 +234,7 @@ async def amireallyalive(alive):
         await alive.edit(output)
 
 
-@register(outgoing=True, pattern="^.aliveu")
+@register(outgoing=True, pattern=r"^\.aliveu")
 async def amireallyaliveuser(username):
     message = username.text
     output = ".aliveu [new user without brackets] nor can it be empty"
@@ -246,7 +246,7 @@ async def amireallyaliveuser(username):
     await username.edit("`" f"{output}" "`")
 
 
-@register(outgoing=True, pattern="^.resetalive$")
+@register(outgoing=True, pattern=r"^\.resetalive$")
 async def amireallyalivereset(ureset):
     global DEFAULTUSER
     DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node

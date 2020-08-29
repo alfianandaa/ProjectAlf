@@ -62,7 +62,7 @@ async def separate_sed(sed_string):
     return None
 
 
-@register(outgoing=True, pattern="^.s")
+@register(outgoing=True, pattern=r"^\.s")
 async def sed(command):
     sed_result = await separate_sed(command.text)
     textx = await command.get_reply_message()
