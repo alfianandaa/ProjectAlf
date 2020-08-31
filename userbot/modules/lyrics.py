@@ -5,9 +5,11 @@
 #
 #
 
+import codecs
 import os
 
 import lyricsgenius
+import requests
 from pylast import User
 
 from userbot import CMD_HELP, GENIUS, LASTFM_USERNAME, lastfm
@@ -39,12 +41,19 @@ async def lyrics(lyric):
         await lyric.edit(f"`Song`  **{artist} - {song}**  `not found...`")
         return False
     if len(songs.lyrics) > 4096:
-        await lyric.edit("`Lyrics is too big, view the file to see it.`")
+        await lyric.edit("`Lyrics is too big, pasted lyrics to Nekobin. please wait.`")
         with open("lyrics.txt", "w+") as f:
             f.write(f"Search query: \n{artist} - {song}\n\n{songs.lyrics}")
-        await lyric.client.send_file(
-            lyric.chat_id, "lyrics.txt", reply_to=lyric.id,
+        lirik = codecs.open("lyrics.txt", "r", encoding="utf-8")
+        data = lirik.read()
+        key = (
+            requests.post("https://nekobin.com/api/documents", json={"content": data})
+            .json()
+            .get("result")
+            .get("key")
         )
+        url = f"https://nekobin.com/raw/{key}"
+        await lyric.edit(f"`Here the lyrics:`\n\nPasted to: [Nekobin]({url})")
         os.remove("lyrics.txt")
     else:
         await lyric.edit(
