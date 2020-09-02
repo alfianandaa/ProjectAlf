@@ -46,12 +46,8 @@ async def lyrics(lyric):
             f.write(f"Search query: \n{artist} - {song}\n\n{songs.lyrics}")
         lirik = codecs.open("lyrics.txt", "r", encoding="utf-8")
         data = lirik.read()
-        key = (
-            requests.post("https://nekobin.com/api/documents", json={"content": data})
-            .json()
-            .get("result")
-            .get("key")
-        )
+        key = (requests.post("https://nekobin.com/api/documents",
+                             json={"content": data}) .json() .get("result") .get("key"))
         url = f"https://nekobin.com/raw/{key}"
         await lyric.edit(f"`Here the lyrics:`\n\nPasted to: [Nekobin]({url})")
         os.remove("lyrics.txt")
