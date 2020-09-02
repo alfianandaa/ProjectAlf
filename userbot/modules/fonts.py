@@ -288,6 +288,7 @@ cursive = [
     "𝓏",
 ]
 
+
 @register(outgoing=True, pattern=r"^\.weeb(?: |$)(.*)")
 async def weebify(event):
 
@@ -340,6 +341,7 @@ async def oldy(event):
             oldycharacter = oldengfont[normiefont.index(normiecharacter)]
             string = string.replace(normiecharacter, oldycharacter)
     await event.edit(string)
+
 
 @register(outgoing=True, pattern=r"^\.bold(?: |$)(.*)")
 async def thicc(bolded):
@@ -448,8 +450,8 @@ async def xcursive(cursivelite):
             cursivecharacter = cursive[normiefont.index(normiecharacter)]
             string = string.replace(normiecharacter, cursivecharacter)
     await cursivelite.edit(string)
-    
-    
+
+
 CMD_HELP.update(
     {
         "fonts": ">`.weeb`"
