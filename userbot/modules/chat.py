@@ -37,8 +37,9 @@ async def permalink(mention):
     if custom:
         await mention.edit(f"[{custom}](tg://user?id={user.id})")
     else:
-        tag = (user.first_name.replace("\u2060", "")
-               if user.first_name else user.username)
+        tag = (
+            user.first_name.replace("\u2060", "") if user.first_name else user.username
+        )
         await mention.edit(f"[{tag}](tg://user?id={user.id})")
 
 
@@ -167,4 +168,6 @@ CMD_HELP.update(
         "\nUsage: Generate a permanent link to the user's profile with optional custom text."
         "\n\n>`.regexninja on/off`"
         "\nUsage: Globally enable/disables the regex ninja module."
-        "\nRegex Ninja module helps to delete the regex bot's triggering messages."})
+        "\nRegex Ninja module helps to delete the regex bot's triggering messages."
+    }
+)

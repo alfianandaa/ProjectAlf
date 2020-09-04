@@ -47,7 +47,9 @@ async def print_changelogs(event, ac_br, changelog):
         file.write(changelog_str)
         file.close()
         await event.client.send_file(
-            event.chat_id, "output.txt", reply_to=event.id,
+            event.chat_id,
+            "output.txt",
+            reply_to=event.id,
         )
         remove("output.txt")
     else:

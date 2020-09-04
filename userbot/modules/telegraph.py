@@ -15,8 +15,7 @@ auth_url = r["auth_url"]
 @register(outgoing=True, pattern=r"^\.tg (m|t)$")
 async def telegraphs(graph):
     await graph.edit("`Processing...`")
-    if not graph.text[0].isalpha() and graph.text[0] not in (
-            "/", "#", "@", "!"):
+    if not graph.text[0].isalpha() and graph.text[0] not in ("/", "#", "@", "!"):
         if graph.fwd_from:
             return
         if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
@@ -93,5 +92,6 @@ def resize_image(image):
     im.save(image, "PNG")
 
 
-CMD_HELP.update({"telegraph": ">`.tg` <m|t>"
-                 "\nUsage: Upload t(text) or m(media) on Telegraph."})
+CMD_HELP.update(
+    {"telegraph": ">`.tg` <m|t>" "\nUsage: Upload t(text) or m(media) on Telegraph."}
+)

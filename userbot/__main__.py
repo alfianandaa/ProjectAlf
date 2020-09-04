@@ -31,9 +31,8 @@ for module_name in ALL_MODULES:
 
 LOGS.info("You are running ProjectAlf [v2]")
 
-LOGS.info(
-    "ProjectAlf is now running !!!" "Test it by typing .alive or .ping in any chat."
-)
+LOGS.info("ProjectAlf is now running !!!"
+          "Test it by typing .alive or .ping in any chat.")
 
 
 if len(argv) not in (1, 3, 4):

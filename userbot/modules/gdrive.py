@@ -83,7 +83,7 @@ if __ is not None:
                 try:
                     G_DRIVE_FOLDER_ID = __.split("folderview?id=")[1]
                 except IndexError:
-                    if 'http://' not in __ or 'https://' not in __:
+                    if "http://" not in __ or "https://" not in __:
                         if any(map(str.isdigit, __)):
                             _1 = True
                         else:
@@ -95,14 +95,10 @@ if __ is not None:
                         if True in [_1 or _2]:
                             pass
                         else:
-                            LOGS.info(
-                                "G_DRIVE_FOLDER_ID "
-                                "not a valid ID...")
+                            LOGS.info("G_DRIVE_FOLDER_ID " "not a valid ID...")
                             G_DRIVE_FOLDER_ID = None
                     else:
-                        LOGS.info(
-                            "G_DRIVE_FOLDER_ID "
-                            "not a valid URL...")
+                        LOGS.info("G_DRIVE_FOLDER_ID " "not a valid URL...")
                         G_DRIVE_FOLDER_ID = None
 # =========================================================== #
 #                           LOG                               #
@@ -152,17 +148,13 @@ async def generate_credentials(gdrive):
     flow = InstalledAppFlow.from_client_config(
         configs, SCOPES, redirect_uri=REDIRECT_URI
     )
-    auth_url, _ = flow.authorization_url(
-        access_type="offline", prompt="consent")
+    auth_url, _ = flow.authorization_url(access_type="offline", prompt="consent")
     msg = await gdrive.respond("`Go to your BOTLOG group to authenticate token...`")
     async with gdrive.client.conversation(BOTLOG_CHATID) as conv:
         url_msg = await conv.send_message(
             "Please go to this URL:\n" f"{auth_url}\nauthorize then reply the code"
         )
-        r = conv.wait_event(
-            events.NewMessage(
-                outgoing=True,
-                chats=BOTLOG_CHATID))
+        r = conv.wait_event(events.NewMessage(outgoing=True, chats=BOTLOG_CHATID))
         r = await r
         code = r.message.message.strip()
         flow.fetch_token(code=code)
@@ -185,8 +177,9 @@ async def create_app(gdrive):
         if creds and creds.expired and creds.refresh_token:
             await gdrive.edit("`Refreshing credentials...`")
             creds.refresh(Request())
-            helper.save_credentials(str(gdrive.from_id),
-                                    base64.b64encode(pickle.dumps(creds)).decode())
+            helper.save_credentials(
+                str(gdrive.from_id), base64.b64encode(pickle.dumps(creds)).decode()
+            )
         else:
             await gdrive.edit("`Credentials is empty, please generate it...`")
             return False
@@ -228,9 +221,7 @@ async def download(gdrive, service, uri=None):
             )
         else:
             uri = [uri]
-            downloads = aria2.add_uris(
-                uri, options={
-                    "dir": full_path}, position=None)
+            downloads = aria2.add_uris(uri, options={"dir": full_path}, position=None)
         gid = downloads.gid
         await check_progress_for_dl(gdrive, gid, previous=None)
         file = aria2.get_download(gid)
@@ -328,9 +319,9 @@ async def download(gdrive, service, uri=None):
                 return reply
     except Exception as e:
         status = status.replace("DOWNLOAD]", "ERROR]")
-        reply += (f"`{status}`\n\n"
-                  "`Status` : **failed**\n"
-                  f"`Reason` : `{str(e)}`\n\n")
+        reply += (
+            f"`{status}`\n\n" "`Status` : **failed**\n" f"`Reason` : `{str(e)}`\n\n"
+        )
         return reply
     return
 
@@ -354,8 +345,9 @@ async def download_gdrive(gdrive, service, uri):
                 file_Id = uri.split("/")[-2]
             else:
                 try:
-                    file_Id = uri.split("uc?export=download&confirm=")[
-                        1].split("id=")[1]
+                    file_Id = uri.split("uc?export=download&confirm=")[1].split("id=")[
+                        1
+                    ]
                 except IndexError:
                     file_Id = uri
     try:
@@ -373,13 +365,16 @@ async def download_gdrive(gdrive, service, uri):
             except KeyError:
                 page = BeautifulSoup(download.content, "lxml")
                 try:
-                    export = drive + \
-                        page.find("a", {"id": "uc-download-link"}).get("href")
+                    export = drive + page.find("a", {"id": "uc-download-link"}).get(
+                        "href"
+                    )
                 except AttributeError:
                     try:
-                        error = (page.find("p",
-                                           {"class": "uc-error-caption"}).text + "\n" + page.find("p",
-                                                                                                  {"class": "uc-error-subcaption"}).text)
+                        error = (
+                            page.find("p", {"class": "uc-error-caption"}).text
+                            + "\n"
+                            + page.find("p", {"class": "uc-error-subcaption"}).text
+                        )
                     except Exception:
                         reply += (
                             "`[FILE - ERROR]`\n\n"
@@ -429,27 +424,17 @@ async def download_gdrive(gdrive, service, uri):
                     speed = round(downloaded / diff, 2)
                     eta = round((file_size - downloaded) / speed)
                     prog_str = "[{0}{1}] `{2}%`".format(
-                        "".join(
-                            "█" for i in range(
-                                math.floor(
-                                    percentage /
-                                    10))),
-                        "".join(
-                            "░" for i in range(
-                                10 -
-                                math.floor(
-                                    percentage /
-                                    10))),
-                        round(
-                            percentage,
-                            2),
+                        "".join("█" for i in range(math.floor(percentage / 10))),
+                        "".join("░" for i in range(10 - math.floor(percentage / 10))),
+                        round(percentage, 2),
                     )
                     current_message = (
                         f"{file_name} - Downloading\n"
                         f"{prog_str}\n"
                         f"`Size:` {humanbytes(downloaded)} of {humanbytes(file_size)}"
                         f"`Speed:` {humanbytes(speed)}`\n"
-                        f"`ETA:` {time_formatter(eta)}")
+                        f"`ETA:` {time_formatter(eta)}"
+                    )
                     if (
                         round(diff % 15.00) == 0
                         and (display_message != current_message)
@@ -485,27 +470,17 @@ async def download_gdrive(gdrive, service, uri):
                     speed = round(downloaded / diff, 2)
                     eta = round((file_size - downloaded) / speed)
                     prog_str = " [{0}{1}] `{2}%`".format(
-                        "".join(
-                            "█" for i in range(
-                                math.floor(
-                                    percentage /
-                                    10))),
-                        "".join(
-                            "░" for i in range(
-                                10 -
-                                math.floor(
-                                    percentage /
-                                    10))),
-                        round(
-                            percentage,
-                            2),
+                        "".join("█" for i in range(math.floor(percentage / 10))),
+                        "".join("░" for i in range(10 - math.floor(percentage / 10))),
+                        round(percentage, 2),
                     )
                     current_message = (
                         f"{file_name} - Downloading\n"
                         f"{prog_str}\n"
                         f"`Size:` {humanbytes(downloaded)} of {humanbytes(file_size)}"
                         f"`Speed:` {humanbytes(speed)}`\n"
-                        f"`ETA:` {time_formatter(eta)}")
+                        f"`ETA:` {time_formatter(eta)}"
+                    )
                     if (
                         round(diff % 15.00) == 0
                         and (display_message != current_message)
@@ -524,10 +499,7 @@ async def download_gdrive(gdrive, service, uri):
     async with gdrive.client.conversation(BOTLOG_CHATID) as conv:
         ask = await conv.send_message("`Proceed with mirroring? [y/N]`")
         try:
-            r = conv.wait_event(
-                events.NewMessage(
-                    outgoing=True,
-                    chats=BOTLOG_CHATID))
+            r = conv.wait_event(events.NewMessage(outgoing=True, chats=BOTLOG_CHATID))
             r = await r
         except Exception:
             ans = "N"
@@ -605,10 +577,10 @@ async def create_dir(service, folder_name):
     else:
         metadata["parents"] = [parent_Id]
     folder = (
-        service.files() .create(
-            body=metadata,
-            fields="id, webViewLink",
-            supportsAllDrives=True) .execute())
+        service.files()
+        .create(body=metadata, fields="id, webViewLink", supportsAllDrives=True)
+        .execute()
+    )
     await change_permission(service, folder.get("id"))
     return folder
 
@@ -787,17 +759,13 @@ async def lists(gdrive):
             if len(result) >= page_size:
                 break
 
-            file_name = files.get('name')
-            if files.get('mimeType') == 'application/vnd.google-apps.folder':
-                link = files.get('webViewLink')
-                message += (
-                    f"📁️ • [{file_name}]({link})\n"
-                )
+            file_name = files.get("name")
+            if files.get("mimeType") == "application/vnd.google-apps.folder":
+                link = files.get("webViewLink")
+                message += f"📁️ • [{file_name}]({link})\n"
             else:
-                link = files.get('webContentLink')
-                message += (
-                    f"📄️ • [{file_name}]({link})\n"
-                )
+                link = files.get("webContentLink")
+                message += f"📄️ • [{file_name}]({link})\n"
             result.append(files)
         if len(result) >= page_size:
             break
@@ -903,9 +871,9 @@ async def google_drive_managers(gdrive):
                 service.files().delete(fileId=f_id, supportsAllDrives=True).execute()
             except HttpError as e:
                 status.replace("DELETE]", "ERROR]")
-                reply += (f"`{status}`\n\n"
-                          "`Status` : **BAD**"
-                          f"`Reason` : {str(e)}\n\n")
+                reply += (
+                    f"`{status}`\n\n" "`Status` : **BAD**" f"`Reason` : {str(e)}\n\n"
+                )
                 continue
             else:
                 reply += f"`{status}`\n\n" f"`{name}`\n" "`Status` : **OK**\n\n"
@@ -935,9 +903,8 @@ async def google_drive_managers(gdrive):
             else:
                 status = "[FILE - EXIST]"
             msg = (
-                f"`{status}`\n\n"
-                f"`Name  :` `{name_or_id}`\n"
-                f"`ID    :` `{f_id}`\n")
+                f"`{status}`\n\n" f"`Name  :` `{name_or_id}`\n" f"`ID    :` `{f_id}`\n"
+            )
             if mimeType != "application/vnd.google-apps.folder":
                 msg += f"`Size  :` `{humanbytes(f_size)}`\n"
                 msg += f"`Link  :` [{name_or_id}]({downloadURL})\n\n"
@@ -1116,8 +1083,9 @@ async def google_drive(gdrive):
     try:
         result = await upload(gdrive, service, file_path, file_name, mimeType)
     except CancelProcess:
-        gdrive.respond("`[FILE - CANCELLED]`\n\n"
-                       "`Status` : **OK** - received signal cancelled.")
+        gdrive.respond(
+            "`[FILE - CANCELLED]`\n\n" "`Status` : **OK** - received signal cancelled."
+        )
     if result:
         await gdrive.respond(
             "`[FILE - UPLOAD]`\n\n"
@@ -1229,17 +1197,8 @@ async def check_progress_for_dl(gdrive, gid, previous):
                 percentage = int(file.progress)
                 downloaded = percentage * int(file.total_length) / 100
                 prog_str = "[{0}{1}] `{2}`".format(
-                    "".join(
-                        "█" for i in range(
-                            math.floor(
-                                percentage /
-                                10))),
-                    "".join(
-                        "░" for i in range(
-                            10 -
-                            math.floor(
-                                percentage /
-                                10))),
+                    "".join("█" for i in range(math.floor(percentage / 10))),
+                    "".join("░" for i in range(10 - math.floor(percentage / 10))),
                     file.progress_string(),
                 )
                 msg = (
@@ -1247,7 +1206,8 @@ async def check_progress_for_dl(gdrive, gid, previous):
                     f"{prog_str}\n"
                     f"`Size:` {humanbytes(downloaded)} of {file.total_length_string()}\n"
                     f"`Speed:` {file.download_speed_string()}\n"
-                    f"`ETA:` {file.eta_string()}\n")
+                    f"`ETA:` {file.eta_string()}\n"
+                )
                 if msg != previous or downloaded == file.total_length_string():
                     await gdrive.edit(msg)
                     msg = previous
@@ -1304,4 +1264,6 @@ CMD_HELP.update(
         "\n\nNOTE:"
         "\nfor >`.gdlist` you can combine -l and -p flags with or without name "
         "at the same time, it must be `-l` flags first before use `-p` flags.\n"
-        "And by default it lists from latest 'modifiedTime' and then folders."})
+        "And by default it lists from latest 'modifiedTime' and then folders."
+    }
+)

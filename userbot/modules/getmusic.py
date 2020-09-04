@@ -38,9 +38,8 @@ def getmusicvideo(cat):
         "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
     }
     html = requests.get(
-        "https://www.youtube.com/results?search_query=" +
-        search,
-        headers=headers).text
+        "https://www.youtube.com/results?search_query=" + search, headers=headers
+    ).text
     soup = BeautifulSoup(html, "html.parser")
     for link in soup.find_all("a"):
         if "/watch?v=" in link.get("href"):
@@ -191,8 +190,7 @@ async def _(event):
     await event.delete()
 
 
-@register(outgoing=True,
-          pattern=r"^\.deez (.+?|) (FLAC|MP3\_320|MP3\_256|MP3\_128)")
+@register(outgoing=True, pattern=r"^\.deez (.+?|) (FLAC|MP3\_320|MP3\_256|MP3\_128)")
 async def _(event):
     if event.fwd_from:
         return

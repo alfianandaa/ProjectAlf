@@ -134,12 +134,12 @@ async def auto_accept(event):
         and not (await event.get_sender()).bot
     ):
         try:
-            from userbot.modules.sql_helper.pm_permit_sql import approve, is_approved
             from userbot.modules.sql_helper.globals import gvarstatus
+            from userbot.modules.sql_helper.pm_permit_sql import approve, is_approved
         except AttributeError:
             return
 
-         # Use user custom unapproved message
+        # Use user custom unapproved message
         get_message = gvarstatus("unapproved_msg")
         if get_message is not None:
             UNAPPROVED_MSG = get_message
@@ -194,8 +194,8 @@ async def notifon(non_event):
 @register(outgoing=True, pattern=r"^\.approve$")
 async def approvepm(apprvpm):
     try:
-        from userbot.modules.sql_helper.pm_permit_sql import approve
         from userbot.modules.sql_helper.globals import gvarstatus
+        from userbot.modules.sql_helper.pm_permit_sql import approve
     except AttributeError:
         return await apprvpm.edit("`Running on Non-SQL mode!`")
 
@@ -206,16 +206,16 @@ async def approvepm(apprvpm):
         name0 = str(replied_user.first_name)
         uid = replied_user.id
 
-     # Get user custom msg
+    # Get user custom msg
     getmsg = gvarstatus("unapproved_msg")
     if getmsg is not None:
         UNAPPROVED_MSG = getmsg
     else:
         UNAPPROVED_MSG = DEF_UNAPPROVED_MSG
 
-    async for message in apprvpm.client.iter_messages(apprvpm.chat_id,
-                                                      from_user='me',
-                                                      search=UNAPPROVED_MSG):
+    async for message in apprvpm.client.iter_messages(
+        apprvpm.chat_id, from_user="me", search=UNAPPROVED_MSG
+    ):
         await message.delete()
 
     else:
@@ -232,7 +232,8 @@ async def approvepm(apprvpm):
 
     if BOTLOG:
         await apprvpm.client.send_message(
-            BOTLOG_CHATID, "#APPROVED\n" + "User: " + f"[{name0}](tg://user?id={uid})",
+            BOTLOG_CHATID,
+            "#APPROVED\n" + "User: " + f"[{name0}](tg://user?id={uid})",
         )
 
 
@@ -292,7 +293,8 @@ async def blockpm(block):
 
     if BOTLOG:
         await block.client.send_message(
-            BOTLOG_CHATID, "#BLOCKED\n" + "User: " + f"[{name0}](tg://user?id={uid})",
+            BOTLOG_CHATID,
+            "#BLOCKED\n" + "User: " + f"[{name0}](tg://user?id={uid})",
         )
 
 
@@ -350,8 +352,7 @@ async def add_pmsg(cust_msg):
 
         if BOTLOG:
             await cust_msg.client.send_message(
-                BOTLOG_CHATID,
-                f"***{status} Unapproved message :*** \n\n{msg}"
+                BOTLOG_CHATID, f"***{status} Unapproved message :*** \n\n{msg}"
             )
 
     if conf.lower() == "reset":
@@ -363,11 +364,15 @@ async def add_pmsg(cust_msg):
 
     if conf.lower() == "get":
         if custom_message is not None:
-            await cust_msg.edit("***This is your current unapproved message:***"
-                                f"\n\n{custom_message}")
+            await cust_msg.edit(
+                "***This is your current unapproved message:***" f"\n\n{custom_message}"
+            )
         else:
-            await cust_msg.edit("*You Have not set unapproved message yet*\n"
-                                f"Using default message: \n\n`{DEF_UNAPPROVED_MSG}`")
+            await cust_msg.edit(
+                "*You Have not set unapproved message yet*\n"
+                f"Using default message: \n\n`{DEF_UNAPPROVED_MSG}`"
+            )
+
 
 CMD_HELP.update(
     {

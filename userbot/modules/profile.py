@@ -182,4 +182,6 @@ CMD_HELP.update(
         "\n\n>`.reserved`"
         "\nUsage: Shows usernames reserved by you."
         "\n\n>`.count`"
-        "\nUsage: Counts your groups, chats, bots etc..."})
+        "\nUsage: Counts your groups, chats, bots etc..."
+    }
+)

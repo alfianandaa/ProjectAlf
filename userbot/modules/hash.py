@@ -59,8 +59,9 @@ async def gethash(hash_q):
 @register(outgoing=True, pattern=r"^\.base64 (en|de) (.*)")
 async def endecrypt(query):
     if query.pattern_match.group(1) == "en":
-        lething = str(pybase64.b64encode(
-            bytes(query.pattern_match.group(2), "utf-8")))[2:]
+        lething = str(pybase64.b64encode(bytes(query.pattern_match.group(2), "utf-8")))[
+            2:
+        ]
         await query.reply("Encoded: `" + lething[:-1] + "`")
     else:
         lething = str(
@@ -77,4 +78,5 @@ CMD_HELP.update(
         "\nUsage: Find the md5, sha1, sha256, sha512 of the string when written into a txt file.",
         "base64": ">`.base64 [en or de]`"
         "\nUsage: Find the base64 encoding of the given string or decode it.",
-    })
+    }
+)

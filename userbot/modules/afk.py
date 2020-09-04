@@ -10,9 +10,9 @@ from random import choice, randint
 
 from telethon.events import StopPropagation
 
+from userbot import BOTLOG  # pylint: disable=unused-imports
 from userbot import (
     AFKREASON,
-    BOTLOG,  # pylint: disable=unused-imports
     BOTLOG_CHATID,
     CMD_HELP,
     COUNT_MSG,

@@ -23,8 +23,8 @@ from userbot import (
 @bot.on(ChatAction)
 async def ANTI_SPAMBOTS(welcm):
     try:
-        """ Ban a recently joined user if it
-           matches the spammer checking algorithm. """
+        """Ban a recently joined user if it
+        matches the spammer checking algorithm."""
         if not ANTI_SPAMBOT:
             return
         if welcm.user_joined or welcm.user_added:
@@ -80,12 +80,10 @@ async def ANTI_SPAMBOTS(welcm):
                     check_user = await welcm.client.get_entity(user_id)
 
                     # DEBUGGING. LEAVING IT HERE FOR SOME TIME ###
-                    print(
-                        f"User Joined: {check_user.first_name} [ID: {check_user.id}]")
+                    print(f"User Joined: {check_user.first_name} [ID: {check_user.id}]")
                     print(f"Chat: {welcm.chat.title}")
                     print(f"Time: {join_time}")
-                    print(
-                        f"Message Sent: {message.text}\n\n[Time: {message_date}]")
+                    print(f"Message Sent: {message.text}\n\n[Time: {message_date}]")
                     ##############################################
 
                     try:

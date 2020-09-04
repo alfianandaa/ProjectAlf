@@ -30,10 +30,8 @@ async def hep(event):
         for i in CMD_HELP:
             string += "`" + str(i)
             string += "`  •  "
-        await event.edit(f"{string1}"
-                         f"{string3}"
-                         f"{string2}\n"
-                         f"{string}"
-                         f"{string2}")
+        await event.edit(
+            f"{string1}" f"{string3}" f"{string2}\n" f"{string}" f"{string2}"
+        )
         await asyncio.sleep(20)
         await event.delete()

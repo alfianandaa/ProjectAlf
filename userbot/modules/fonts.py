@@ -428,8 +428,7 @@ async def cursive2(cursivebolded):
     string = "".join(args).lower()
     for normiecharacter in string:
         if normiecharacter in normiefont:
-            cursiveboldcharacter = cursiveboldx[normiefont.index(
-                normiecharacter)]
+            cursiveboldcharacter = cursiveboldx[normiefont.index(normiecharacter)]
             string = string.replace(normiecharacter, cursiveboldcharacter)
     await cursivebolded.edit(string)
 

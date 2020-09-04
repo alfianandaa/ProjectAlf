@@ -9,9 +9,10 @@ from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
 
 
-@register(outgoing=True,
-          pattern=r"^\.web ?(.+?|) (anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles|letsupload|0x0)",
-          )
+@register(
+    outgoing=True,
+    pattern=r"^\.web ?(.+?|) (anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles|letsupload|0x0)",
+)
 async def _(event):
     await event.edit("`Processing ...`")
     input_str = event.pattern_match.group(1)
@@ -57,8 +58,7 @@ async def _(event):
 		return"""
     if t_response:
         try:
-            t_response = json.dumps(
-                json.loads(t_response), sort_keys=True, indent=4)
+            t_response = json.dumps(json.loads(t_response), sort_keys=True, indent=4)
         except Exception:
             # some sites don't return valid JSONs
             pass
@@ -67,6 +67,10 @@ async def _(event):
         await event.edit(t_response)
 
 
-CMD_HELP.update({"webupload": ">`.web` **File** **Server**"
-                 "\nServer List: anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles|lestupload|0x0"
-                 "\nUsage: Upload file to web."})
+CMD_HELP.update(
+    {
+        "webupload": ">`.web` **File** **Server**"
+        "\nServer List: anonfiles|transfer|filebin|anonymousfiles|megaupload|bayfiles|lestupload|0x0"
+        "\nUsage: Upload file to web."
+    }
+)
