@@ -69,7 +69,7 @@ BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID") or None)
 
 # Userbot logging feature switch.
 BOTLOG = sb(os.environ.get("BOTLOG") or "False")
-LOGSPAMMER = sb(os.environ.get("LOGSPAMMER") or "False")
+LOGSPAMMER = sb(os.environ.get("LOGSPAMMER") or "True")
 
 # Default .alive name
 ALIVE_NAME = os.environ.get("ALIVE_NAME") or None
