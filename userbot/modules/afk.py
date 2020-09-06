@@ -10,9 +10,18 @@ from random import choice, randint
 
 from telethon.events import StopPropagation
 
-from userbot import BOTLOG  # pylint: disable=unused-imports
-from userbot import AFKREASON, BOTLOG_CHATID, CMD_HELP, PM_AUTO_BAN
 from userbot.events import register
+
+from userbot import (  # noqa pylint: disable=unused-import isort:skip
+    AFKREASON,
+    BOTLOG,
+    BOTLOG_CHATID,
+    CMD_HELP,
+    COUNT_MSG,
+    ISAFK,
+    PM_AUTO_BAN,
+    USERS,
+)
 
 # ========================= CONSTANTS ============================
 AFKSTR = [
