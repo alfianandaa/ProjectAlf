@@ -115,8 +115,6 @@ async def glitch(event):
 
 @register(outgoing=True, pattern=r"^\.mmf(?: |$)(.*)")
 async def mim(event):
-    if event.fwd_from:
-        return
     if not event.reply_to_msg_id:
         await event.edit(
             "`Syntax: reply to an image with .mmf` 'text on top' ; 'text on bottom' "
@@ -126,12 +124,13 @@ async def mim(event):
     if not reply_message.media:
         await event.edit("```reply to a image/sticker/gif```")
         return
-    reply_message.sender
     await bot.download_file(reply_message.media)
-    if reply_message.sender.bot:
-        await event.edit("```Reply to actual users message.```")
-        return
-    else:
+    if event.is_reply:
+        data = await check_media(reply_message)
+        if isinstance(data, bool):
+            await event.edit("`Unsupported Files...`")
+            return
+
         await event.edit(
             "```Transfiguration Time! Mwahaha Memifying this image! (」ﾟﾛﾟ)｣ ```"
         )
@@ -139,7 +138,6 @@ async def mim(event):
         text = event.pattern_match.group(1)
         if event.reply_to_msg_id:
             file_name = "meme.jpg"
-            reply_message = await event.get_reply_message()
             to_download_directory = TEMP_DOWNLOAD_DIRECTORY
             downloaded_file_name = os.path.join(to_download_directory, file_name)
             downloaded_file_name = await bot.download_media(
@@ -153,6 +151,7 @@ async def mim(event):
         )
         await event.delete()
         os.remove(webp_file)
+        os.remove(dls_loc)
 
 
 async def draw_meme_text(image_path, text):
