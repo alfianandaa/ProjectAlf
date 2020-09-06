@@ -96,20 +96,20 @@ async def glitch(event):
     )
     await event.edit("`Uploading Glitched Media...`")
     nosave = await event.client.send_file(
-                 event.chat_id, Glitched, force_document=False, reply_to=event.reply_to_msg_id
-             )
+        event.chat_id, Glitched, force_document=False, reply_to=event.reply_to_msg_id
+    )
     await event.delete()
     os.remove(Glitched)
     await bot(
-            functions.messages.SaveGifRequest(
-                id=types.InputDocument(
-                    id=nosave.media.document.id,
-                    access_hash=nosave.media.document.access_hash,
-                    file_reference=nosave.media.document.file_reference,
-                ),
-                unsave=True,
-            )
+        functions.messages.SaveGifRequest(
+            id=types.InputDocument(
+                id=nosave.media.document.id,
+                access_hash=nosave.media.document.access_hash,
+                file_reference=nosave.media.document.file_reference,
+            ),
+            unsave=True,
         )
+    )
     os.remove(glitch_file)
 
 
