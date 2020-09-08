@@ -363,7 +363,7 @@ async def useragent():
 
 CMD_HELP.update(
     {
-        "direct": ">`.dir <url>`"
+        "direct": ">`.direct <url>`"
         "\nUsage: Reply to a link or paste a URL to\n"
         "generate a direct download link\n\n"
         "List of supported URLs:\n"
