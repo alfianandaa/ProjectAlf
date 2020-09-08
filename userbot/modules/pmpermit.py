@@ -205,7 +205,7 @@ async def approvepm(apprvpm):
         aname = replied_user.id
         name0 = str(replied_user.first_name)
         uid = replied_user.id
-        
+
     else:
         aname = await apprvpm.client.get_entity(apprvpm.chat_id)
         name0 = str(aname.first_name)
