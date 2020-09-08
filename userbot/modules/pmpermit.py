@@ -205,6 +205,11 @@ async def approvepm(apprvpm):
         aname = replied_user.id
         name0 = str(replied_user.first_name)
         uid = replied_user.id
+        
+    else:
+        aname = await apprvpm.client.get_entity(apprvpm.chat_id)
+        name0 = str(aname.first_name)
+        uid = apprvpm.chat_id
 
     # Get user custom msg
     getmsg = gvarstatus("unapproved_msg")
@@ -217,11 +222,6 @@ async def approvepm(apprvpm):
         apprvpm.chat_id, from_user="me", search=UNAPPROVED_MSG
     ):
         await message.delete()
-
-    else:
-        aname = await apprvpm.client.get_entity(apprvpm.chat_id)
-        name0 = str(aname.first_name)
-        uid = apprvpm.chat_id
 
     try:
         approve(uid)
