@@ -315,6 +315,7 @@ async def upload_track(track_location, message):
     supports_streaming = True
     force_document = False
     caption_rts = os.path.basename(track_location)
+    c_time = time.time()
     await message.client.send_file(
         message.chat_id,
         track_location,
@@ -323,6 +324,9 @@ async def upload_track(track_location, message):
         supports_streaming=supports_streaming,
         allow_cache=False,
         attributes=document_attributes,
+        progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+            progress(d, t, message, c_time, "[UPLOAD]")
+        ),
     )
     os.remove(track_location)
 
