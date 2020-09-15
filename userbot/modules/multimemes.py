@@ -14,6 +14,7 @@ import random
 import re
 import textwrap
 import time
+from asyncio.exceptions import TimeoutError
 from random import randint, uniform
 
 from glitch_this import ImageGlitcher
@@ -288,26 +289,30 @@ async def quotess(qotli):
         await qotli.edit("```Reply to actual users message.```")
         return
     await qotli.delete()
-    async with bot.conversation(chat) as conv:
-        try:
-            response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=1031952739)
-            )
-            msg = await bot.forward_messages(chat, reply_message)
-            response = await response
-            await bot.send_read_acknowledge(conv.chat_id)
-        except YouBlockedUserError:
-            await qotli.reply("```Please unblock @QuotLyBot and try again```")
-            return
-        if response.text.startswith("Hi!"):
-            await qotli.edit(
-                "```Can you kindly disable your forward privacy settings for good?```"
-            )
-        else:
-            await qotli.delete()
-            await bot.forward_messages(qotli.chat_id, response.message)
-            await bot.send_read_acknowledge(qotli.chat_id)
-            await qotli.client.delete_messages(conv.chat_id, [msg.id, response.id])
+    try:
+        async with bot.conversation(chat) as conv:
+            try:
+                response = conv.wait_event(
+                    events.NewMessage(incoming=True, from_users=1031952739)
+                )
+                msg = await bot.forward_messages(chat, reply_message)
+                response = await response
+                await bot.send_read_acknowledge(conv.chat_id)
+            except YouBlockedUserError:
+                await qotli.reply("```Please unblock @QuotLyBot and try again```")
+                return
+            if response.text.startswith("Hi!"):
+                await qotli.edit(
+                    "```Can you kindly disable your forward privacy settings for good?```"
+                )
+            else:
+                await qotli.delete()
+                await bot.forward_messages(qotli.chat_id, response.message)
+                await bot.send_read_acknowledge(qotli.chat_id)
+                await qotli.client.delete_messages(conv.chat_id, [msg.id, response.id])
+    except TimeoutError:
+        await qotli.edit("`@QuotlyBot doesnt responding`")
+        await qotli.client.delete_messages(conv.chat_id, [msg.id])
 
 
 @register(outgoing=True, pattern=r"^\.hz(:? |$)(.*)?")
@@ -330,46 +335,52 @@ async def hazz(hazmat):
     await hazmat.edit("```Suit Up Capt!, We are going to purge some virus...```")
     message_id_to_reply = hazmat.message.reply_to_msg_id
     msg_reply = None
-    async with hazmat.client.conversation(chat) as conv:
-        try:
-            msg = await conv.send_message(reply_message)
-            if level:
-                m = f"/hazmat {level}"
-                msg_reply = await conv.send_message(m, reply_to=msg.id)
-                r = await conv.get_response()
-            elif reply_message.gif:
-                m = "/hazmat"
-                msg_reply = await conv.send_message(m, reply_to=msg.id)
-                r = await conv.get_response()
-            response = await conv.get_response()
-            await bot.send_read_acknowledge(conv.chat_id)
-        except YouBlockedUserError:
-            await hazmat.reply("`Please unblock` @hazmat_suit_bot`...`")
-            return
-        if response.text.startswith("I can't"):
-            await hazmat.edit("`Can't handle this GIF...`")
-            await hazmat.client.delete_messages(
-                conv.chat_id, [msg.id, response.id, r.id, msg_reply.id]
-            )
-            return
-        else:
-            downloaded_file_name = await hazmat.client.download_media(
-                response.media, TEMP_DOWNLOAD_DIRECTORY
-            )
-            await hazmat.client.send_file(
-                hazmat.chat_id,
-                downloaded_file_name,
-                force_document=False,
-                reply_to=message_id_to_reply,
-            )
-            if msg_reply is not None:
+    try:
+        async with hazmat.client.conversation(chat) as conv:
+            try:
+                msg = await conv.send_message(reply_message)
+                if level:
+                    m = f"/hazmat {level}"
+                    msg_reply = await conv.send_message(m, reply_to=msg.id)
+                    r = await conv.get_response()
+                elif reply_message.gif:
+                    m = "/hazmat"
+                    msg_reply = await conv.send_message(m, reply_to=msg.id)
+                    r = await conv.get_response()
+                response = await conv.get_response()
+                await bot.send_read_acknowledge(conv.chat_id)
+            except YouBlockedUserError:
+                await hazmat.reply("`Please unblock` @hazmat_suit_bot`...`")
+                return
+            if response.text.startswith("I can't"):
+                await hazmat.edit("`Can't handle this GIF...`")
                 await hazmat.client.delete_messages(
-                    conv.chat_id, [msg.id, msg_reply.id, r.id, response.id]
+                    conv.chat_id, [msg.id, response.id, r.id, msg_reply.id]
                 )
+                return
             else:
-                await hazmat.client.delete_messages(conv.chat_id, [msg.id, response.id])
-    await hazmat.delete()
-    return os.remove(downloaded_file_name)
+                downloaded_file_name = await hazmat.client.download_media(
+                    response.media, TEMP_DOWNLOAD_DIRECTORY
+                )
+                await hazmat.client.send_file(
+                    hazmat.chat_id,
+                    downloaded_file_name,
+                    force_document=False,
+                    reply_to=message_id_to_reply,
+                )
+                if msg_reply is not None:
+                    await hazmat.client.delete_messages(
+                        conv.chat_id, [msg.id, msg_reply.id, r.id, response.id]
+                    )
+                else:
+                    await hazmat.client.delete_messages(
+                        conv.chat_id, [msg.id, response.id]
+                    )
+        await hazmat.delete()
+        return os.remove(downloaded_file_name)
+    except TimeoutError:
+        await hazmat.edit("`@hazmat_suit_bot isnt responding..`")
+        await hazmat.client.delete_messages(conv.chat_id, [msg.id])
 
 
 @register(outgoing=True, pattern=r"^\.df(:? |$)([1-8])?")
@@ -390,40 +401,46 @@ async def fryerrr(fry):
         return
     chat = "@image_deepfrybot"
     message_id_to_reply = fry.message.reply_to_msg_id
-    async with fry.client.conversation(chat) as conv:
-        try:
-            msg = await conv.send_message(reply_message)
-            if level:
-                m = f"/deepfry {level}"
-                msg_level = await conv.send_message(m, reply_to=msg.id)
-                r = await conv.get_response()
-            response = await conv.get_response()
-            await bot.send_read_acknowledge(conv.chat_id)
-        except YouBlockedUserError:
-            await fry.reply("`Please unblock` @image_deepfrybot`...`")
-            return
-        if response.text.startswith("Forward"):
-            await fry.edit("`Please disable your forward privacy setting...`")
-        else:
-            downloaded_file_name = await fry.client.download_media(
-                response.media, TEMP_DOWNLOAD_DIRECTORY
-            )
-            await fry.client.send_file(
-                fry.chat_id,
-                downloaded_file_name,
-                force_document=False,
-                reply_to=message_id_to_reply,
-            )
+    try:
+        async with fry.client.conversation(chat) as conv:
             try:
-                msg_level
-            except NameError:
-                await fry.client.delete_messages(conv.chat_id, [msg.id, response.id])
+                msg = await conv.send_message(reply_message)
+                if level:
+                    m = f"/deepfry {level}"
+                    msg_level = await conv.send_message(m, reply_to=msg.id)
+                    r = await conv.get_response()
+                response = await conv.get_response()
+                await bot.send_read_acknowledge(conv.chat_id)
+            except YouBlockedUserError:
+                await fry.reply("`Please unblock` @image_deepfrybot`...`")
+                return
+            if response.text.startswith("Forward"):
+                await fry.edit("`Please disable your forward privacy setting...`")
             else:
-                await fry.client.delete_messages(
-                    conv.chat_id, [msg.id, response.id, r.id, msg_level.id]
+                downloaded_file_name = await fry.client.download_media(
+                    response.media, TEMP_DOWNLOAD_DIRECTORY
                 )
-    await fry.delete()
-    return os.remove(downloaded_file_name)
+                await fry.client.send_file(
+                    fry.chat_id,
+                    downloaded_file_name,
+                    force_document=False,
+                    reply_to=message_id_to_reply,
+                )
+                try:
+                    msg_level
+                except NameError:
+                    await fry.client.delete_messages(
+                        conv.chat_id, [msg.id, response.id]
+                    )
+                else:
+                    await fry.client.delete_messages(
+                        conv.chat_id, [msg.id, response.id, r.id, msg_level.id]
+                    )
+        await fry.delete()
+        return os.remove(downloaded_file_name)
+    except TimeoutError:
+        await fry.edit("`@image_deepfrybot isnt responding..`")
+        await fry.client.delete_messages(conv.chat_id, [msg.id])
 
 
 @register(pattern=r"^\.deepfry(?: |$)(.*)", outgoing=True)
