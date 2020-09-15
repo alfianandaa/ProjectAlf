@@ -13,6 +13,7 @@ import os
 import random
 import re
 import textwrap
+import time
 from random import randint, uniform
 
 from glitch_this import ImageGlitcher
@@ -23,6 +24,7 @@ from telethon.tl.types import DocumentAttributeFilename
 
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
 from userbot.events import register
+from userbot.utils import progress
 
 THUMB_IMAGE_PATH = "./thumb_image.jpg"
 
@@ -95,8 +97,15 @@ async def glitch(event):
         loop=LOOP,
     )
     await event.edit("`Uploading Glitched Media...`")
+    c_time = time.time()
     nosave = await event.client.send_file(
-        event.chat_id, Glitched, force_document=False, reply_to=event.reply_to_msg_id
+        event.chat_id,
+        Glitched,
+        force_document=False,
+        reply_to=event.reply_to_msg_id,
+        progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+            progress(d, t, event, c_time, "[UPLOAD]")
+        ),
     )
     await event.delete()
     os.remove(Glitched)
