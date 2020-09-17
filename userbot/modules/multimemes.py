@@ -544,9 +544,10 @@ async def waifu(animu):
     await sticcers[0].click(
         animu.chat_id,
         reply_to=animu.reply_to_msg_id,
-        silent=True if animu.is_reply else False,
+        silent=bool(animu.is_reply),
         hide_via=True,
     )
+
     await animu.delete()
 
 
