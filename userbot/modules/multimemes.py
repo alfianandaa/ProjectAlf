@@ -21,11 +21,11 @@ from glitch_this import ImageGlitcher
 from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 from telethon import events, functions, types
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.types import DocumentAttributeFilename
 
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
 from userbot.events import register
 from userbot.utils import progress
+from userbot.utils.tools import check_media
 
 THUMB_IMAGE_PATH = "./thumb_image.jpg"
 
@@ -526,35 +526,6 @@ async def deepfry(img: Image) -> Image:
     img = ImageEnhance.Sharpness(img).enhance(randint(5, 300))
 
     return img
-
-
-async def check_media(reply_message):
-    if reply_message and reply_message.media:
-        if reply_message.photo:
-            data = reply_message.photo
-        elif reply_message.document:
-            if (
-                DocumentAttributeFilename(file_name="AnimatedSticker.tgs")
-                in reply_message.media.document.attributes
-            ):
-                return False
-            if (
-                reply_message.gif
-                or reply_message.video
-                or reply_message.audio
-                or reply_message.voice
-            ):
-                return False
-            data = reply_message.media.document
-        else:
-            return False
-    else:
-        return False
-
-    if not data or data is None:
-        return False
-    else:
-        return data
 
 
 @register(outgoing=True, pattern=r"^\.waifu(?: |$)(.*)")
