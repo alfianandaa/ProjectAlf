@@ -12,7 +12,7 @@ from userbot.utils.tools import check_media
 Converted = TEMP_DOWNLOAD_DIRECTORY + "sticker.webp"
 
 
-@register(outgoing=True, pattern=r"^\.ghost(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.ghost$")
 async def ghost(ghost):
     if not ghost.reply_to_msg_id:
         await ghost.edit("`Reply to any media..`")
@@ -55,7 +55,7 @@ async def ghost(ghost):
         pass
 
 
-@register(outgoing=True, pattern=r"^\.media(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.(mirror|flip)$")
 async def mirrorflip(event):
     if not event.reply_to_msg_id:
         await event.edit("`Reply to Any media..`")
@@ -147,8 +147,10 @@ CMD_HELP.update(
     {
         "transform": ">`.ghost`"
         "\nUsage: Enchance your image to become a ghost!."
-        "\n\n>`.media <flip|mirror>`"
-        "\nUsage: To mirror/flip your image"
+        "\n\n>`.flip`"
+        "\nUsage: To flip your image"
+        "\n\n>`.mirror`"
+        "\nUsage: To mirror your image"
         "\n\n>`.rotate <value>`"
         "\nUsage: To rotate your image\n* The value is range 1-360 if not it'll give default value which is 90"
     }
