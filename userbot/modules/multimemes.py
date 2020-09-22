@@ -317,7 +317,7 @@ async def quotess(qotli):
                 await qotli.client.delete_messages(conv.chat_id, [msg.id, response.id])
                 os.remove(downloaded_file_name)
     except TimeoutError:
-        await qotli.edit("`@QuotlyBot doesnt responding`")
+        await qotli.edit("`@QuotlyBot isnt responding`")
         await qotli.client.delete_messages(conv.chat_id, [msg.id])
 
 
