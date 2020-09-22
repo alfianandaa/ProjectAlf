@@ -9,11 +9,10 @@ import shutil
 import time
 
 import deezloader
-import requests
-from bs4 import BeautifulSoup
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from pylast import User
+from selenium import webdriver
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
@@ -21,6 +20,7 @@ from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
 from userbot import (
     CMD_HELP,
     DEEZER_ARL_TOKEN,
+    GOOGLE_CHROME_BIN,
     LASTFM_USERNAME,
     TEMP_DOWNLOAD_DIRECTORY,
     bot,
@@ -29,24 +29,23 @@ from userbot import (
 from userbot.events import register
 from userbot.utils import progress
 
-# For getvideosong
 
-
-def getmusicvideo(cat):
+async def getmusicvideo(cat):
+    video_link = ""
     search = cat
-    headers = {
-        "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
-    }
-    html = requests.get(
-        "https://www.youtube.com/results?search_query=" + search, headers=headers
-    ).text
-    soup = BeautifulSoup(html, "html.parser")
-    for link in soup.find_all("a"):
-        if "/watch?v=" in link.get("href"):
-            # May change when Youtube Website may get updated in the future.
-            video_link = link.get("href")
-            break
-    video_link = "http://www.youtube.com/" + video_link
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--ignore-certificate-errors")
+    chrome_options.add_argument("--test-type")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.binary_location = GOOGLE_CHROME_BIN
+    driver = webdriver.Chrome(chrome_options=chrome_options)
+    driver.get("https://www.youtube.com/results?search_query=" + search)
+    user_data = driver.find_elements_by_xpath('//*[@id="video-title"]')
+    for i in user_data:
+        video_link = i.get_attribute("href")
+        break
     command = 'youtube-dl -f "[filesize<50M]" --merge-output-format mp4 ' + video_link
     os.system(command)
 
@@ -102,18 +101,19 @@ async def _(event):
     if event.pattern_match.group(1):
         query = event.pattern_match.group(1)
         await event.edit("`Wait..! I am finding your videosong..`")
-    elif reply.message:
-        query = reply.message
+    elif reply:
+        query = str(reply.message)
         await event.edit("`Wait..! I am finding your videosong..`")
     else:
         await event.edit("`What I am Supposed to find?`")
         return
-    getmusicvideo(query)
+    await getmusicvideo(query)
     l = glob.glob(("*.mp4")) + glob.glob(("*.mkv")) + glob.glob(("*.webm"))
     if l:
         await event.edit("`Yeah..! i found something..`")
     else:
-        await event.edit(f"Sorry..! i can't find anything with `{query}`")
+        await event.edit(f"`Sorry..! i can't find anything with` **{query}**")
+        return
     loa = l[0]
     metadata = extractMetadata(createParser(loa))
     duration = 0
@@ -125,7 +125,6 @@ async def _(event):
         width = metadata.get("width")
     if metadata.has("height"):
         height = metadata.get("height")
-    await event.edit("`Uploading video.. Please wait..`")
     os.system("cp *mp4 thumb.mp4")
     os.system("ffmpeg -i thumb.mp4 -vframes 1 -an -s 480x360 -ss 5 thumb.jpg")
     thumb_image = "thumb.jpg"
@@ -152,7 +151,7 @@ async def _(event):
             progress(d, t, event, c_time, "[UPLOAD]", loa)
         ),
     )
-    await event.delete()
+    await event.edit(f"**{query}** `Uploaded Successfully..!`")
     os.remove(thumb_image)
     os.system("rm -rf *.mkv")
     os.system("rm -rf *.mp4")
