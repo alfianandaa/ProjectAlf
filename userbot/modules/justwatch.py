@@ -2,10 +2,14 @@
 # Author: Sumanjay (https://github.com/cyberboysumanjay) (@cyberboysumanjay)
 # All rights reserved.
 
-from justwatch import JustWatch
+from justwatch import JustWatch, justwatchapi
 
 from userbot import CMD_HELP, WATCH_COUNTRY
 from userbot.events import register
+
+justwatchapi.__dict__["HEADER"] = {
+    "User-Agent": "JustWatch client (github.com/dawoudt/JustWatchAPI)"
+}
 
 
 def get_stream_data(query):
@@ -80,8 +84,11 @@ async def _(event):
     if event.fwd_from:
         return
     query = event.pattern_match.group(1)
-    await event.edit("Finding Sites...")
-    streams = get_stream_data(query)
+    await event.edit("`Finding Sites...`")
+    try:
+        streams = get_stream_data(query)
+    except Exception as e:
+        return await event.edit(f"**Error :** `{str(e)}`")
     title = streams["title"]
     thumb_link = streams["movie_thumb"]
     release_year = streams["release_year"]
