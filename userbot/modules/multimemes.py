@@ -59,7 +59,7 @@ async def glitch(event):
         return
     await event.edit("`Downloading Media..`")
     downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "glitch.png")
-    downloaded_file_name = await bot.download_media(
+    glitch_file = await bot.download_media(
         reply_message,
         downloaded_file_name,
     )
@@ -80,7 +80,6 @@ async def glitch(event):
         value = 2
     await event.edit("```Glitching This Media```")
     await asyncio.sleep(2)
-    glitch_file = downloaded_file_name
     glitcher = ImageGlitcher()
     img = Image.open(glitch_file)
     glitch_img = glitcher.glitch_image(img, value, color_offset=True, gif=True)
