@@ -22,8 +22,7 @@ async def transform(event):
         await event.edit("`reply to a image/sticker`")
         return
     await event.edit("`Downloading Media..`")
-    file_name = "gambar.png"
-    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, file_name)
+    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "gambar.png")
     transform = await bot.download_media(
         reply_message,
         downloaded_file_name,
@@ -72,8 +71,7 @@ async def rotate(event):
         await event.edit("`reply to a image/sticker`")
         return
     await event.edit("`Downloading Media..`")
-    file_name = "gambar.png"
-    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, file_name)
+    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "gambar.png")
     rotate = await bot.download_media(
         reply_message,
         downloaded_file_name,
