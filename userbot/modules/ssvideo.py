@@ -38,7 +38,5 @@ async def ssvideo(event):
 
 
 CMD_HELP.update(
-    {
-     "ssvideo": "`>.ssvideo <framexframe>`" "\nUsage: to ss video frame per frame"
-    }
+    {"ssvideo": "`>.ssvideo <framexframe>`" "\nUsage: to ss video frame per frame"}
 )
