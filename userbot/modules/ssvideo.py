@@ -21,7 +21,7 @@ async def ssvideo(event):
     try:
         await event.edit("`Proccessing..`")
         frame = event.pattern_match.group(1)
-        command = f"vcsi -g {frame} {ss} -o ss.png "
+        command = f"vcsi -g {frame}x{frame} {ss} -o ss.png "
         os.system(command)
         await event.client.send_file(
             event.chat_id,
@@ -38,5 +38,5 @@ async def ssvideo(event):
 
 
 CMD_HELP.update(
-    {"ssvideo": "`>.ssvideo <framexframe>`" "\nUsage: to ss video frame per frame"}
+    {"ssvideo": "`>.ssvideo <frame>`" "\nUsage: to ss video frame per frame"}
 )
