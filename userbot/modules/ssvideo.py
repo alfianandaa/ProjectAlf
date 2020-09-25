@@ -21,6 +21,8 @@ async def ssvideo(event):
     try:
         await event.edit("`Proccessing..`")
         frame = event.pattern_match.group(1)
+        if frame < 10:
+             return await event.edit("`hey..dont put isnt that much`")
         command = f"vcsi -g {frame}x{frame} {ss} -o ss.png "
         os.system(command)
         await event.client.send_file(
