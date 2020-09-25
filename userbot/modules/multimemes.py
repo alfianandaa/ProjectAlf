@@ -132,7 +132,7 @@ async def mim(event):
         return
     await event.edit("`Downloading media..`")
     downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "meme.jpg")
-    downloaded_file_name = await bot.download_media(
+    dls_loc = await bot.download_media(
         reply_message,
         downloaded_file_name,
     )
@@ -147,7 +147,6 @@ async def mim(event):
     )
     await asyncio.sleep(5)
     text = event.pattern_match.group(1)
-    dls_loc = downloaded_file_name
     webp_file = await draw_meme_text(dls_loc, text)
     await event.client.send_file(
         event.chat_id, webp_file, reply_to=event.reply_to_msg_id
