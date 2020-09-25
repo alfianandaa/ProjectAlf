@@ -21,8 +21,13 @@ async def transform(event):
     if not reply_message.media:
         await event.edit("`reply to a image/sticker`")
         return
-    await bot.download_file(reply_message.media)
     await event.edit("`Downloading Media..`")
+    file_name = "gambar.png"
+    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, file_name)
+    transform = await bot.download_media(
+        reply_message,
+        downloaded_file_name,
+    )
     if event.is_reply:
         data = await check_media(reply_message)
         if isinstance(data, bool):
@@ -35,12 +40,6 @@ async def transform(event):
     try:
         await event.edit("`Transforming this image..`")
         cmd = event.pattern_match.group(1)
-        file_name = "gambar.png"
-        downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, file_name)
-        transform = await bot.download_media(
-            reply_message,
-            downloaded_file_name,
-        )
         im = Image.open(transform).convert("RGB")
         if cmd == "mirror":
             IMG = ImageOps.mirror(im)
@@ -72,8 +71,13 @@ async def rotate(event):
     if not reply_message.media:
         await event.edit("`reply to a image/sticker`")
         return
-    await bot.download_file(reply_message.media)
     await event.edit("`Downloading Media..`")
+    file_name = "gambar.png"
+    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, file_name)
+    rotate = await bot.download_media(
+        reply_message,
+        downloaded_file_name,
+    )
     if event.is_reply:
         data = await check_media(reply_message)
         if isinstance(data, bool):
@@ -89,12 +93,6 @@ async def rotate(event):
             raise ValueError
     except ValueError:
         value = 90
-    file_name = "gambar.png"
-    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, file_name)
-    rotate = await bot.download_media(
-        reply_message,
-        downloaded_file_name,
-    )
     im = Image.open(rotate).convert("RGB")
     IMG = im.rotate(value, expand=1)
     IMG.save(Converted, quality=95)
