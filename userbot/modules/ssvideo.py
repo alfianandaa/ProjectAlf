@@ -6,9 +6,10 @@
 
 import os
 
-from userbot import CMD_HELP, bot, TEMP_DOWNLOAD_DIRECTORY
-from userbot.events import register
 from telethon.tl.types import DocumentAttributeFilename
+
+from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
+from userbot.events import register
 
 
 @register(outgoing=True, pattern=r"^\.ssvideo(?: |$)(.*)")
@@ -57,8 +58,10 @@ async def ssvideo(event):
 
 async def gifify(sticker_path: str, quality: int = 256) -> str:
     dest = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "animation.gif")
-    with open(dest, 'wb') as t_g:
-        lottie.exporters.gif.export_gif(lottie.parsers.tgs.parse_tgs(sticker_path), t_g, quality, 1)
+    with open(dest, "wb") as t_g:
+        lottie.exporters.gif.export_gif(
+            lottie.parsers.tgs.parse_tgs(sticker_path), t_g, quality, 1
+        )
     os.remove(sticker_path)
     return dest
 
