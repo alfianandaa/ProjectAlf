@@ -21,12 +21,6 @@ async def transform(event):
     if not reply_message.media:
         await event.edit("`reply to a image/sticker`")
         return
-    await event.edit("`Downloading Media..`")
-    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "gambar.png")
-    transform = await bot.download_media(
-        reply_message,
-        downloaded_file_name,
-    )
     if event.is_reply:
         data = await check_media(reply_message)
         if isinstance(data, bool):
@@ -35,7 +29,12 @@ async def transform(event):
     else:
         await event.edit("`Reply to Any Media Sur`")
         return
-
+    await event.edit("`Downloading Media..`")
+    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "gambar.png")
+    transform = await bot.download_media(
+        reply_message,
+        downloaded_file_name,
+    )
     try:
         await event.edit("`Transforming this image..`")
         cmd = event.pattern_match.group(1)
@@ -70,12 +69,6 @@ async def rotate(event):
     if not reply_message.media:
         await event.edit("`reply to a image/sticker`")
         return
-    await event.edit("`Downloading Media..`")
-    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "gambar.png")
-    rotate = await bot.download_media(
-        reply_message,
-        downloaded_file_name,
-    )
     if event.is_reply:
         data = await check_media(reply_message)
         if isinstance(data, bool):
@@ -84,6 +77,12 @@ async def rotate(event):
     else:
         await event.edit("`Reply to Any Media Sur`")
         return
+    await event.edit("`Downloading Media..`")
+    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "gambar.png")
+    rotate = await bot.download_media(
+        reply_message,
+        downloaded_file_name,
+    )
     await event.edit("`Rotating your media..`")
     try:
         value = int(event.pattern_match.group(1))
