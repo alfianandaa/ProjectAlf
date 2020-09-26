@@ -26,9 +26,6 @@ async def transform(event):
         if isinstance(data, bool):
             await event.edit("`Unsupported Files...`")
             return
-    else:
-        await event.edit("`Reply to Any Media Sur`")
-        return
     await event.edit("`Downloading Media..`")
     downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "gambar.png")
     transform = await bot.download_media(
@@ -74,9 +71,6 @@ async def rotate(event):
         if isinstance(data, bool):
             await event.edit("`Unsupported Files...`")
             return
-    else:
-        await event.edit("`Reply to Any Media Sur`")
-        return
     await event.edit("`Downloading Media..`")
     downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "gambar.png")
     rotate = await bot.download_media(
