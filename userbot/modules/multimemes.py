@@ -62,9 +62,6 @@ async def glitch(event):
         if isinstance(data, bool):
             await event.edit("`Unsupported Files...`")
             return
-    else:
-        await event.edit("`Reply to Any Media Sur`")
-        return
     await event.edit("`Downloading Media..`")
     downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "glitch.png")
     glitch_file = await bot.download_media(
@@ -134,9 +131,6 @@ async def mim(event):
         if isinstance(data, bool):
             await event.edit("`Unsupported Files...`")
             return
-    else:
-        await event.edit("`Reply to Any Media Sur`")
-        return
     await event.edit("`Downloading media..`")
     downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "meme.jpg")
     dls_loc = await bot.download_media(
