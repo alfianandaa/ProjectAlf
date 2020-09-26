@@ -57,12 +57,6 @@ async def glitch(event):
     if not reply_message.media:
         await event.edit("`reply to a image/sticker`")
         return
-    await event.edit("`Downloading Media..`")
-    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "glitch.png")
-    glitch_file = await bot.download_media(
-        reply_message,
-        downloaded_file_name,
-    )
     if event.is_reply:
         data = await check_media(reply_message)
         if isinstance(data, bool):
@@ -71,7 +65,12 @@ async def glitch(event):
     else:
         await event.edit("`Reply to Any Media Sur`")
         return
-
+    await event.edit("`Downloading Media..`")
+    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "glitch.png")
+    glitch_file = await bot.download_media(
+        reply_message,
+        downloaded_file_name,
+    )
     try:
         value = int(event.pattern_match.group(1))
         if value > 8:
@@ -130,18 +129,20 @@ async def mim(event):
     if not reply_message.media:
         await event.edit("```reply to a image/sticker/gif```")
         return
+    if event.is_reply:
+        data = await check_media(reply_message)
+        if isinstance(data, bool):
+            await event.edit("`Unsupported Files...`")
+            return
+    else:
+        await event.edit("`Reply to Any Media Sur`")
+        return
     await event.edit("`Downloading media..`")
     downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "meme.jpg")
     dls_loc = await bot.download_media(
         reply_message,
         downloaded_file_name,
     )
-    if event.is_reply:
-        data = await check_media(reply_message)
-        if isinstance(data, bool):
-            await event.edit("`Unsupported Files...`")
-            return
-
     await event.edit(
         "```Transfiguration Time! Mwahaha Memifying this image! (」ﾟﾛﾟ)｣ ```"
     )
