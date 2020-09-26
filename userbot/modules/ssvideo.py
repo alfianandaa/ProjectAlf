@@ -19,11 +19,12 @@ async def ssvideo(event):
     if not reply_message.media:
         await event.edit("`reply to a video..`")
         return
-    frame = int(event.pattern_match.group(1))
-    if not frame:
+    try:
+        frame = int(event.pattern_match.group(1))
+        if frame > 10:
+            return await event.edit("`hey..dont put that much`")
+    except BaseException:
         return await event.edit("`Please input number of frame!`")
-    if frame > 10:
-        return await event.edit("`hey..dont put that much`")
     await event.edit("`Downloading media..`")
     ss = await bot.download_media(
         reply_message,
