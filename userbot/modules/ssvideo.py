@@ -20,6 +20,8 @@ async def ssvideo(event):
         await event.edit("`reply to a video..`")
         return
     frame = int(event.pattern_match.group(1))
+    if not frame:
+        return await event.edit("`Please input number of frame!`")
     if frame > 10:
         return await event.edit("`hey..dont put that much`")
     await event.edit("`Downloading media..`")
