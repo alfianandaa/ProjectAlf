@@ -58,7 +58,7 @@ async def transform(event):
         os.remove(transform)
         os.remove(Converted)
     except BaseException:
-        pass
+        return
 
 
 @register(outgoing=True, pattern=r"^\.rotate(?: |$)(.*)")
