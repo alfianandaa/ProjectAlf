@@ -57,17 +57,17 @@ async def glitch(event):
     if not reply_message.media:
         await event.edit("`reply to a image/sticker`")
         return
-    await bot.download_file(reply_message.media)
-    await event.edit("`Downloading Media..`")
     if event.is_reply:
         data = await check_media(reply_message)
         if isinstance(data, bool):
             await event.edit("`Unsupported Files...`")
             return
-    else:
-        await event.edit("`Reply to Any Media Sur`")
-        return
-
+    await event.edit("`Downloading Media..`")
+    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "glitch.png")
+    glitch_file = await bot.download_media(
+        reply_message,
+        downloaded_file_name,
+    )
     try:
         value = int(event.pattern_match.group(1))
         if value > 8:
@@ -76,14 +76,6 @@ async def glitch(event):
         value = 2
     await event.edit("```Glitching This Media```")
     await asyncio.sleep(2)
-    file_name = "glitch.png"
-    to_download_directory = TEMP_DOWNLOAD_DIRECTORY
-    downloaded_file_name = os.path.join(to_download_directory, file_name)
-    downloaded_file_name = await bot.download_media(
-        reply_message,
-        downloaded_file_name,
-    )
-    glitch_file = downloaded_file_name
     glitcher = ImageGlitcher()
     img = Image.open(glitch_file)
     glitch_img = glitcher.glitch_image(img, value, color_offset=True, gif=True)
@@ -134,34 +126,29 @@ async def mim(event):
     if not reply_message.media:
         await event.edit("```reply to a image/sticker/gif```")
         return
-    await bot.download_file(reply_message.media)
     if event.is_reply:
         data = await check_media(reply_message)
         if isinstance(data, bool):
             await event.edit("`Unsupported Files...`")
             return
-
-        await event.edit(
-            "```Transfiguration Time! Mwahaha Memifying this image! (」ﾟﾛﾟ)｣ ```"
-        )
-        await asyncio.sleep(5)
-        text = event.pattern_match.group(1)
-        if event.reply_to_msg_id:
-            file_name = "meme.jpg"
-            to_download_directory = TEMP_DOWNLOAD_DIRECTORY
-            downloaded_file_name = os.path.join(to_download_directory, file_name)
-            downloaded_file_name = await bot.download_media(
-                reply_message,
-                downloaded_file_name,
-            )
-            dls_loc = downloaded_file_name
-        webp_file = await draw_meme_text(dls_loc, text)
-        await event.client.send_file(
-            event.chat_id, webp_file, reply_to=event.reply_to_msg_id
-        )
-        await event.delete()
-        os.remove(webp_file)
-        os.remove(dls_loc)
+    await event.edit("`Downloading media..`")
+    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "meme.jpg")
+    dls_loc = await bot.download_media(
+        reply_message,
+        downloaded_file_name,
+    )
+    await event.edit(
+        "```Transfiguration Time! Mwahaha Memifying this image! (」ﾟﾛﾟ)｣ ```"
+    )
+    await asyncio.sleep(5)
+    text = event.pattern_match.group(1)
+    webp_file = await draw_meme_text(dls_loc, text)
+    await event.client.send_file(
+        event.chat_id, webp_file, reply_to=event.reply_to_msg_id
+    )
+    await event.delete()
+    os.remove(webp_file)
+    os.remove(downloaded_file_name)
 
 
 async def draw_meme_text(image_path, text):
