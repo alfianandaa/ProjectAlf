@@ -6,8 +6,9 @@
 
 import os
 
-from userbot import CMD_HELP, bot
+from userbot import CMD_HELP, bot, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
+from telethon.tl.types import DocumentAttributeFilename
 
 
 @register(outgoing=True, pattern=r"^\.ssvideo(?: |$)(.*)")
@@ -26,10 +27,16 @@ async def ssvideo(event):
     except BaseException:
         return await event.edit("`Please input number of frame!`")
     await event.edit("`Downloading media..`")
+    file = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "")
     ss = await bot.download_media(
         reply_message,
-        "anu.mp4",
+        file,
     )
+    if (
+        DocumentAttributeFilename(file_name="AnimatedSticker.tgs")
+        in message.media.document.attributes
+    ):
+        await gifify(ss, 215)
     try:
         await event.edit("`Proccessing..`")
         command = f"vcsi -g {frame}x{frame} {ss} -o ss.png "
@@ -46,6 +53,14 @@ async def ssvideo(event):
         os.system("rm -rf *.png")
         os.system("rm -rf *.mp4")
         return await event.edit(f"{e}")
+
+
+async def gifify(sticker_path: str, quality: int = 256) -> str:
+    dest = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "animation.gif")
+    with open(dest, 'wb') as t_g:
+        lottie.exporters.gif.export_gif(lottie.parsers.tgs.parse_tgs(sticker_path), t_g, quality, 1)
+    os.remove(sticker_path)
+    return dest
 
 
 CMD_HELP.update(
