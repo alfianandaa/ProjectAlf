@@ -24,8 +24,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
 from userbot.events import register
-from userbot.utils import progress
-from userbot.utils.tools import check_media
+from userbot.utils import progress, check_media
 
 THUMB_IMAGE_PATH = "./thumb_image.jpg"
 
