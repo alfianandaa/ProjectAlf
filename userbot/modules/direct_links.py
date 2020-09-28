@@ -38,7 +38,7 @@ async def subprocess_run(cmd):
     return result
 
 
-@register(outgoing=True, pattern=r"^\.direct(?: |$)([\s\S]*)")
+@register(outgoing=True, pattern=r"^\.dir(?: |$)([\s\S]*)")
 async def direct_link_generator(request):
     await request.edit("`Processing...`")
     textx = await request.get_reply_message()
@@ -363,7 +363,7 @@ async def useragent():
 
 CMD_HELP.update(
     {
-        "direct": ">`.direct <url>`"
+        "direct": ">`.dir <url>`"
         "\nUsage: Reply to a link or paste a URL to\n"
         "generate a direct download link\n\n"
         "List of supported URLs:\n"
