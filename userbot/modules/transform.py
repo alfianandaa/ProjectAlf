@@ -3,11 +3,13 @@
 
 import os
 
+from hachoir.metadata import extractMetadata
+from hachoir.parser import createParser
 from PIL import Image, ImageOps
+from telethon.tl.types import DocumentAttributeFilename
 
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, bot
 from userbot.events import register
-from userbot.utils import check_media
 
 Converted = TEMP_DOWNLOAD_DIRECTORY + "sticker.webp"
 
@@ -21,19 +23,39 @@ async def transform(event):
     if not reply_message.media:
         await event.edit("`reply to a image/sticker`")
         return
-    if event.is_reply:
-        data = await check_media(reply_message)
-        if isinstance(data, bool):
-            await event.edit("`Unsupported Files...`")
-            return
     await event.edit("`Downloading Media..`")
-    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "gambar.png")
-    transform = await bot.download_media(
-        reply_message,
-        downloaded_file_name,
-    )
+    if reply_message.photo:
+        transform = await bot.download_media(
+            reply_message,
+            "transform.png",
+        )
+    elif (
+        DocumentAttributeFilename(file_name="AnimatedSticker.tgs")
+        in reply_message.media.document.attributes
+    ):
+        await bot.download_media(
+            reply_message,
+            "transform.tgs",
+        )
+        os.system("lottie_convert.py transform.tgs transform.png")
+        transform = "transform.png"
+    elif reply_message.video:
+        video = await bot.download_media(
+            reply_message,
+            "transform.mp4",
+        )
+        extractMetadata(createParser(video))
+        os.system(
+            "ffmpeg -i transform.mp4 -vframes 1 -an -s 480x360 -ss 1 transform.png"
+        )
+        transform = "transform.png"
+    else:
+        transform = await bot.download_media(
+            reply_message,
+            "transform.png",
+        )
     try:
-        await event.edit("`Transforming this image..`")
+        await event.edit("`Transforming this media..`")
         cmd = event.pattern_match.group(1)
         im = Image.open(transform).convert("RGB")
         if cmd == "mirror":
@@ -51,6 +73,8 @@ async def transform(event):
             event.chat_id, Converted, reply_to=event.reply_to_msg_id
         )
         await event.delete()
+        os.system("rm -rf *.mp4")
+        os.system("rm -rf *.tgs")
         os.remove(transform)
         os.remove(Converted)
     except BaseException:
@@ -66,24 +90,44 @@ async def rotate(event):
     if not reply_message.media:
         await event.edit("`reply to a image/sticker`")
         return
-    if event.is_reply:
-        data = await check_media(reply_message)
-        if isinstance(data, bool):
-            await event.edit("`Unsupported Files...`")
-            return
     await event.edit("`Downloading Media..`")
-    downloaded_file_name = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "gambar.png")
-    rotate = await bot.download_media(
-        reply_message,
-        downloaded_file_name,
-    )
-    await event.edit("`Rotating your media..`")
+    if reply_message.photo:
+        rotate = await bot.download_media(
+            reply_message,
+            "transform.png",
+        )
+    elif (
+        DocumentAttributeFilename(file_name="AnimatedSticker.tgs")
+        in reply_message.media.document.attributes
+    ):
+        await bot.download_media(
+            reply_message,
+            "transform.tgs",
+        )
+        os.system("lottie_convert.py transform.tgs transform.png")
+        rotate = "transform.png"
+    elif reply_message.video:
+        video = await bot.download_media(
+            reply_message,
+            "transform.mp4",
+        )
+        extractMetadata(createParser(video))
+        os.system(
+            "ffmpeg -i transform.mp4 -vframes 1 -an -s 480x360 -ss 1 transform.png"
+        )
+        rotate = "transform.png"
+    else:
+        rotate = await bot.download_media(
+            reply_message,
+            "transform.png",
+        )
     try:
         value = int(event.pattern_match.group(1))
         if value > 360:
             raise ValueError
     except ValueError:
         value = 90
+    await event.edit("`Rotating your media..`")
     im = Image.open(rotate).convert("RGB")
     IMG = im.rotate(value, expand=1)
     IMG.save(Converted, quality=95)
@@ -91,6 +135,8 @@ async def rotate(event):
         event.chat_id, Converted, reply_to=event.reply_to_msg_id
     )
     await event.delete()
+    os.system("rm -rf *.mp4")
+    os.system("rm -rf *.tgs")
     os.remove(rotate)
     os.remove(Converted)
 
