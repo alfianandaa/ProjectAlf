@@ -73,8 +73,7 @@ async def transform(event):
             event.chat_id, Converted, reply_to=event.reply_to_msg_id
         )
         await event.delete()
-        os.system("rm -rf *.mp4")
-        os.system("rm -rf *.tgs")
+        os.system("rm *.mp4 *.tgs")
         os.remove(transform)
         os.remove(Converted)
     except BaseException:
@@ -135,8 +134,7 @@ async def rotate(event):
         event.chat_id, Converted, reply_to=event.reply_to_msg_id
     )
     await event.delete()
-    os.system("rm -rf *.mp4")
-    os.system("rm -rf *.tgs")
+    os.system("rm *.mp4 *.tgs")
     os.remove(rotate)
     os.remove(Converted)
 

@@ -52,7 +52,7 @@ async def ssvideo(event):
         ),
     )
     try:
-        await event.edit("`Proccessing..`")
+        await event.edit("`Processing..`")
         command = f"vcsi -g {frame}x{frame} {ss} -o ss.png "
         os.system(command)
         await event.client.send_file(
@@ -61,11 +61,9 @@ async def ssvideo(event):
             reply_to=event.reply_to_msg_id,
         )
         await event.delete()
-        os.system("rm -rf *.png")
-        os.system("rm -rf *.mp4")
+        os.system("rm *.png *.mp4")
     except BaseException as e:
-        os.system("rm -rf *.png")
-        os.system("rm -rf *.mp4")
+        os.system("rm *.png *.mp4")
         return await event.edit(f"{e}")
 
 

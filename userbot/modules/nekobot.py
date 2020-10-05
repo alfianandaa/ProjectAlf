@@ -123,8 +123,7 @@ async def tweets(text1, text2):
 
 async def purge():
     try:
-        os.system("rm -rf *.png")
-        os.system("rm -rf *.webp")
+        os.system("rm *.png *.webp")
     except OSError:
         pass
 
@@ -160,7 +159,7 @@ async def trump(event):
 @register(outgoing=True, pattern=r"^\.ph(?: |$)(.*)")
 async def phcomment(event):
     try:
-        await event.edit("`Proccessing..`")
+        await event.edit("`Processing..`")
         text = event.pattern_match.group(1)
         reply = await event.get_reply_message()
         if reply:

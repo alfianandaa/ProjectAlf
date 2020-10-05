@@ -319,7 +319,7 @@ with bot:
                         [
                             custom.Button.url(
                                 "GitHub Repo",
-                                "https://github.com/afianandaa/ProjectAlf",
+                                "https://github.com/alfianandaa/ProjectAlf",
                             ),
                             custom.Button.url(
                                 "Support",
