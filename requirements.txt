@@ -64,3 +64,5 @@ vcsi
 lottie
 cairosvg
 colour
+scipy
+wordcloud
