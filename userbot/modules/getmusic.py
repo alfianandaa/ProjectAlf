@@ -148,7 +148,7 @@ async def _(event):
         os.system("rm *.mkv *.mp4 *.webm")
     except BaseException:
         os.remove(thumb_image)
-        os.system("rm *.png *.webp *.mp4 *.tgs")
+        os.system("rm *.mkv *.mp4 *.webm")
         return
 
 
