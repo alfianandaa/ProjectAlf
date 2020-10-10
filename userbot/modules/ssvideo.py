@@ -58,6 +58,7 @@ async def ssvideo(event):
         await event.client.send_file(
             event.chat_id,
             "ss.png",
+            force_document=True,
             reply_to=event.reply_to_msg_id,
         )
         await event.delete()
