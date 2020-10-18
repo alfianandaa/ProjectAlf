@@ -31,11 +31,14 @@ async def magisk(request):
     releases = "Latest Magisk Releases:\n"
     for name, release_url in magisk_dict.items():
         data = get(release_url).json()
-        releases += (
-            f'{name}: [ZIP v{data["magisk"]["version"]}]({data["magisk"]["link"]}) | '
-            f'[APK v{data["app"]["version"]}]({data["app"]["link"]}) | '
-            f'[Uninstaller]({data["uninstaller"]["link"]})\n'
-        )
+        if str(name) == "Canary":
+            data["magisk"]["link"] = "https://github.com/topjohnwu/magisk_files/raw/canary/" + data["magisk"]["link"]
+            data["app"]["link"] = "https://github.com/topjohnwu/magisk_files/raw/canary/" + data["app"]["link"]
+            data["uninstaller"]["link"] = "https://github.com/topjohnwu/magisk_files/raw/canary/" + data["uninstaller"]["link"]
+
+        releases += f'{name}: [ZIP v{data["magisk"]["version"]}]({data["magisk"]["link"]}) | ' \
+                    f'[APK v{data["app"]["version"]}]({data["app"]["link"]}) | ' \
+                    f'[Uninstaller]({data["uninstaller"]["link"]})\n'
     await request.edit(releases)
 
 
