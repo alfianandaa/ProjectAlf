@@ -21,7 +21,7 @@ from googletrans import LANGUAGES, Translator
 from gtts import gTTS
 from gtts.lang import tts_langs
 from requests import get
-from search_engine_parser import YahooSearch as GoogleSearch
+from search_engine_parser import GoogleSearch
 from telethon.tl.types import DocumentAttributeAudio
 from urbandict import define
 from wikipedia import summary
