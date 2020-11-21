@@ -28,11 +28,14 @@ async def who(event):
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
 
     replied_user = await get_user(event)
+    if replied_user is None:
+        await event.edit("`This is anonymous admin in this group.\nCan't fetch the info`")
+        return
 
     try:
         photo, caption = await fetch_info(replied_user, event)
     except AttributeError:
-        return event.edit("`Could not fetch info of that user.`")
+        return await event.edit("`Could not fetch info of that user.`")
 
     message_id_to_reply = event.message.reply_to_msg_id
 
@@ -61,7 +64,10 @@ async def who(event):
 async def get_user(event):
     if event.reply_to_msg_id and not event.pattern_match.group(1):
         previous_message = await event.get_reply_message()
-        replied_user = await event.client(GetFullUserRequest(previous_message.from_id))
+        if previous_message.from_id is None:  # Anonymous admin seems don't have id attr
+            return None
+        replied_user = await event.client(
+            GetFullUserRequest(previous_message.from_id))
     else:
         user = event.pattern_match.group(1)
 
