@@ -29,7 +29,9 @@ async def who(event):
 
     replied_user = await get_user(event)
     if replied_user is None:
-        await event.edit("`This is anonymous admin in this group.\nCan't fetch the info`")
+        await event.edit(
+            "`This is anonymous admin in this group.\nCan't fetch the info`"
+        )
         return
 
     try:
@@ -66,8 +68,7 @@ async def get_user(event):
         previous_message = await event.get_reply_message()
         if previous_message.from_id is None:  # Anonymous admin seems don't have id attr
             return None
-        replied_user = await event.client(
-            GetFullUserRequest(previous_message.from_id))
+        replied_user = await event.client(GetFullUserRequest(previous_message.from_id))
     else:
         user = event.pattern_match.group(1)
 
